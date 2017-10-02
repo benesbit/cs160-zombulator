@@ -1,3 +1,3 @@
-# zombulator
+# Zombulator
 
 by Ben Nebit
