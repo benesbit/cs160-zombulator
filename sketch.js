@@ -76,11 +76,15 @@ function draw(){
 		y = 0;
 	}
 	//Resets y to the top of window when it crosses outside of the boundry.
+	
 	/*
 	if(y<0 || y>400){
 		y = height/2;
 	}*/ 
 	//Resets y to the center of window when it crosses outside of the boundry.
+	//Was trying to get it so hat if the circle hit a y-boundry, it would change directions. I think
+	//I need to put a 'do/while' (with a booleen value !=) loop inside of an 'if' conditional.
+
 
 	if(x < 0){
 		x = width;
