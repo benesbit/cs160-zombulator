@@ -48,7 +48,7 @@ if (mouseIsPressed) {
 //I was unable to get this to work until I declared the variables outside 
 //of the functions, and I am not really sure why. This one also has a unique
 //'function setup()' from the other functions.
-
+/*
 var x, y;
 
 function setup(){
