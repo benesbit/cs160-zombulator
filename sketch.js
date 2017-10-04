@@ -77,10 +77,10 @@ function draw(){
 	}
 	//Resets y to the top of window when it crosses outside of the boundry.
 	
-	/*
-	if(y<0 || y>400){
-		y = height/2;
-	}*/ 
+	
+	// if(y<0 || y>400){
+	// 	y = height/2;
+	// }
 	//Resets y to the center of window when it crosses outside of the boundry.
 	//Was trying to get it so hat if the circle hit a y-boundry, it would change directions. I think
 	//I need to put a 'do/while' (with a booleen value !=) loop inside of an 'if' conditional.
@@ -94,6 +94,7 @@ function draw(){
 	}
 	//Allows x to screen wrap in both directions
 }
+*/
 
 //CHALLENGE 5 attempt 1 (ugly, see below for attempt 2)
 //Spawns hunderds of circles, using a few lines of code. But only in a line. No good pattern, need two seperate loops
@@ -133,3 +134,69 @@ function draw(){
 		}
 	}
 }*/
+
+//This is test code to try and get the ball to bounce back and forth between the y-bounds.
+//Basically, as the ball travels in the -y direction, when it hit the lower y-boundry it will
+//siwtch directions and start moving in the +y direction.
+//Update! Made the ball change directions whenever it comes in contact with a wall! Looks like 
+//the old Windows screen-savers haha
+//Update 2! Made the ball change colors at random. SIEZURE TIME!!
+
+var x, y, zY, zX;
+
+function setup(){
+	createCanvas(720, 400);
+	x = width/2;
+	y = height/2;
+	zY = 0;
+	zX = 0;
+}
+
+function draw(){
+	background('gray');
+
+	fill(random(255),random(255),random(255)); //HAHA IT WORKS!!!
+	ellipse(x, y, 20, 20);
+
+	//x += random(-5, 5);
+
+
+	// if(x < 0){
+	// 	x = width;
+	// }
+	// if(x > width){
+	// 	x = 0;
+	// }
+	//Allows the x-position to screen wrap. Took this out to make the x-position do what
+	//the y-position is doing.
+
+	if(zY == 0){
+		y += 3.14;
+	}
+	if(zY == 0 && y > height){
+		zY = 1;
+	}
+
+	if(zY == 1){
+		y -= 3.14;
+	}
+	if(zY == 1 && y < 0){
+		zY = 0;
+	}
+	//Attempt at making the y-position "bounce" between the boundaries.
+	//Holy cow! My first idea actually worked!
+
+	if(zX == 0){
+		x += 3.14;
+	}
+	if(zX == 0 && x > width){
+		zX = 1;
+	}
+
+	if(zX == 1){
+		x -= 3.14;
+	}
+	if(zX == 1 && x < 0){
+		zX = 0;
+	}
+}
