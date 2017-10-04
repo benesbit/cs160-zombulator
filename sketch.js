@@ -143,13 +143,15 @@ function draw(){
 //Update 2! Made the ball change colors at random. SIEZURE TIME!!
 
 var x, y, zY, zX;
+//I wanted to call these switchX and switchY, but I think 'switch' is a function, and I did 
+//not want to screw anything up. On the right side, 'z' is much faster to type than 'switch.'
 
 function setup(){
 	createCanvas(720, 400);
 	x = width/2;
 	y = height/2;
 	zY = 0;
-	zX = 0;
+	zX = 0; 
 }
 
 function draw(){
