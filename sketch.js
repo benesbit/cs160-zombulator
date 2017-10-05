@@ -143,8 +143,8 @@ function draw(){
 //Update 2! Made the ball change colors at random. SIEZURE TIME!!
 
 var x, y, zY, zX;
-//I wanted to call these switchX and switchY, but I think 'switch' is a function, and I did 
-//not want to screw anything up. On the right side, 'z' is much faster to type than 'switch.'
+//I wanted to call 'zX' and 'zY' switchX and switchY, but I think 'switch' is a function, and I did 
+//not want to screw anything up. On the bright side, 'z' is much faster to type than 'switch.'
 
 function setup(){
 	createCanvas(720, 400);
@@ -152,15 +152,28 @@ function setup(){
 	y = height/2;
 	zY = 0;
 	zX = 0; 
+	fill('orange');
 }
 
 function draw(){
 	background('gray');
 
-	fill(random(255),random(255),random(255)); //HAHA IT WORKS!!!
+	// fill(random(255),random(255),random(255)); //HAHA IT WORKS!!!
 	ellipse(x, y, 20, 20);
 
 	//x += random(-5, 5);
+	if(zX == 0 && zY == 0){
+		fill('red');
+	}
+	if(zX == 0 && zY == 1){
+		fill('blue');
+	}
+	if(zX == 1 && zY == 0){
+		fill('purple');
+	}
+	if(zX == 1 && zY == 1){
+		fill('yellow');
+	}
 
 
 	// if(x < 0){
