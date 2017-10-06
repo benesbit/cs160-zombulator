@@ -152,7 +152,8 @@ function setup(){
 	y = height/2;
 	zY = 0;
 	zX = 0; 
-	fill('orange');
+	// fill('orange'); Realized this is unnecessary as zX and zY both start at 0, and I have a
+	//condition for this already.
 }
 
 function draw(){
