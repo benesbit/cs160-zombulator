@@ -163,16 +163,16 @@ function draw(){
 	ellipse(x, y, 20, 20);
 
 	//x += random(-5, 5);
-	if(zX == 0 && zY == 0){
+	if (zX == 0 && zY == 0) {
 		fill('red');
 	}
-	if(zX == 0 && zY == 1){
+	if (zX == 0 && zY == 1) {
 		fill('blue');
 	}
-	if(zX == 1 && zY == 0){
+	if (zX == 1 && zY == 0) {
 		fill('purple');
 	}
-	if(zX == 1 && zY == 1){
+	if (zX == 1 && zY == 1) {
 		fill('yellow');
 	}
 
@@ -186,33 +186,33 @@ function draw(){
 	//Allows the x-position to screen wrap. Took this out to make the x-position do what
 	//the y-position is doing.
 
-	if(zY == 0){
+	if (zY == 0) {
 		y += 3.14;
 	}
-	if(zY == 0 && y > height){
+	if (zY == 0 && y > height) {
 		zY = 1;
 	}
 
-	if(zY == 1){
+	if (zY == 1) {
 		y -= 3.14;
 	}
-	if(zY == 1 && y < 0){
+	if (zY == 1 && y < 0) {
 		zY = 0;
 	}
 	//Attempt at making the y-position "bounce" between the boundaries.
 	//Holy cow! My first idea actually worked!
 
-	if(zX == 0){
+	if (zX == 0) {
 		x += 3.14;
 	}
-	if(zX == 0 && x > width){
+	if (zX == 0 && x > width) {
 		zX = 1;
 	}
 
-	if(zX == 1){
+	if (zX == 1) {
 		x -= 3.14;
 	}
-	if(zX == 1 && x < 0){
+	if (zX == 1 && x < 0) {
 		zX = 0;
 	}
 	//Same 'boundry bouncing' as the y-position, but for the x-position
