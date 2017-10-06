@@ -214,4 +214,5 @@ function draw(){
 	if(zX == 1 && x < 0){
 		zX = 0;
 	}
+	//Same 'boundry bouncing' as the y-position, but for the x-position
 }
