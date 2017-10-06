@@ -62,8 +62,10 @@ function setup(){
 function draw(){
 	background('gray');
 
-	fill('red');
+	fill(random(255),random(255),random(255));
 	ellipse(x, y, 20, 20);
+	strokeWeight(5);
+	stroke(random(255),random(255),random(255));
 
 	x += random(-15, 15);
 	//From reading the help on p5js.org, this function 'jiggles' the circles on the x-axis,
@@ -163,18 +165,22 @@ function draw(){
 	ellipse(x, y, 20, 20);
 
 	//x += random(-5, 5);
-	if (zX == 0 && zY == 0) {
-		fill('red');
-	}
-	if (zX == 0 && zY == 1) {
-		fill('blue');
-	}
-	if (zX == 1 && zY == 0) {
-		fill('purple');
-	}
-	if (zX == 1 && zY == 1) {
-		fill('yellow');
-	}
+	// if (zX == 0 && zY == 0) {
+	// 	fill('red');
+	// }
+	// if (zX == 0 && zY == 1) {
+	// 	fill('blue');
+	// }
+	// if (zX == 1 && zY == 0) {
+	// 	fill('purple');
+	// }
+	// if (zX == 1 && zY == 1) {
+	// 	fill('yellow');
+	// }
+
+	fill(random(255), random(255), random(255));
+	strokeWeight(5);
+	stroke(random(255), random(255), random(255));
 
 
 	// if(x < 0){
