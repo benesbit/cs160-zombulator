@@ -143,7 +143,7 @@ function draw(){
 //Update! Made the ball change directions whenever it comes in contact with a wall! Looks like 
 //the old Windows screen-savers haha
 //Update 2! Made the ball change colors at random. SIEZURE TIME!!
-
+/*
 var x, y, zY, zX;
 //I wanted to call 'zX' and 'zY' switchX and switchY, but I think 'switch' is a function, and I did 
 //not want to screw anything up. On the bright side, 'z' is much faster to type than 'switch.'
@@ -222,4 +222,111 @@ function draw(){
 		zX = 0;
 	}
 	//Same 'boundry bouncing' as the y-position, but for the x-position
+}
+*/
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+// START EXCERCISE 8
+// This will be a constantly changing piece of code as I try and work my way
+// towards the final challenge in this excersize. This ends at the second to
+// last challenge, I am going to attempt branching for the final challenge.
+// NOTE: the way I have these accelerate causes them to move so fast that they
+// are outside the range and can no longer be drawn. LuL.
+
+var x, t, n, y, zY, zX, zT, zN;
+var xSpeed, tSpeed, nSpeed;
+
+function setup(){
+	createCanvas(700, 420);
+	x = 0;
+	t = 0;
+	n = 0;
+	y = 0;
+	zY = 0;
+	zT = 0;
+	zN = 0;
+	zX = 0;
+	xSpeed = 3;
+	tSpeed = 5;
+	nSpeed = 7;
+}
+
+function draw(){
+
+	background('gray');
+
+	// 'x' ball
+	fill(random(255), random(255), random(255));
+	strokeWeight(5);
+	stroke(random(255), random(255), random(255));
+	ellipse(x, 50, 20, 20);
+
+	// 't' ball
+	fill(random(255), random(255), random(255));
+	strokeWeight(5);
+	stroke(random(255), random(255), random(255));
+	ellipse(t, 100, 20, 20);
+
+	// 'n' ball
+	fill(random(255), random(255), random(255));
+	strokeWeight(5);
+	stroke(random(255), random(255), random(255));
+	ellipse(n, 250, 20, 20);
+
+
+	// FOR x
+	if (zX == 0) {
+		x += xSpeed;
+	}
+	if (zX == 0 && x > width) {
+		zX = 1;
+		xSpeed += 2;
+	}
+
+	if (zX == 1) {
+		x -= xSpeed;
+	}
+	if (zX == 1 && x < 0) {
+		zX = 0;
+		xSpeed += 2;
+	}
+
+	//FOR t
+	if (zT == 0) {
+		t += tSpeed;
+	}
+	if (zT == 0 && t > width) {
+		zT = 1;
+		tSpeed += xSpeed;
+	}
+
+	if (zT == 1) {
+		t -= tSpeed;
+	}
+	if (zT == 1 && t < 0) {
+		zT = 0;
+		tSpeed -= xSpeed;
+	}
+
+	//FOR n
+	if (zN == 0) {
+		n += nSpeed;
+	}
+	if (zN == 0 && n > width) {
+		zN = 1;
+		nSpeed *= 3;
+	}
+
+	if (zN == 1) {
+		n -= nSpeed;
+	}
+	if (zN == 1 && n < 0) {
+		zN = 0;
+		nSpeed /= 2;
+	}
 }
