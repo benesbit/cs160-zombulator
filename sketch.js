@@ -237,7 +237,7 @@ function draw(){
 // last challenge, I am going to attempt branching for the final challenge.
 // NOTE: the way I have these accelerate causes them to move so fast that they
 // are outside the range and can no longer be drawn. LuL.
-
+/*
 var x, t, n, y, zY, zX, zT, zN;
 var xSpeed, tSpeed, nSpeed;
 
@@ -329,4 +329,62 @@ function draw(){
 		zN = 0;
 		nSpeed /= 2;
 	}
+}
+*/
+
+// FINAL CHALLENGE FOR EXCERSIZE 8!
+// Make a ball bounce, and have "gravity" effect it
+
+var x, y, zX, zY, k, h;
+
+function setup(){
+	createCanvas(800,420);
+	x = 0;
+	y = 0;
+	zX = 0;
+	zY = 0;
+	k = 5;
+	h = height/2;
+}
+
+function draw(){
+
+	background('gray');
+
+	fill('red');
+	strokeWeight(5);
+	stroke('blue');
+	ellipse(x, y, 20, 20);
+
+	if (zY == 0) {
+		y += 5;
+	}
+	if (zY == 0 && y >= 420) {
+		zY = 1;
+		h = h + k;
+		k += 5;
+	}
+
+	if (zY == 1) {
+		y -= 5;
+	}
+	if (zY == 1 && y <= h) {
+		zY = 0;
+	}
+	//Attempt at making the y-position "bounce" like a ball
+
+	if (zX == 0) {
+		x += 3.14;
+	}
+	if (zX == 0 && x > width) {
+		zX = 1;
+	}
+
+	if (zX == 1) {
+		x -= 3.14;
+	}
+	if (zX == 1 && x < 0) {
+		zX = 0;
+	}
+	//Constant x-boundary bouncing
 }
