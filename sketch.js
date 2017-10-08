@@ -335,7 +335,7 @@ function draw(){
 // FINAL CHALLENGE FOR EXCERSIZE 8!
 // Make a ball bounce, and have "gravity" effect it
 
-var x, y, zX, zY, k, h;
+var x, y, zX, zY, k, h, b;
 
 function setup(){
 	createCanvas(800,420);
@@ -345,15 +345,19 @@ function setup(){
 	zY = 0;
 	k = 5;
 	h = height/2;
+	b = 0;
+	fill(random(255), random(255), random(255));
+	strokeWeight(5);
+	stroke(random(255), random(255), random(255));
 }
 
 function draw(){
 
 	background('gray');
 
-	fill('red');
-	strokeWeight(5);
-	stroke('blue');
+	// fill('red');
+	// strokeWeight(5);
+	// stroke('blue');
 	ellipse(x, y, 20, 20);
 
 	if (zY == 0) {
@@ -362,7 +366,14 @@ function draw(){
 	if (zY == 0 && y >= 420) {
 		zY = 1;
 		h = h + k;
-		k += 5;
+		k += 10;
+		b += 0.05;
+		// fill(random(255), random(255), random(255));
+		// stroke(random(255), random(255), random(255));
+	}
+	if (y >= 420 && h <= 420) {
+		fill(random(255), random(255), random(255));
+		stroke(random(255), random(255), random(255));
 	}
 
 	if (zY == 1) {
@@ -373,18 +384,21 @@ function draw(){
 	}
 	//Attempt at making the y-position "bounce" like a ball
 
-	if (zX == 0) {
-		x += 3.14;
+
+	if (zX == 0 && b < 5) {
+		x += 5 - b;
 	}
 	if (zX == 0 && x > width) {
 		zX = 1;
 	}
-
-	if (zX == 1) {
-		x -= 3.14;
+	if (zX == 1 && b < 5) {
+		x -= 5 - b;
 	}
 	if (zX == 1 && x < 0) {
 		zX = 0;
 	}
-	//Constant x-boundary bouncing
+	//Constant x-boundary bouncing, with the "x-speed" decellerating
+	//and evenetaully coming to a stop. Done matemataically, And it stops
+	//because 'b' eventaully becomes greater than 5, so the loops that move
+	//x no longer are entered.
 }
