@@ -339,17 +339,17 @@ var x, y, zX, zY, k, h, b, ySpeed, c, yS, yB;
 
 function setup(){
 	createCanvas(800,420);
-	x = 0;
-	y = 0;
-	zX = 0;
-	zY = 0;
+	x = 0; //x position
+	y = 0; //y position
+	zX = 0; //x directional modifier
+	zY = 0; //y directional modifier 
 	// k = 5;
 	// h = height/2;
-	b = 0;
-	c = 0;
-	ySpeed = 0;
-	yS = .075;
-	yB = 6;
+	b = 0; //slow down increment for x-axis
+	c = 0; //deterines if ball was just trown or has started bouncing
+	ySpeed = 0; //the change in how fast y moves
+	yS = .075; //the change in ySpeed
+	yB = 6; //the speed y is moving at
 	fill(random(255), random(255), random(255));
 	strokeWeight(5);
 	stroke(random(255), random(255), random(255));
@@ -371,7 +371,7 @@ function draw(){
 	}
 
 	if(c == 1){
-		if (zY == 0) {
+		if (zY == 0 && ) {
 			y += (yB - ySpeed);
 			ySpeed -= yS;
 		}
