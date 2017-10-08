@@ -335,7 +335,7 @@ function draw(){
 // FINAL CHALLENGE FOR EXCERSIZE 8!
 // Make a ball bounce, and have "gravity" effect it
 
-var x, y, zX, zY, k, h, b;
+var x, y, zX, zY, k, h, b, ySpeed, c;
 
 function setup(){
 	createCanvas(800,420);
@@ -346,6 +346,8 @@ function setup(){
 	k = 5;
 	h = height/2;
 	b = 0;
+	c = 0;
+	ySpeed = 0;
 	fill(random(255), random(255), random(255));
 	strokeWeight(5);
 	stroke(random(255), random(255), random(255));
@@ -360,26 +362,40 @@ function draw(){
 	// stroke('blue');
 	ellipse(x, y, 20, 20);
 
-	if (zY == 0) {
+	if (zY == 0 && c == 0) {
 		y += 5;
 	}
-	if (zY == 0 && y >= 420) {
+
+	if (zY == 0 && c == 1) {
+		y += (5 - ySpeed);
+		ySpeed -= .075;
+	}
+	if (zY == 0 && y >= height) {
 		zY = 1;
 		h = h + k;
-		k += 10;
-		b += 0.05;
+		k += 10; //I had to use 2 variables to accomplish the y-bounce. 'h' is the 
+				 //height boundary each time. 'k' is the variable adjusting 'h.'
+				 //I needed 2 variables because I use 'h' later, and I cannot have 
+				 //it change to 'k' until I am finished using 'h.'
+		b += 1; //This is slowing down the "x-speed" w/ every bounce.
 		// fill(random(255), random(255), random(255));
 		// stroke(random(255), random(255), random(255));
+		c = 1;
+		ySpeed = 0;
 	}
-	if (y >= 420 && h <= 420) {
+	if (y >= height) {
 		fill(random(255), random(255), random(255));
 		stroke(random(255), random(255), random(255));
-	}
-
+	} //Need to move the ball color change into this loop because 
+	  //it would change forever after ball stopped bouncing.
+	  //Now the ball remains the color it was after its final bounce.
+	
+	
 	if (zY == 1) {
-		y -= 5;
+		y -= (5 - ySpeed);
+		ySpeed += .075;
 	}
-	if (zY == 1 && y <= h) {
+	if (zY == 1 && ySpeed >= 5) {
 		zY = 0;
 	}
 	//Attempt at making the y-position "bounce" like a ball
