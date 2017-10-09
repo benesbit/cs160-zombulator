@@ -364,14 +364,14 @@ function draw(){
 	// stroke('blue');
 	ellipse(x, y, 20, 20);
 
-	if (c == 0){
+	if (c == 0) {
 		if (zY == 0) {
 			y += yB;
 		}
 	}
 
-	if(c == 1){
-		if (zY == 0 && ) {
+	if (c == 1) {
+		if (zY == 0) {
 			y += (yB - ySpeed);
 			ySpeed -= yS;
 		}
