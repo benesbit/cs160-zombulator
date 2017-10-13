@@ -334,7 +334,10 @@ function draw(){
 
 // FINAL CHALLENGE FOR EXCERSIZE 8!
 // Make a ball bounce, and have "gravity" effect it
+// NOTE! Still needs work as something very weird happens when the ball "stops" bouncing
+// When it should come to rest, it startis bouncing in the y-cord very erratically.
 
+/*
 var x, y, zX, zY, k, h, b, ySpeed, c, yS, yB;
 
 function setup(){
@@ -425,4 +428,144 @@ function draw(){
 	//and evenetaully coming to a stop. Done matemataically, And it stops
 	//because 'b' eventaully becomes greater than 5, so the loops that move
 	//x no longer are entered.
+}
+*/
+
+
+// Web development excercise 9. Need to make 2 seperate balls bounce
+// independentally of eachother. Do not need to change the x-position
+// (which) is unfortunate because this is the easy part!
+
+var zombieY, zombieX, zombieV, zombieA, zombieDamping, zombieSize, zombieColor, backgroundColor;
+var humanY, humanV, humanA, humanDamping, humanSize, humanColor, humanColor;
+var humanX, humanXV, humanXA, humanSw;
+var img, imgX, imgY, imgYA, imgDamping;
+
+/*
+function preload() {
+	img = loadImage("https://i.pinimg.com/736x/e9/56/42/e95642e70ec7b2494f176165e983a02c--the-minish-cap-link-zelda.jpg");
+
+	loadImage("https://i.pinimg.com/736x/e9/56/42/e95642e70ec7b2494f176165e983a02c--the-minish-cap-link-zelda.jpg", function(img){
+		image(img, 0, 0);
+	});
+}*/
+
+function setup() {
+	createCanvas(720, 400);
+
+	zombieY = 100; // Zombie position, y-cord
+	zombieX = height / 2; // Zombie position, x-cord
+	zombieV = 0; // Zombie velocity
+	zombieA = 0.2; // Zombie acceleration due to gravity
+	zombieDamping = -0.5; // Zombie deceleration due to inertia lost per bounce (higher bounces more)
+	zombieSize = 80; // Size of the zombie
+
+	humanY = 100; // Human y-cord starting position
+	humanX = 100; // Human x-cord starting position
+	humanV = 0; // Human velocity in y-cord
+	humanVX = 10; // Human velocity in x-cord
+	humanA = 0.3; // Human acceleration due to gravity
+	humanVA = 0.75 // Deceleration in x-cord
+	humanDamping = -0.7; // Human deceleration due to inertia lost per bounce (higher number bounces more)
+	humanSize = 80; // Size of the human
+	humanSw = 0; // Switch x direction
+
+	imgX = 400;
+	imgY = 200;
+
+	
+	backgroundColor = color(114, 168, 255);
+
+
+	zombieColor = color(242, 255, 0);
+	humanColor = color(random(256), random(256), random(256));
+}
+
+function draw(){
+	background(backgroundColor);
+	noStroke();
+
+	drawZombie();
+
+	moveZombie();
+
+	drawHuman();
+
+  	moveHuman();
+}
+
+
+function drawZombie(){
+	fill(zombieColor);
+	rect(zombieX, zombieY, zombieSize, zombieSize, 20);
+	fill(0);
+	text("zombie", zombieX + (zombieSize / 4), zombieY + (zombieSize / 2));	
+}
+
+function moveZombie(){
+	zombieY += zombieV;  // Position changing due to velocity
+	zombieV += zombieA;  // Velocity changing due to acceleration
+
+	if (zombieY + (zombieSize) >= height) {
+	 	zombieY = height - (zombieSize);
+    	zombieV *= zombieDamping;
+    	zColor();
+  	} //Won't allow zombie to go outside boundary, and dampens the bounce each time	
+}
+
+function zColor(){
+	zombieColor = color(random(256), random(256), random(256));
+}
+
+function drawHuman(){
+	fill(humanColor);
+  	rect(humanX, humanY, humanSize, humanSize, 20);
+  	fill(0);
+  	text("human", humanX + (humanSize / 4), humanY + (humanSize / 2));
+}
+
+function moveHuman(){
+	// humanY += humanV;
+	// humanX += humanVX;
+
+ 	//humanV += humanA;
+  	
+  	// if (humanVA >= 0 && abs(humanVX) >=0){
+  	
+  	if (humanVX >= 0) {
+  		humanY += humanV;
+		humanX += humanVX;
+
+  		humanV += humanA;
+  	}
+
+  	if (humanVX < 0) {
+  		humanY += humanV;
+		humanX -= humanVX;
+
+  		humanV += humanA;
+  	}
+	
+
+	if (humanY + (humanSize) >= height) {
+		humanY = height - (humanSize);
+ 	  	humanV *= humanDamping;
+   		humanVX -= humanVA;
+   		// humanD = 1;
+   	}
+
+  	if (humanX + (humanSize) >= width) {
+   		humanX = width - (humanSize);
+   		humanVX *= -1;
+   		humanVA -= 0.5;
+    		// humandSw = 1;
+	}
+
+	if (humanX - (humanSize / 2) <= 0) {
+   		humanX = 0 + (humanSize / 2);
+   		humanVX *= -1;
+   		// humanVA -= 0.5;
+   		// humanSw = 0;
+	}
+	//}
 }
