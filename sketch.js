@@ -538,8 +538,7 @@ function moveHuman(){
 
   		humanV += humanA;
   	}
-
-  	if (humanVX < 0) {
+	else {
   		humanY += humanV;
 		humanX -= humanVX;
 
