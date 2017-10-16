@@ -644,8 +644,8 @@ function drawHuman() {
 var backgroundColor;
 
 const MIN_SIZE = 20; 
-const MAX_SIZE = 75;
-const HUMAN_LENGTH = 100;
+const MAX_SIZE = 50;
+const HUMAN_LENGTH = 1000;
 
 var zombieX;
 var zombieY;
@@ -654,10 +654,8 @@ var zombieColor;
 
 var humanX = new Array(HUMAN_LENGTH);
 var humanY = new Array(HUMAN_LENGTH);
-var humanSize;
+var humanSize = new Array(HUMAN_LENGTH);
 var humanColor = new Array(HUMAN_LENGTH);
-
-var c;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -682,12 +680,11 @@ function initializeZombie() {
 }
 
 function initializeHuman() {
-  humanSize = random(MIN_SIZE, MAX_SIZE);
   for (c = 0; c < HUMAN_LENGTH; c++) {
-  	humanX[c] = random(humanSize / 2, windowWidth - (humanSize / 2));
+  	humanSize[c] = random(MIN_SIZE, MAX_SIZE);
+  	humanX[c] = random(humanSize[c] / 2, windowWidth - (humanSize[c] / 2));
   	humanColor[c] = color(random(256), random(256), random(256), random(100, 150));
-  	humanY[c] = random(windowHeight - 50, windowHeight - (humanSize / 2));
-  	// humanSize[c] = random(MIN_SIZE, MAX_SIZE);
+  	humanY[c] = random(windowHeight - 50, windowHeight - (humanSize[c] / 2));
   }
 }
 
@@ -699,20 +696,24 @@ function drawZombie() {
 
 function drawHuman() {
   for (c = 0; c < HUMAN_LENGTH; c++) {
- 	if ((humanX[c] - (humanSize / 2)) <= 0) {
- 		humanX[c] = humanSize / 2;
+ 	if ((humanX[c] - (humanSize[c] / 2)) <= 0) {
+ 		humanX[c] = humanSize[c] / 2;
  	}
- 	if ((humanX[c] + (humanSize / 2)) >= windowWidth){
- 		humanX[c] = windowWidth - (humanSize / 2);
+ 	if ((humanX[c] + (humanSize[c] / 2)) >= windowWidth){
+ 		humanX[c] = windowWidth - (humanSize[c] / 2);
  	}
  	//These two 'if' loops keep human from going outside vertical boundaries
+ 	//They basically check all of the humanX postions, and if it finds any part
+ 	//of them to outside the vertical boundaries, it adjust their position so that
+ 	//they are 100% within the boundary, and just sets them on the very edge of
+ 	//the boundary they tried to leave.
 
  	fill(humanColor[c]);
- 	ellipse(humanX[c], humanY[c], humanSize, humanSize);
- 	humanX[c] += random(-5, 5);
-  	humanY[c] -= random(-1.5, 3);
- }
- //This 'for' loop is is drawing the array of humans. It will go through all the code in 
- //in the loop 'HUMAN_LENGTH' amount of times.
- //The last two lines control the movement of the humans.
+ 	ellipse(humanX[c], humanY[c], humanSize[c], humanSize[c]);
+ 	humanX[c] += random(-4, 4);
+  	humanY[c] -= random(-1, 3);
+  }
+  //This 'for' loop is is drawing the array of humans. It will go through all the code in 
+  //in the loop 'HUMAN_LENGTH' amount of times.
+  //The last two lines control the movement of the humans.
 }
