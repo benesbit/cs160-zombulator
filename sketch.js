@@ -579,7 +579,7 @@ function moveHuman(){
 /*
 var backgroundColor;
 
-const MIN_SIZE = 25; // old browser? change to var.
+const MIN_SIZE = 25;
 const MAX_SIZE = 100;
 
 var zombieX;
@@ -643,19 +643,19 @@ function drawHuman() {
 
 var backgroundColor;
 
-const MIN_SIZE = 20; // old browser? change to var.
+const MIN_SIZE = 20; 
 const MAX_SIZE = 75;
-const HUMAN_LENGTH = 1000;
+const HUMAN_LENGTH = 100;
 
 var zombieX;
 var zombieY;
 var zombieSize;
 var zombieColor;
 
-var humanX = [];
+var humanX = new Array(HUMAN_LENGTH);
 var humanY;
 var humanSize;
-var humanColor = [];
+var humanColor = new Array(HUMAN_LENGTH);
 
 var c;
 
@@ -686,17 +686,15 @@ function initializeZombie() {
 function initializeHuman() {
   // humanX = random(0, windowWidth);
   // humanY = random(windowHeight - 200, windowHeight);
-  humanX.length = HUMAN_LENGTH;
-  humanColor.length - HUMAN_LENGTH;
   humanSize = random(MIN_SIZE, MAX_SIZE);
-  for(c = 0; c < humanX.length; c++){
+  for (c = 0; c < HUMAN_LENGTH; c++) {
   	humanX[c] = random(humanSize / 2, windowWidth - (humanSize / 2));
+  	humanColor[c] = color(random(256), random(256), random(256), random(100, 150));
+  	// humanSize[c] = random(MIN_SIZE, MAX_SIZE);
   }
   humanY = random(windowHeight - 200, windowHeight - (humanSize / 2));
-  for(c = 0; c < humanX.length; c++){
-  	humanColor[c] = color(random(256), random(256), random(256), random(100, 150));
-  }
 }
+
 
 function drawZombie() {
   fill(zombieColor);
@@ -705,8 +703,11 @@ function drawZombie() {
 
 function drawHuman() {	
   // fill(humanColor);
-  for(c = 0; c < humanX.length; c++){
+  for (c = 0; c < HUMAN_LENGTH; c++) {
   	fill(humanColor[c]);
  	ellipse(humanX[c], humanY, humanSize, humanSize);
  }
+  for (c = 0; c < HUMAN_LENGTH; c++) {
+  	humanX[c] += random(-5, 5);
+  }
 }
