@@ -675,17 +675,13 @@ function draw() {
 }
 
 function initializeZombie() {
-  // zombieX = random(0, windowWidth);
-  // zombieY = random(0, 200);
   zombieSize = random(MIN_SIZE, MAX_SIZE);
   zombieX = random(zombieSize / 2, windowWidth - (zombieSize / 2));
-  zombieY = random(zombieSize / 2, 200);
+  zombieY = random(zombieSize / 2, 150);
   zombieColor = color(random(50, 255), random(50, 255), random(50, 255), random(100, 150));
 }
 
 function initializeHuman() {
-  // humanX = random(0, windowWidth);
-  // humanY = random(windowHeight - 200, windowHeight);
   humanSize = random(MIN_SIZE, MAX_SIZE);
   for (c = 0; c < HUMAN_LENGTH; c++) {
   	humanX[c] = random(humanSize / 2, windowWidth - (humanSize / 2));
@@ -693,7 +689,6 @@ function initializeHuman() {
   	humanY[c] = random(windowHeight - 50, windowHeight - (humanSize / 2));
   	// humanSize[c] = random(MIN_SIZE, MAX_SIZE);
   }
-  // humanY = random(windowHeight - 200, windowHeight - (humanSize / 2));
 }
 
 
@@ -705,10 +700,10 @@ function drawZombie() {
 function drawHuman() {	
   // fill(humanColor);
   for (c = 0; c < HUMAN_LENGTH; c++) {
- 	if (humanX[c] <= 0) {
+ 	if ((humanX[c] - (humanSize / 2)) <= 0) {
  		humanX[c] = humanSize / 2;
  	}
- 	if (humanX[c] >= windowWidth){
+ 	if ((humanX[c] + (humanSize / 2)) >= windowWidth){
  		humanX[c] = windowWidth - (humanSize / 2);
  	}
  	fill(humanColor[c]);
