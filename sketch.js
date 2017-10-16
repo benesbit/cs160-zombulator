@@ -704,7 +704,13 @@ function drawZombie() {
 function drawHuman() {	
   // fill(humanColor);
   for (c = 0; c < HUMAN_LENGTH; c++) {
-  	fill(humanColor[c]);
+ 	if (humanX[c] <= 0) {
+ 		humanX[c] = humanSize / 2;
+ 	}
+ 	if (humanX[c] >= windowWidth){
+ 		humanX[c] = windowWidth - (humanSize / 2);
+ 	}
+ 	fill(humanColor[c]);
  	ellipse(humanX[c], humanY, humanSize, humanSize);
  }
   for (c = 0; c < HUMAN_LENGTH; c++) {
