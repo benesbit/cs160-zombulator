@@ -442,14 +442,15 @@ var humanY, humanV, humanA, humanDamping, humanSize, humanColor, humanColor;
 var humanX, humanXV, humanXA, humanSw;
 var img, imgX, imgY, imgYA, imgDamping;
 
-/*
+
 function preload() {
 	img = loadImage("https://i.pinimg.com/736x/e9/56/42/e95642e70ec7b2494f176165e983a02c--the-minish-cap-link-zelda.jpg");
 
 	loadImage("https://i.pinimg.com/736x/e9/56/42/e95642e70ec7b2494f176165e983a02c--the-minish-cap-link-zelda.jpg", function(img){
 		image(img, 0, 0);
 	});
-}*/
+}
+*/
 /*
 function setup() {
 	createCanvas(720, 400);
@@ -577,7 +578,7 @@ function moveHuman(){
 var backgroundColor;
 
 const MIN_SIZE = 25; // old browser? change to var.
-const MAX_SIZE = 500;
+const MAX_SIZE = 100;
 
 var zombieX;
 var zombieY;
@@ -591,7 +592,7 @@ var humanColor;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  backgroundColor = color(245, 255, 245);
+  backgroundColor = color('lightgray');
   initializeZombie();
   initializeHuman();
 }
@@ -605,17 +606,21 @@ function draw() {
 }
 
 function initializeZombie() {
-  zombieX = random(0, windowWidth);
-  zombieY = random(0, 200);
+  // zombieX = random(0, windowWidth);
+  // zombieY = random(0, 200);
   zombieSize = random(MIN_SIZE, MAX_SIZE);
-  zombieColor = color(random(50, 255), random(50, 255), random(50, 255), 150);
+  zombieX = random(zombieSize / 2, windowWidth - (zombieSize / 2));
+  zombieY = random(zombieSize / 2, 200);
+  zombieColor = color(random(50, 255), random(50, 255), random(50, 255), random(100, 150));
 }
 
 function initializeHuman() {
-  humanX = random(0, windowWidth);
-  humanY = random(windowHeight - 200, windowHeight);
+  // humanX = random(0, windowWidth);
+  // humanY = random(windowHeight - 200, windowHeight);
   humanSize = random(MIN_SIZE, MAX_SIZE);
-  humanColor color(random(256), random(256), random(256), 150);
+  humanX = random(humanSize / 2, windowWidth - (humanSize / 2));
+  humanY = random(windowHeight - 200, windowHeight - (humanSize / 2));
+  humanColor = color(random(256), random(256), random(256), random(100, 150));
 }
 
 function drawZombie() {
