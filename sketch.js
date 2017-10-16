@@ -574,7 +574,9 @@ function moveHuman(){
 
 // Zombulator by Ben and Hannah
 // CS 160 Exercise 12: Function practice. Preamble to arrays.
+// This is the paired programming that Hannah and myself worked on in class.
 
+/*
 var backgroundColor;
 
 const MIN_SIZE = 25; // old browser? change to var.
@@ -631,4 +633,80 @@ function drawZombie() {
 function drawHuman() {
   fill(humanColor);
   ellipse(humanX, humanY, humanSize, humanSize);
+}
+
+*/
+
+// Zombulator by Ben (in class work with Hannah shown above)
+// CS 160 Exercise 12: Function practice. Preamble to arrays.
+// Below is myself working on the challenge code.
+
+var backgroundColor;
+
+const MIN_SIZE = 20; // old browser? change to var.
+const MAX_SIZE = 75;
+const HUMAN_LENGTH = 1000;
+
+var zombieX;
+var zombieY;
+var zombieSize;
+var zombieColor;
+
+var humanX = [];
+var humanY;
+var humanSize;
+var humanColor = [];
+
+var c;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  backgroundColor = color('lightgray');
+  initializeZombie();
+  initializeHuman();
+}
+
+function draw() {
+  background(backgroundColor);
+  noStroke();
+
+  drawZombie();
+  drawHuman();
+}
+
+function initializeZombie() {
+  // zombieX = random(0, windowWidth);
+  // zombieY = random(0, 200);
+  zombieSize = random(MIN_SIZE, MAX_SIZE);
+  zombieX = random(zombieSize / 2, windowWidth - (zombieSize / 2));
+  zombieY = random(zombieSize / 2, 200);
+  zombieColor = color(random(50, 255), random(50, 255), random(50, 255), random(100, 150));
+}
+
+function initializeHuman() {
+  // humanX = random(0, windowWidth);
+  // humanY = random(windowHeight - 200, windowHeight);
+  humanX.length = HUMAN_LENGTH;
+  humanColor.length - HUMAN_LENGTH;
+  humanSize = random(MIN_SIZE, MAX_SIZE);
+  for(c = 0; c < humanX.length; c++){
+  	humanX[c] = random(humanSize / 2, windowWidth - (humanSize / 2));
+  }
+  humanY = random(windowHeight - 200, windowHeight - (humanSize / 2));
+  for(c = 0; c < humanX.length; c++){
+  	humanColor[c] = color(random(256), random(256), random(256), random(100, 150));
+  }
+}
+
+function drawZombie() {
+  fill(zombieColor);
+  ellipse(zombieX, zombieY, zombieSize, zombieSize);
+}
+
+function drawHuman() {	
+  // fill(humanColor);
+  for(c = 0; c < humanX.length; c++){
+  	fill(humanColor[c]);
+ 	ellipse(humanX[c], humanY, humanSize, humanSize);
+ }
 }
