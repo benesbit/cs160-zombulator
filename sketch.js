@@ -653,7 +653,7 @@ var zombieSize;
 var zombieColor;
 
 var humanX = new Array(HUMAN_LENGTH);
-var humanY;
+var humanY = new Array(HUMAN_LENGTH);
 var humanSize;
 var humanColor = new Array(HUMAN_LENGTH);
 
@@ -690,9 +690,10 @@ function initializeHuman() {
   for (c = 0; c < HUMAN_LENGTH; c++) {
   	humanX[c] = random(humanSize / 2, windowWidth - (humanSize / 2));
   	humanColor[c] = color(random(256), random(256), random(256), random(100, 150));
+  	humanY[c] = random(windowHeight - 50, windowHeight - (humanSize / 2));
   	// humanSize[c] = random(MIN_SIZE, MAX_SIZE);
   }
-  humanY = random(windowHeight - 200, windowHeight - (humanSize / 2));
+  // humanY = random(windowHeight - 200, windowHeight - (humanSize / 2));
 }
 
 
@@ -711,9 +712,11 @@ function drawHuman() {
  		humanX[c] = windowWidth - (humanSize / 2);
  	}
  	fill(humanColor[c]);
- 	ellipse(humanX[c], humanY, humanSize, humanSize);
+ 	ellipse(humanX[c], humanY[c], humanSize, humanSize);
  }
   for (c = 0; c < HUMAN_LENGTH; c++) {
   	humanX[c] += random(-5, 5);
+  	humanY[c] -= random(-1.5, 3);
   }
+  // humanY -= random (-2, 5);
 }
