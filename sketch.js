@@ -697,8 +697,7 @@ function drawZombie() {
   ellipse(zombieX, zombieY, zombieSize, zombieSize);
 }
 
-function drawHuman() {	
-  // fill(humanColor);
+function drawHuman() {
   for (c = 0; c < HUMAN_LENGTH; c++) {
  	if ((humanX[c] - (humanSize / 2)) <= 0) {
  		humanX[c] = humanSize / 2;
@@ -706,12 +705,14 @@ function drawHuman() {
  	if ((humanX[c] + (humanSize / 2)) >= windowWidth){
  		humanX[c] = windowWidth - (humanSize / 2);
  	}
+ 	//These two 'if' loops keep human from going outside vertical boundaries
+
  	fill(humanColor[c]);
  	ellipse(humanX[c], humanY[c], humanSize, humanSize);
- }
-  for (c = 0; c < HUMAN_LENGTH; c++) {
-  	humanX[c] += random(-5, 5);
+ 	humanX[c] += random(-5, 5);
   	humanY[c] -= random(-1.5, 3);
-  }
-  // humanY -= random (-2, 5);
+ }
+ //This 'for' loop is is drawing the array of humans. It will go through all the code in 
+ //in the loop 'HUMAN_LENGTH' amount of times.
+ //The last two lines control the movement of the humans.
 }
