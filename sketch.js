@@ -707,7 +707,7 @@ function drawHuman() {
  	if ((humanX[c] - (humanSize[c] / 2)) <= 0) {
  		humanX[c] = humanSize[c] / 2;
  	}
- 	if ((humanX[c] + (humanSize[c] / 2)) >= windowWidth){
+ 	if ((humanX[c] + (humanSize[c] / 2)) >= windowWidth) {
  		humanX[c] = windowWidth - (humanSize[c] / 2);
  	}
  	//These two 'if' loops keep human from going outside vertical boundaries
@@ -715,6 +715,9 @@ function drawHuman() {
  	//of them to outside the vertical boundaries, it adjust their position so that
  	//they are 100% within the boundary, and just sets them on the very edge of
  	//the boundary they tried to leave.
+ 	if ((humanY[c] - (humanSize[c] / 2)) <= 0) {
+ 		humanY[c] = (humanSize[c] / 2);
+ 	}
 
  	fill(humanColor[c]);
  	ellipse(humanX[c], humanY[c], humanSize[c], humanSize[c]); //These two lines are daring human number [c].
