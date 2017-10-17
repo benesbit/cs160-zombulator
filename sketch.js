@@ -662,7 +662,7 @@ var penColor;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   backgroundColor = color('lightgray');
-  penColor = color(random(256), random(256), random(256));
+  // penColor = color(random(256), random(256), random(256));
 
   initializeZombie();
   initializeHuman();
@@ -671,6 +671,8 @@ function setup() {
 function draw() {
   background(backgroundColor);
   noStroke();
+
+  penColor = color(random(256), random(256), random(256));
 
   drawZombie();
   drawHuman();
