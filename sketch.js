@@ -657,9 +657,13 @@ var humanY = new Array(HUMAN_LENGTH);
 var humanSize = new Array(HUMAN_LENGTH);
 var humanColor = new Array(HUMAN_LENGTH);
 
+var penColor;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   backgroundColor = color('lightgray');
+  penColor = color(random(256), random(256), random(256));
+
   initializeZombie();
   initializeHuman();
 }
@@ -692,6 +696,8 @@ function initializeHuman() {
 function drawZombie() {
   fill(zombieColor);
   ellipse(zombieX, zombieY, zombieSize, zombieSize);
+  fill(penColor);
+  text('The Lonely' + '\n' + 'Zombie', zombieX, zombieY);
 }
 
 function drawHuman() {
@@ -709,7 +715,11 @@ function drawHuman() {
  	//the boundary they tried to leave.
 
  	fill(humanColor[c]);
- 	ellipse(humanX[c], humanY[c], humanSize[c], humanSize[c]);
+ 	ellipse(humanX[c], humanY[c], humanSize[c], humanSize[c]); //These two lines are daring human number [c].
+
+ 	// text('Human', humanX[c], humanY[c], humanSize[c], humanSize[c]); //This was added for fun, pointless tho.
+ 	//^^ That crated even MORE lag than the 1000 humans already do.
+
  	humanX[c] += random(-4, 4);
   	humanY[c] -= random(-1, 3);
   }
