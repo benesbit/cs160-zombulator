@@ -743,10 +743,10 @@ function drawHuman() {
 
 var backgroundColor;
 
-const MIN_SIZE = 10; // old browser? change to var.
+const MIN_SIZE = 10; 
 const MAX_SIZE = 25;
-const NUMBER_OF_ZOMBIES = 10;
-const NUMBER_OF_HUMANS = 10;
+const NUMBER_OF_ZOMBIES = 100;
+const NUMBER_OF_HUMANS = 100;
 
 var zombieXs;
 var zombieYs;
@@ -781,9 +781,10 @@ function initializeZombies() {
   	zombieColors = [];
 
   	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
-    	zombieXs[i] = random(0, windowWidth);
-    	zombieYs[i] = random(0, 150);
-    	zombieSizes[i] = random(MIN_SIZE, MAX_SIZE);
+  		zombieSizes[i] = random(MIN_SIZE, MAX_SIZE);
+    	zombieXs[i] = random(zombieSizes[i] / 2, windowWidth - (zombieSizes[i] / 2));
+    	zombieYs[i] = random(zombieSizes[i] / 2, 150);
+    	// zombieSizes[i] = random(MIN_SIZE, MAX_SIZE);
     	zombieColors[i] = color(random(200, 255), random(50, 100), random(50, 100), random(50, 150));
   	}
 }
@@ -795,9 +796,10 @@ function initializeHuman() {
 	humanColors = [];
 
 	for (var c = 0; c < NUMBER_OF_HUMANS; c++) {
-		humanXs[c] = random(0, windowWidth);
-  		humanYs[c] = random(windowHeight - 150, windowHeight);
-  		humanSizes[c] = random(MIN_SIZE, MAX_SIZE);
+		humanSizes[c] = random(MIN_SIZE, MAX_SIZE);
+		humanXs[c] = random(humanSizes[c] / 2, windowWidth - (humanSizes[c] / 2));
+  		humanYs[c] = random(windowHeight - 150, windowHeight - (humanSizes[c] / 2));
+  		// humanSizes[c] = random(MIN_SIZE, MAX_SIZE);
   		humanColors[c] = color(random(50, 255), random(50, 255), random(50, 255), random(50, 150));
   	}
 }
@@ -811,7 +813,25 @@ function drawZombies() {
 
 function drawHuman() {
 	for (var c = 0; c < NUMBER_OF_HUMANS; c++) {
+		if ((humanXs[c] - (humanSizes[c] / 2)) <= 0) {
+ 			humanXs[c] = humanSizes[c] / 2;
+ 		}
+ 		if ((humanXs[c] + (humanSizes[c] / 2)) >= windowWidth) {
+ 			humanXs[c] = windowWidth - (humanSizes[c] / 2);
+ 		}
+ 		//These two 'if' loops keep human from going outside vertical boundaries
+ 		//They basically check all of the humanX postions, and if it finds any part
+ 		//of them to outside the vertical boundaries, it adjust their position so that
+ 		//they are 100% within the boundary, and just sets them on the very edge of
+ 		//the boundary they tried to leave.
+ 		if ((humanYs[c] - (humanSizes[c] / 2)) <= 0) {
+ 			humanYs[c] = (humanSizes[c] / 2);
+ 		} //Creates an upper boundary for the humans
+
   		fill(humanColors[c]);
   		ellipse(humanXs[c], humanYs[c], humanSizes[c], humanSizes[c]);
+
+  		humanXs[c] += random(-3, 3);
+  		humanYs[c] -= random(-1, 6);
   	}
 }
