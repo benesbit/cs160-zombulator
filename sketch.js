@@ -888,13 +888,14 @@ function trapZombie(index) {
  		zombieXs[index] = zombieSizes[index] / 2;
  	}
  	if ((zombieXs[index] + (zombieSizes[index] / 2)) >= windowWidth) {
- 	zombieXs[index] = windowWidth - (zombieSizes[index] / 2);
+ 		zombieXs[index] = windowWidth - (zombieSizes[index] / 2);
  	}
  	// These two 'if' loops keep zombies from going outside vertical boundaries (side walls)
  	// They basically check all of the zombieX postions, and if it finds any part
  	// of them to outside the vertical boundaries (side walls), it adjusts their position so that
  	// they are 100% within the boundary, and just sets them on the very edge of the boundary 
  	// that they tried to leave.
+ 	
  	if ((zombieYs[index] + (zombieSizes[index] / 2)) >= windowHeight) {
  		zombieYs[index] = (windowHeight - (zombieSizes[index] / 2));
  	} // Creates an lower boundary for the zombies. They will not leave the screen.
