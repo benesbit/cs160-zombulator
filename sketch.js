@@ -855,7 +855,7 @@ function drawZombies() {
     	ellipse(zombieXs[i], zombieYs[i], zombieSizes[i], zombieSizes[i]);
 
     	zombieXs[i] += random(-3, 3);
-    	zombieYs[i] += random(-1, 3);
+    	zombieYs[i] += random(-0.5, 2);
   	}
 }
 
