@@ -754,6 +754,14 @@ const LOWER_ZOMBIE_POP_BOUND = .4;
 const UPPER_ZOMBIE_POP_BOUND = .6;
 // Using these to create a percentage change based off max population. These are passed to
 // the random function so we get between a 40% and 60% ratio, randomly.
+
+const HUMAN_SPAWN_BOUND = 150;
+const ZOMBIE_SPAWN_BOUND = 150;
+// The distance from the respective boundaries that each human and zombie can spawn.
+// AKA: The distance each 'army' will spawn from eachother. HOWEVER, the code is set
+// up such that these numbers do represent the max spawn distance from the top and 
+// bottom boundaries.
+
 const NEG_HUMAN_X = -3;
 const POS_HUMAN_X = 3;
 const NEG_HUMAN_Y = -1;
@@ -781,17 +789,9 @@ var humanSizes;
 var humanColors;
 
 function setup() {
+
   	createCanvas(windowWidth, windowHeight);
   	backgroundColor = color('lightgray');
-
-
-  	// NUMBER_OF_ZOMBIES = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));
-  	
-  	// round(NUMBER_OF_ZOMBIES, 0);
-
-  	// NUMBER_OF_HUMANS = MAX_POPULATION - NUMBER_OF_ZOMBIES;
-  	// Math.round(NUMBER_OF_HUMANS);
-  	// Moved these assignments to their respective initialize functions.
   	
   	initializeZombies();
   	initializeHumans();
@@ -823,12 +823,15 @@ function initializeZombies() {
 }
 
 function initializeZombie(index) {
-	  	zombieSizes[index] = random(MIN_SIZE, MAX_SIZE); //Had to put this first, size used right after.
-    	zombieXs[index] = random(zombieSizes[index] / 2, windowWidth - (zombieSizes[index] / 2));
-    	zombieYs[index] = random(zombieSizes[index] / 2, 150);
-    	// This was changed a bit so zombies never spawn outside of window boundaries.
-    	// zombieSizes[i] = random(MIN_SIZE, MAX_SIZE);
-    	zombieColors[index] = color(random(200, 255), random(50, 100), random(50, 100), random(50, 150));
+
+	zombieSizes[index] = random(MIN_SIZE, MAX_SIZE); // Had to put this first, size used right after.
+
+    zombieXs[index] = random(zombieSizes[index] / 2, windowWidth - (zombieSizes[index] / 2));
+    zombieYs[index] = random(zombieSizes[index] / 2, ZOMBIE_SPAWN_BOUND);
+    // This was changed a bit so zombies never spawn outside of window boundaries.
+    // zombieSizes[i] = random(MIN_SIZE, MAX_SIZE);
+
+    zombieColors[index] = color(random(200, 255), random(50, 100), random(50, 100), random(50, 150));
 }
 
 function initializeHumans() {
@@ -847,11 +850,14 @@ function initializeHumans() {
 }
 
 function initializeHuman(index) {
-	humanSizes[index] = random(MIN_SIZE, MAX_SIZE); //Had to put this first, size is used right after.
+
+	humanSizes[index] = random(MIN_SIZE, MAX_SIZE); // Had to put this first, size is used right after.
+
 	humanXs[index] = random(humanSizes[index] / 2, windowWidth - (humanSizes[index] / 2));
-  	humanYs[index] = random(windowHeight - 150, windowHeight - (humanSizes[index] / 2));
+  	humanYs[index] = random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (humanSizes[index] / 2));
  	// Keeps humans from spawning outside the window boundaries.
   	// humanSizes[c] = random(MIN_SIZE, MAX_SIZE);
+
   	humanColors[index] = color(random(50, 255), random(50, 255), random(50, 255), random(50, 150));
 }
 
@@ -884,14 +890,14 @@ function trapZombie(index) {
  	if ((zombieXs[index] + (zombieSizes[index] / 2)) >= windowWidth) {
  	zombieXs[index] = windowWidth - (zombieSizes[index] / 2);
  	}
- 	//These two 'if' loops keep zombies from going outside vertical boundaries (side walls)
- 	//They basically check all of the zombieX postions, and if it finds any part
- 	//of them to outside the vertical boundaries (side walls), it adjusts their position so that
- 	//they are 100% within the boundary, and just sets them on the very edge of the boundary 
- 	//that they tried to leave.
+ 	// These two 'if' loops keep zombies from going outside vertical boundaries (side walls)
+ 	// They basically check all of the zombieX postions, and if it finds any part
+ 	// of them to outside the vertical boundaries (side walls), it adjusts their position so that
+ 	// they are 100% within the boundary, and just sets them on the very edge of the boundary 
+ 	// that they tried to leave.
  	if ((zombieYs[index] + (zombieSizes[index] / 2)) >= windowHeight) {
  		zombieYs[index] = (windowHeight - (zombieSizes[index] / 2));
- 	} //Creates an lower boundary for the zombies. They will not leave the screen.
+ 	} // Creates an lower boundary for the zombies. They will not leave the screen.
 }
 
 function drawHumans() {
@@ -918,18 +924,20 @@ function drawHuman(index) {
 }
 
 function trapHuman(index) {
+
 	if ((humanXs[index] - (humanSizes[index] / 2)) <= 0) {
  		humanXs[index] = humanSizes[index] / 2;
  	}
  	if ((humanXs[index] + (humanSizes[index] / 2)) >= windowWidth) {
  		humanXs[index] = windowWidth - (humanSizes[index] / 2);
  	}
- 	//These two 'if' loops keep humans from going outside vertical boundaries (side walls)
- 	//They basically check all of the humanX postions, and if it finds any part
- 	//of them to outside the vertical boundaries (side walls), it adjust their position so that
- 	//they are 100% within the boundary, and just sets them on the very edge of the boundary
- 	//that they tried to leave.
+ 	// These two 'if' loops keep humans from going outside vertical boundaries (side walls)
+ 	// They basically check all of the humanX postions, and if it finds any part
+ 	// of them to outside the vertical boundaries (side walls), it adjust their position so that
+ 	// they are 100% within the boundary, and just sets them on the very edge of the boundary
+ 	// that they tried to leave.
+
  	if ((humanYs[index] - (humanSizes[index] / 2)) <= 0) {
  		humanYs[index] = (humanSizes[index] / 2);
- 	} //Creates an upper boundary for the humans
+ 	} // Creates an upper boundary for the humans.
 }
