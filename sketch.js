@@ -131,7 +131,7 @@ function draw(){
 			//This is a mathematically (shitty) way to have the colors change gradually. The if/else was a quick
 			//fix to give an interesting "windowed" look to the slow color change. Got rid of if/else loop, 
 			//I like this look better, but..
-			//Could be down better with an additional var?
+			//Could be done better with an additional var?
 				ellipse(x, y, 25, 25);
 		}
 	}
@@ -735,6 +735,10 @@ function drawHuman() {
 }
 */
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 // Excercise 13
 
 // http://tinyurl.com/cs160ex13
@@ -777,9 +781,10 @@ function setup() {
 
   	// NUMBER_OF_HUMANS = MAX_POPULATION - NUMBER_OF_ZOMBIES;
   	// Math.round(NUMBER_OF_HUMANS);
+  	// Moved these assignments to their respective initialize functions.
   	
   	initializeZombies();
-  	initializeHuman();
+  	initializeHumans();
 }
 
 function draw() {
@@ -787,15 +792,14 @@ function draw() {
   	noStroke();
 
   	drawZombies();
-  	drawHuman();
+  	drawHumans();
 }
 
 function initializeZombies() {
 
 	NUMBER_OF_ZOMBIES = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));
   	
-  	Math.round(NUMBER_OF_ZOMBIES, 0);
-
+  	NUMBER_OF_ZOMBIES = Math.trunc(NUMBER_OF_ZOMBIES);
 
   	zombieXs = [];
   	zombieYs = [];
@@ -803,15 +807,21 @@ function initializeZombies() {
   	zombieColors = [];
 
   	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
-  		zombieSizes[i] = random(MIN_SIZE, MAX_SIZE); //Had to put this first, size used right after.
-    	zombieXs[i] = random(zombieSizes[i] / 2, windowWidth - (zombieSizes[i] / 2));
-    	zombieYs[i] = random(zombieSizes[i] / 2, 150);
-    	// zombieSizes[i] = random(MIN_SIZE, MAX_SIZE);
-    	zombieColors[i] = color(random(200, 255), random(50, 100), random(50, 100), random(50, 150));
+  		
+  		initializeZombie(i);
   	}
 }
 
-function initializeHuman() {
+function initializeZombie(index) {
+	  	zombieSizes[index] = random(MIN_SIZE, MAX_SIZE); //Had to put this first, size used right after.
+    	zombieXs[index] = random(zombieSizes[index] / 2, windowWidth - (zombieSizes[index] / 2));
+    	zombieYs[index] = random(zombieSizes[index] / 2, 150);
+    	// This was changed a bit so zombies never spawn outside of window boundaries.
+    	// zombieSizes[i] = random(MIN_SIZE, MAX_SIZE);
+    	zombieColors[index] = color(random(200, 255), random(50, 100), random(50, 100), random(50, 150));
+}
+
+function initializeHumans() {
 
 	NUMBER_OF_HUMANS = MAX_POPULATION - NUMBER_OF_ZOMBIES;
 
@@ -821,12 +831,18 @@ function initializeHuman() {
 	humanColors = [];
 
 	for (var c = 0; c < NUMBER_OF_HUMANS; c++) {
-		humanSizes[c] = random(MIN_SIZE, MAX_SIZE); //Had to put this first, size is used right after.
-		humanXs[c] = random(humanSizes[c] / 2, windowWidth - (humanSizes[c] / 2));
-  		humanYs[c] = random(windowHeight - 150, windowHeight - (humanSizes[c] / 2));
-  		// humanSizes[c] = random(MIN_SIZE, MAX_SIZE);
-  		humanColors[c] = color(random(50, 255), random(50, 255), random(50, 255), random(50, 150));
+		
+		initializeHuman(c);
   	}
+}
+
+function initializeHuman(index) {
+	humanSizes[index] = random(MIN_SIZE, MAX_SIZE); //Had to put this first, size is used right after.
+	humanXs[index] = random(humanSizes[index] / 2, windowWidth - (humanSizes[index] / 2));
+  	humanYs[index] = random(windowHeight - 150, windowHeight - (humanSizes[index] / 2));
+ 	// Keeps humans from spawning outside the window boundaries.
+  	// humanSizes[c] = random(MIN_SIZE, MAX_SIZE);
+  	humanColors[index] = color(random(50, 255), random(50, 255), random(50, 255), random(50, 150));
 }
 
 function drawZombies() {
@@ -835,55 +851,66 @@ function drawZombies() {
 	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, 200);
 
  	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
- 		if ((zombieXs[i] - zombieSizes[i] / 2) <= 0){
- 			zombieXs[i] = zombieSizes[i] / 2;
+ 		
+ 		drawZombie(i);
+  	}
+}
+
+function drawZombie(index) {
+	 	if ((zombieXs[index] - zombieSizes[index] / 2) <= 0){
+ 			zombieXs[index] = zombieSizes[index] / 2;
  		}
- 		if ((zombieXs[i] + (zombieSizes[i] / 2)) >= windowWidth) {
- 			zombieXs[i] = windowWidth - (zombieSizes[i] / 2);
+ 		if ((zombieXs[index] + (zombieSizes[index] / 2)) >= windowWidth) {
+ 			zombieXs[index] = windowWidth - (zombieSizes[index] / 2);
  		}
  		//These two 'if' loops keep zombies from going outside vertical boundaries
  		//They basically check all of the zombieX postions, and if it finds any part
  		//of them to outside the vertical boundaries, it adjust their position so that
  		//they are 100% within the boundary, and just sets them on the very edge of
  		//the boundary they tried to leave.
- 		if ((zombieYs[i] + (zombieSizes[i] / 2)) >= windowHeight) {
- 			zombieYs[i] = (windowHeight - (zombieSizes[i] / 2));
+ 		if ((zombieYs[index] + (zombieSizes[index] / 2)) >= windowHeight) {
+ 			zombieYs[index] = (windowHeight - (zombieSizes[index] / 2));
  		} //Creates an lower boundary for the zombies.
 
 
-    	fill(zombieColors[i]);
-    	ellipse(zombieXs[i], zombieYs[i], zombieSizes[i], zombieSizes[i]);
+    	fill(zombieColors[index]);
+    	ellipse(zombieXs[index], zombieYs[index], zombieSizes[index], zombieSizes[index]);
 
-    	zombieXs[i] += random(-3, 3);
-    	zombieYs[i] += random(-0.5, 2);
-  	}
+    	zombieXs[index] += random(-3, 3);
+    	zombieYs[index] += random(-0.5, 2);
 }
 
-function drawHuman() {
+function drawHumans() {
 
 	fill('black');
 	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
 
 	for (var c = 0; c < NUMBER_OF_HUMANS; c++) {
-		if ((humanXs[c] - (humanSizes[c] / 2)) <= 0) {
- 			humanXs[c] = humanSizes[c] / 2;
- 		}
- 		if ((humanXs[c] + (humanSizes[c] / 2)) >= windowWidth) {
- 			humanXs[c] = windowWidth - (humanSizes[c] / 2);
- 		}
- 		//These two 'if' loops keep humans from going outside vertical boundaries
- 		//They basically check all of the humanX postions, and if it finds any part
- 		//of them to outside the vertical boundaries, it adjust their position so that
- 		//they are 100% within the boundary, and just sets them on the very edge of
- 		//the boundary they tried to leave.
- 		if ((humanYs[c] - (humanSizes[c] / 2)) <= 0) {
- 			humanYs[c] = (humanSizes[c] / 2);
- 		} //Creates an upper boundary for the humans
-
-  		fill(humanColors[c]);
-  		ellipse(humanXs[c], humanYs[c], humanSizes[c], humanSizes[c]);
-
-  		humanXs[c] += random(-3, 3);
-  		humanYs[c] -= random(-1, 3);
+		
+		drawHuman(c);
+ 			
   	}
+}
+
+function drawHuman(index) {
+	if ((humanXs[index] - (humanSizes[index] / 2)) <= 0) {
+ 		humanXs[index] = humanSizes[index] / 2;
+ 	}
+ 	if ((humanXs[index] + (humanSizes[index] / 2)) >= windowWidth) {
+ 		humanXs[index] = windowWidth - (humanSizes[index] / 2);
+ 	}
+ 	//These two 'if' loops keep humans from going outside vertical boundaries
+ 	//They basically check all of the humanX postions, and if it finds any part
+ 	//of them to outside the vertical boundaries, it adjust their position so that
+ 	//they are 100% within the boundary, and just sets them on the very edge of
+ 	//the boundary they tried to leave.
+ 	if ((humanYs[index] - (humanSizes[index] / 2)) <= 0) {
+ 		humanYs[index] = (humanSizes[index] / 2);
+ 	} //Creates an upper boundary for the humans
+
+  	fill(humanColors[index]);
+  	ellipse(humanXs[index], humanYs[index], humanSizes[index], humanSizes[index]);
+
+  	humanXs[index] += random(-3, 3);
+  	humanYs[index] -= random(-1, 3);
 }
