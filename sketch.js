@@ -867,27 +867,31 @@ function drawZombies() {
 }
 
 function drawZombie(index) {
-	 	if ((zombieXs[index] - zombieSizes[index] / 2) <= 0){
- 			zombieXs[index] = zombieSizes[index] / 2;
- 		}
- 		if ((zombieXs[index] + (zombieSizes[index] / 2)) >= windowWidth) {
- 			zombieXs[index] = windowWidth - (zombieSizes[index] / 2);
- 		}
- 		//These two 'if' loops keep zombies from going outside vertical boundaries
- 		//They basically check all of the zombieX postions, and if it finds any part
- 		//of them to outside the vertical boundaries, it adjust their position so that
- 		//they are 100% within the boundary, and just sets them on the very edge of
- 		//the boundary they tried to leave.
- 		if ((zombieYs[index] + (zombieSizes[index] / 2)) >= windowHeight) {
- 			zombieYs[index] = (windowHeight - (zombieSizes[index] / 2));
- 		} //Creates an lower boundary for the zombies.
+	 	
+	trapZombie(index);
 
+    fill(zombieColors[index]);
+    ellipse(zombieXs[index], zombieYs[index], zombieSizes[index], zombieSizes[index]);
 
-    	fill(zombieColors[index]);
-    	ellipse(zombieXs[index], zombieYs[index], zombieSizes[index], zombieSizes[index]);
+    zombieXs[index] += random(NEG_ZOMBIE_X, POS_ZOMBIE_X);
+    zombieYs[index] += random(NEG_ZOMBIE_Y, POS_ZOMBIE_Y);
+}
 
-    	zombieXs[index] += random(NEG_ZOMBIE_X, POS_ZOMBIE_X);
-    	zombieYs[index] += random(NEG_ZOMBIE_Y, POS_ZOMBIE_Y);
+function trapZombie(index) {
+	if ((zombieXs[index] - zombieSizes[index] / 2) <= 0){
+ 		zombieXs[index] = zombieSizes[index] / 2;
+ 	}
+ 	if ((zombieXs[index] + (zombieSizes[index] / 2)) >= windowWidth) {
+ 	zombieXs[index] = windowWidth - (zombieSizes[index] / 2);
+ 	}
+ 	//These two 'if' loops keep zombies from going outside vertical boundaries (side walls)
+ 	//They basically check all of the zombieX postions, and if it finds any part
+ 	//of them to outside the vertical boundaries (side walls), it adjusts their position so that
+ 	//they are 100% within the boundary, and just sets them on the very edge of the boundary 
+ 	//that they tried to leave.
+ 	if ((zombieYs[index] + (zombieSizes[index] / 2)) >= windowHeight) {
+ 		zombieYs[index] = (windowHeight - (zombieSizes[index] / 2));
+ 	} //Creates an lower boundary for the zombies. They will not leave the screen.
 }
 
 function drawHumans() {
@@ -898,7 +902,7 @@ function drawHumans() {
 	for (var c = 0; c < NUMBER_OF_HUMANS; c++) {
 		
 		drawHuman(c);
- 			
+ 		
   	}
 }
 
@@ -922,9 +926,9 @@ function trapHuman(index) {
  	}
  	//These two 'if' loops keep humans from going outside vertical boundaries (side walls)
  	//They basically check all of the humanX postions, and if it finds any part
- 	//of them to outside the vertical boundaries, it adjust their position so that
- 	//they are 100% within the boundary, and just sets them on the very edge of
- 	//the boundary they tried to leave.
+ 	//of them to outside the vertical boundaries (side walls), it adjust their position so that
+ 	//they are 100% within the boundary, and just sets them on the very edge of the boundary
+ 	//that they tried to leave.
  	if ((humanYs[index] - (humanSizes[index] / 2)) <= 0) {
  		humanYs[index] = (humanSizes[index] / 2);
  	} //Creates an upper boundary for the humans
