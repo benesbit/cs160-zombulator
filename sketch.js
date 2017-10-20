@@ -764,6 +764,8 @@ const NEG_ZOMBIE_X = -3;
 const POS_ZOMBIE_X = 3;
 const NEG_ZOMBIE_Y = -0.5;
 const POS_ZOMBIE_Y = 2;
+// These are the constants that control the "Brownian motion" of the zombies.
+// Note that POS in the y category indicates the main direction we want the object moving.
 
 var NUMBER_OF_ZOMBIES;
 var NUMBER_OF_HUMANS;
@@ -901,13 +903,24 @@ function drawHumans() {
 }
 
 function drawHuman(index) {
+	
+	trapHuman(index);
+
+  	fill(humanColors[index]);
+  	ellipse(humanXs[index], humanYs[index], humanSizes[index], humanSizes[index]);
+
+  	humanXs[index] += random(NEG_HUMAN_X, POS_HUMAN_X);
+  	humanYs[index] -= random(NEG_HUMAN_Y, POS_HUMAN_Y);
+}
+
+function trapHuman(index) {
 	if ((humanXs[index] - (humanSizes[index] / 2)) <= 0) {
  		humanXs[index] = humanSizes[index] / 2;
  	}
  	if ((humanXs[index] + (humanSizes[index] / 2)) >= windowWidth) {
  		humanXs[index] = windowWidth - (humanSizes[index] / 2);
  	}
- 	//These two 'if' loops keep humans from going outside vertical boundaries
+ 	//These two 'if' loops keep humans from going outside vertical boundaries (side walls)
  	//They basically check all of the humanX postions, and if it finds any part
  	//of them to outside the vertical boundaries, it adjust their position so that
  	//they are 100% within the boundary, and just sets them on the very edge of
@@ -915,10 +928,4 @@ function drawHuman(index) {
  	if ((humanYs[index] - (humanSizes[index] / 2)) <= 0) {
  		humanYs[index] = (humanSizes[index] / 2);
  	} //Creates an upper boundary for the humans
-
-  	fill(humanColors[index]);
-  	ellipse(humanXs[index], humanYs[index], humanSizes[index], humanSizes[index]);
-
-  	humanXs[index] += random(NEG_HUMAN_X, POS_HUMAN_X);
-  	humanYs[index] -= random(NEG_HUMAN_Y, POS_HUMAN_Y);
 }
