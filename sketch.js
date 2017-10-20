@@ -748,6 +748,8 @@ const MAX_SIZE = 25;
 const MAX_POPULATION = 1000;
 const LOWER_ZOMBIE_POP_BOUND = .4;
 const UPPER_ZOMBIE_POP_BOUND = .6;
+// Using these to create a percentage change based off max population. These are passed to
+// the random function so we get between a 40% and 60% ratio, randomly.
 // const NUMBER_OF_ZOMBIES = 100;
 // const NUMBER_OF_HUMANS = 100;
 
@@ -792,7 +794,7 @@ function initializeZombies() {
 
 	NUMBER_OF_ZOMBIES = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));
   	
-  	round(NUMBER_OF_ZOMBIES, 0);
+  	Math.round(NUMBER_OF_ZOMBIES, 0);
 
 
   	zombieXs = [];
@@ -810,7 +812,7 @@ function initializeZombies() {
 }
 
 function initializeHuman() {
-	
+
 	NUMBER_OF_HUMANS = MAX_POPULATION - NUMBER_OF_ZOMBIES;
 
 	humanXs = [];
@@ -865,8 +867,4 @@ function drawHuman() {
   		humanXs[c] += random(-3, 3);
   		humanYs[c] -= random(-1, 3);
   	}
-}
-
-function round(value, decimals) {
-  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
