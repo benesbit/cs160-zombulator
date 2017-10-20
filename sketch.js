@@ -745,8 +745,14 @@ var backgroundColor;
 
 const MIN_SIZE = 10; 
 const MAX_SIZE = 25;
-const NUMBER_OF_ZOMBIES = 100;
-const NUMBER_OF_HUMANS = 100;
+const MAX_POPULATION = 1000;
+const LOWER_ZOMBIE_POP_BOUND = .4;
+const UPPER_ZOMBIE_POP_BOUND = .6;
+// const NUMBER_OF_ZOMBIES = 100;
+// const NUMBER_OF_HUMANS = 100;
+
+var NUMBER_OF_ZOMBIES;
+var NUMBER_OF_HUMANS;
 
 var zombieXs;
 var zombieYs;
@@ -761,6 +767,14 @@ var humanColors;
 function setup() {
   	createCanvas(windowWidth, windowHeight);
   	backgroundColor = color('lightgray');
+
+
+  	// NUMBER_OF_ZOMBIES = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));
+  	
+  	// round(NUMBER_OF_ZOMBIES, 0);
+
+  	// NUMBER_OF_HUMANS = MAX_POPULATION - NUMBER_OF_ZOMBIES;
+  	// Math.round(NUMBER_OF_HUMANS);
   	
   	initializeZombies();
   	initializeHuman();
@@ -775,6 +789,12 @@ function draw() {
 }
 
 function initializeZombies() {
+
+	NUMBER_OF_ZOMBIES = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));
+  	
+  	round(NUMBER_OF_ZOMBIES, 0);
+
+
   	zombieXs = [];
   	zombieYs = [];
   	zombieSizes = [];
@@ -790,6 +810,9 @@ function initializeZombies() {
 }
 
 function initializeHuman() {
+	
+	NUMBER_OF_HUMANS = MAX_POPULATION - NUMBER_OF_ZOMBIES;
+
 	humanXs = [];
 	humanYs = [];
 	humanSizes = [];
@@ -805,6 +828,10 @@ function initializeHuman() {
 }
 
 function drawZombies() {
+
+	fill('black');
+	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, 200);
+
  	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
     	fill(zombieColors[i]);
     	ellipse(zombieXs[i], zombieYs[i], zombieSizes[i], zombieSizes[i]);
@@ -812,6 +839,10 @@ function drawZombies() {
 }
 
 function drawHuman() {
+
+	fill('black');
+	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
+
 	for (var c = 0; c < NUMBER_OF_HUMANS; c++) {
 		if ((humanXs[c] - (humanSizes[c] / 2)) <= 0) {
  			humanXs[c] = humanSizes[c] / 2;
@@ -832,6 +863,10 @@ function drawHuman() {
   		ellipse(humanXs[c], humanYs[c], humanSizes[c], humanSizes[c]);
 
   		humanXs[c] += random(-3, 3);
-  		humanYs[c] -= random(-1, 6);
+  		humanYs[c] -= random(-1, 3);
   	}
+}
+
+function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
