@@ -837,6 +837,9 @@ function drawZombies() {
  	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
     	fill(zombieColors[i]);
     	ellipse(zombieXs[i], zombieYs[i], zombieSizes[i], zombieSizes[i]);
+
+    	zombieXs[i] += random(-3, 3);
+    	zombieYs[i] += random(-1, 3);
   	}
 }
 
