@@ -803,7 +803,7 @@ function initializeZombies() {
   	zombieColors = [];
 
   	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
-  		zombieSizes[i] = random(MIN_SIZE, MAX_SIZE);
+  		zombieSizes[i] = random(MIN_SIZE, MAX_SIZE); //Had to put this first, size used right after.
     	zombieXs[i] = random(zombieSizes[i] / 2, windowWidth - (zombieSizes[i] / 2));
     	zombieYs[i] = random(zombieSizes[i] / 2, 150);
     	// zombieSizes[i] = random(MIN_SIZE, MAX_SIZE);
@@ -821,7 +821,7 @@ function initializeHuman() {
 	humanColors = [];
 
 	for (var c = 0; c < NUMBER_OF_HUMANS; c++) {
-		humanSizes[c] = random(MIN_SIZE, MAX_SIZE);
+		humanSizes[c] = random(MIN_SIZE, MAX_SIZE); //Had to put this first, size is used right after.
 		humanXs[c] = random(humanSizes[c] / 2, windowWidth - (humanSizes[c] / 2));
   		humanYs[c] = random(windowHeight - 150, windowHeight - (humanSizes[c] / 2));
   		// humanSizes[c] = random(MIN_SIZE, MAX_SIZE);
