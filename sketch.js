@@ -835,6 +835,22 @@ function drawZombies() {
 	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, 200);
 
  	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
+ 		if ((zombieXs[i] - zombieSizes[i] / 2) <= 0){
+ 			zombieXs[i] = zombieSizes[i] / 2;
+ 		}
+ 		if ((zombieXs[i] + (zombieSizes[i] / 2)) >= windowWidth) {
+ 			zombieXs[i] = windowWidth - (zombieSizes[i] / 2);
+ 		}
+ 		//These two 'if' loops keep zombies from going outside vertical boundaries
+ 		//They basically check all of the zombieX postions, and if it finds any part
+ 		//of them to outside the vertical boundaries, it adjust their position so that
+ 		//they are 100% within the boundary, and just sets them on the very edge of
+ 		//the boundary they tried to leave.
+ 		if ((zombieYs[i] + (zombieSizes[i] / 2)) >= windowHeight) {
+ 			zombieYs[i] = (windowHeight - (zombieSizes[i] / 2));
+ 		} //Creates an lower boundary for the zombies.
+
+
     	fill(zombieColors[i]);
     	ellipse(zombieXs[i], zombieYs[i], zombieSizes[i], zombieSizes[i]);
 
@@ -855,7 +871,7 @@ function drawHuman() {
  		if ((humanXs[c] + (humanSizes[c] / 2)) >= windowWidth) {
  			humanXs[c] = windowWidth - (humanSizes[c] / 2);
  		}
- 		//These two 'if' loops keep human from going outside vertical boundaries
+ 		//These two 'if' loops keep humans from going outside vertical boundaries
  		//They basically check all of the humanX postions, and if it finds any part
  		//of them to outside the vertical boundaries, it adjust their position so that
  		//they are 100% within the boundary, and just sets them on the very edge of
