@@ -641,6 +641,7 @@ function drawHuman() {
 // CS 160 Exercise 12: Function practice. Preamble to arrays.
 // Below is myself working on the challenge code.
 
+/*
 var backgroundColor;
 
 const MIN_SIZE = 20; 
@@ -699,7 +700,7 @@ function drawZombie() {
   fill(zombieColor);
   ellipse(zombieX, zombieY, zombieSize, zombieSize);
   fill(penColor);
-  text('The Lonely' + '\n' + 'Zombie', zombieX, zombieY);
+  text('The Lonely' + '\n' + '   Zombie', zombieX, zombieY);
 }
 
 function drawHuman() {
@@ -717,7 +718,7 @@ function drawHuman() {
  	//the boundary they tried to leave.
  	if ((humanY[c] - (humanSize[c] / 2)) <= 0) {
  		humanY[c] = (humanSize[c] / 2);
- 	}
+ 	} //Creates an upper boundary for the humans
 
  	fill(humanColor[c]);
  	ellipse(humanX[c], humanY[c], humanSize[c], humanSize[c]); //These two lines are daring human number [c].
@@ -731,4 +732,86 @@ function drawHuman() {
   //This 'for' loop is is drawing the array of humans. It will go through all the code in 
   //in the loop 'HUMAN_LENGTH' amount of times.
   //The last two lines control the movement of the humans.
+}
+*/
+
+// Excercise 13
+
+// http://tinyurl.com/cs160ex13
+// Zombulator by YOUR NAME
+// CS 160 Exercise 13: Intro to arrays
+
+var backgroundColor;
+
+const MIN_SIZE = 10; // old browser? change to var.
+const MAX_SIZE = 25;
+const NUMBER_OF_ZOMBIES = 10;
+const NUMBER_OF_HUMANS = 10;
+
+var zombieXs;
+var zombieYs;
+var zombieSizes;
+var zombieColors;
+
+var humanXs;
+var humanYs;
+var humanSizes;
+var humanColors;
+
+function setup() {
+  	createCanvas(windowWidth, windowHeight);
+  	backgroundColor = color('lightgray');
+  	
+  	initializeZombies();
+  	initializeHuman();
+}
+
+function draw() {
+  	background(backgroundColor);
+  	noStroke();
+
+  	drawZombies();
+  	drawHuman();
+}
+
+function initializeZombies() {
+  	zombieXs = [];
+  	zombieYs = [];
+  	zombieSizes = [];
+  	zombieColors = [];
+
+  	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
+    	zombieXs[i] = random(0, windowWidth);
+    	zombieYs[i] = random(0, 150);
+    	zombieSizes[i] = random(MIN_SIZE, MAX_SIZE);
+    	zombieColors[i] = color(random(200, 255), random(50, 100), random(50, 100), random(50, 150));
+  	}
+}
+
+function initializeHuman() {
+	humanXs = [];
+	humanYs = [];
+	humanSizes = [];
+	humanColors = [];
+
+	for (var c = 0; c < NUMBER_OF_HUMANS; c++) {
+		humanXs[c] = random(0, windowWidth);
+  		humanYs[c] = random(windowHeight - 150, windowHeight);
+  		humanSizes[c] = random(MIN_SIZE, MAX_SIZE);
+  		humanColors[c] = color(random(50, 255), random(50, 255), random(50, 255), random(50, 150));
+  	}
+}
+
+function drawZombies() {
+ 	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
+    	fill(zombieColors[i]);
+    	ellipse(zombieXs[i], zombieYs[i], zombieSizes[i], zombieSizes[i]);
+  	}
+}
+
+function drawHuman() {
+	for (var c = 0; c < NUMBER_OF_HUMANS; c++) {
+  		fill(humanColors[c]);
+  		ellipse(humanXs[c], humanYs[c], humanSizes[c], humanSizes[c]);
+  	}
 }
