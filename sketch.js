@@ -754,8 +754,16 @@ const LOWER_ZOMBIE_POP_BOUND = .4;
 const UPPER_ZOMBIE_POP_BOUND = .6;
 // Using these to create a percentage change based off max population. These are passed to
 // the random function so we get between a 40% and 60% ratio, randomly.
-// const NUMBER_OF_ZOMBIES = 100;
-// const NUMBER_OF_HUMANS = 100;
+const NEG_HUMAN_X = -3;
+const POS_HUMAN_X = 3;
+const NEG_HUMAN_Y = -1;
+const POS_HUMAN_Y = 3;
+// These are the constants that control the "Brownian motion" of the humans.
+// Note that POS in the y category indicates the main direction we want the object moving.
+const NEG_ZOMBIE_X = -3;
+const POS_ZOMBIE_X = 3;
+const NEG_ZOMBIE_Y = -0.5;
+const POS_ZOMBIE_Y = 2;
 
 var NUMBER_OF_ZOMBIES;
 var NUMBER_OF_HUMANS;
@@ -876,8 +884,8 @@ function drawZombie(index) {
     	fill(zombieColors[index]);
     	ellipse(zombieXs[index], zombieYs[index], zombieSizes[index], zombieSizes[index]);
 
-    	zombieXs[index] += random(-3, 3);
-    	zombieYs[index] += random(-0.5, 2);
+    	zombieXs[index] += random(NEG_ZOMBIE_X, POS_ZOMBIE_X);
+    	zombieYs[index] += random(NEG_ZOMBIE_Y, POS_ZOMBIE_Y);
 }
 
 function drawHumans() {
@@ -911,6 +919,6 @@ function drawHuman(index) {
   	fill(humanColors[index]);
   	ellipse(humanXs[index], humanYs[index], humanSizes[index], humanSizes[index]);
 
-  	humanXs[index] += random(-3, 3);
-  	humanYs[index] -= random(-1, 3);
+  	humanXs[index] += random(NEG_HUMAN_X, POS_HUMAN_X);
+  	humanYs[index] -= random(NEG_HUMAN_Y, POS_HUMAN_Y);
 }
