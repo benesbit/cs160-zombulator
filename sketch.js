@@ -1000,9 +1000,6 @@ function setup() {
 
   	createCanvas(windowWidth, windowHeight);
   	backgroundColor = color('lightgray');
-  	
-  	// initializeZombies();
-  	// initializeHumans();
 
   	initializePopulation();
 }
@@ -1012,121 +1009,69 @@ function draw() {
   	background(backgroundColor);
   	noStroke();
 
-  	// drawZombies();
-  	// drawHumans();
-
   	drawPopulation();
 }
 
 function initializePopulation() {
 
-	NUMBER_OF_ZOMBIES = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));
-  	
+	NUMBER_OF_ZOMBIES = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));  	
   	NUMBER_OF_ZOMBIES = Math.trunc(NUMBER_OF_ZOMBIES);
-
   	NUMBER_OF_HUMANS = MAX_POPULATION - NUMBER_OF_ZOMBIES;
 
   	populationTotal = [];
 
   	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
   		
-  		initializeBeing(i, 0);
+  		initializeBeing(i, false);
 
   	}
 
   	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
   		
-  		initializeBeing(i, 1);
+  		initializeBeing(i, true);
 
   	}
 }
 
 function initializeBeing(index, alive) {
 
-	if (alive == 0) {
+	if (alive == false) {
 		
-		populationTotal[index] = {
-			size: random(MIN_SIZE, MAX_SIZE), 
-			x: random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2)),
-			y: random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND),
-			color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
-			humanity: 0
-		};
-	} // Zombies. Code should be put in initializeZombie
+		initializeZombie(index);
 
-	if (alive == 1) {
+	} // Zombies.
+
+	if (alive == true) {
 		
-		populationTotal[index] = {
-			size: random(MIN_SIZE, MAX_SIZE),
-			x: random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2)),
-			y: random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)),
-			color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
-			humanity: 1
-		};
-	} // Humans. This code needs to be put in initializeHuman
+		initializeHuman(index);
+
+	} // Humans.
 
 }
 
-// function initializeZombies() {
+function initializeZombie(index) {
 
-// 	NUMBER_OF_ZOMBIES = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));
-  	
-//   	NUMBER_OF_ZOMBIES = Math.trunc(NUMBER_OF_ZOMBIES);
+	populationTotal[index] = {
+		size: random(MIN_SIZE, MAX_SIZE), 
+		x: random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2)),
+		y: random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND),
+		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
+		humanity: false
+	};
+}
 
-//   	zombies = [];
+function initializeHuman(index) {
 
-//   	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
-  		
-//   		initializeZombie(i);
-//   	}
-// }
-
-// function initializeZombie(index) {
-
-// 	zombies[index] = {
-// 		size: random(MIN_SIZE, MAX_SIZE), 
-// 		x: random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2)),
-// 		y: random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND),
-// 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150))
-// 	};
-
-// 	// zombieSizes[index] = random(MIN_SIZE, MAX_SIZE); // Had to put this first, size used right after.
-
-//     // zombieXs[index] = random(zombieSizes[index] / 2, windowWidth - (zombieSizes[index] / 2));
-//     // zombieYs[index] = random(zombieSizes[index] / 2, ZOMBIE_SPAWN_BOUND);
-//     // // This was changed a bit so zombies never spawn outside of window boundaries.
-//     // // zombieSizes[i] = random(MIN_SIZE, MAX_SIZE);
-
-//     // zombieColors[index] = color(random(200, 255), random(50, 100), random(50, 100), random(50, 150));
-//     // Changed to OOP, to the above code is now TRASH! :P
-// }
-
-// function initializeHumans() {
-
-// 	NUMBER_OF_HUMANS = MAX_POPULATION - NUMBER_OF_ZOMBIES;
-
-// 	humans = [];
-
-// 	for (var c = 0; c < NUMBER_OF_HUMANS; c++) {
-		
-// 		initializeHuman(c);
-//   	}
-// }
-
-// function initializeHuman(index) {
-
-// 	humans[index] = {
-// 		size: random(MIN_SIZE, MAX_SIZE),
-// 		x: random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2)),
-// 		y: random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)),
-// 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150))
-// 	};
-// }
+	populationTotal[index] = {
+		size: random(MIN_SIZE, MAX_SIZE),
+		x: random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2)),
+		y: random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)),
+		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
+		humanity: true
+	};
+}
 
 function drawPopulation() {
-
-	// fill(random(200, 255), random(50, 100), random(50, 100));
-	// text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, 200);
 
  	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
  		
@@ -1145,57 +1090,33 @@ function drawBeing(index) {
 
 	var being = populationTotal[index];
 
-	if (being.humanity == 0) {
-		fill(random(200, 255), random(50, 100), random(50, 100));
-		text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, 200);
-	 	
-		trapZombie(index);
+	if (being.humanity == false) {
+		
+		drawZombie(index);
 
-		fill(being.color);
-		ellipse(being.x, being.y, being.size, being.size);
-
-    	being.x += random(NEG_ZOMBIE_X, POS_ZOMBIE_X);
-    	being.y += random(NEG_ZOMBIE_Y, POS_ZOMBIE_Y);
 	} // For the zombie, nees to be put in own function
 
-	if (being.humanity == 1) {
+	if (being.humanity == true) {
 
-		fill(random(0, 30), random(0, 200), random(250, 255));
-		text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
+		drawHuman(index);
 
-		trapHuman(index);
-
-		fill(being.color);
-		ellipse(being.x, being.y, being.size, being.size);
-
-	  	being.x += random(NEG_HUMAN_X, POS_HUMAN_X);
-  		being.y -= random(NEG_HUMAN_Y, POS_HUMAN_Y);
 	}
 }
 
-// function drawZombies() {
+function drawZombie(index) {
 
-// 	fill(random(200, 255), random(50, 100), random(50, 100));
-// 	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, 200);
+	var zombie = populationTotal[index];
 
-//  	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
- 		
-//  		drawZombie(i);
-//   	}
-// }
-
-// function drawZombie(index) {
-
-// 	var zombie = zombies[index];
+	fill(random(200, 255), random(50, 100), random(50, 100));
+	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, 200);
 	 	
-// 	trapZombie(index);
+	trapZombie(index);
 
-// 	fill(zombie.color);
-// 	ellipse(zombie.x, zombie.y, zombie.size, zombie.size);
+	fill(zombie.color);
+	ellipse(zombie.x, zombie.y, zombie.size, zombie.size);
 
-//     zombie.x += random(NEG_ZOMBIE_X, POS_ZOMBIE_X);
-//     zombie.y += random(NEG_ZOMBIE_Y, POS_ZOMBIE_Y);
-// }
+	moveZombie(index);
+}
 
 function trapZombie(index) {
 
@@ -1218,30 +1139,28 @@ function trapZombie(index) {
  	} // Creates an lower boundary for the zombies. They will not leave the screen.
 }
 
-// function drawHumans() {
+function moveZombie(index) {
 
-// 	fill(random(0, 30), random(0, 200), random(250, 255));
-// 	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
+	var zombie = populationTotal[index];
 
-// 	for (var c = 0; c < NUMBER_OF_HUMANS; c++) {
-		
-// 		drawHuman(c);
- 		
-//   	}
-// }
+	zombie.x += random(NEG_ZOMBIE_X, POS_ZOMBIE_X);
+    zombie.y += random(NEG_ZOMBIE_Y, POS_ZOMBIE_Y);
+}
 
-// function drawHuman(index) {
+function drawHuman(index) {
 
-// 	var human = humans[index];
-	
-// 	trapHuman(index);
+	var human = populationTotal[index];
 
-// 	fill(human.color);
-// 	ellipse(human.x, human.y, human.size, human.size);
+	fill(random(0, 30), random(0, 200), random(250, 255));
+	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
 
-//   	human.x += random(NEG_HUMAN_X, POS_HUMAN_X);
-//   	human.y -= random(NEG_HUMAN_Y, POS_HUMAN_Y);
-// }
+	trapHuman(index);
+
+	fill(human.color);
+	ellipse(human.x, human.y, human.size, human.size);
+
+	moveHuman(index);
+}
 
 function trapHuman(index) {
 
@@ -1262,4 +1181,11 @@ function trapHuman(index) {
  	if ((human.y - (human.size / 2)) <= 0) {
  		human.y = (human.size / 2);
  	} // Creates an upper boundary for the humans.
+}
+
+function moveHuman(index) {
+	var human = populationTotal[index];
+
+	human.x += random(NEG_HUMAN_X, POS_HUMAN_X);
+  	human.y -= random(NEG_HUMAN_Y, POS_HUMAN_Y);
 }
