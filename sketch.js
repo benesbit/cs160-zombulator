@@ -762,16 +762,16 @@ const ZOMBIE_SPAWN_BOUND = 150;
 // up such that these numbers do represent the max spawn distance from the top and 
 // bottom boundaries.
 
-const NEG_HUMAN_X = -3;
-const POS_HUMAN_X = 3;
+const NEG_HUMAN_X = -2.5;
+const POS_HUMAN_X = 2.5;
 const NEG_HUMAN_Y = -1;
-const POS_HUMAN_Y = 3;
+const POS_HUMAN_Y = 2.5;
 // These are the constants that control the "Brownian motion" of the humans.
 // Note that POS in the y category indicates the main direction we want the object moving.
-const NEG_ZOMBIE_X = -3;
-const POS_ZOMBIE_X = 3;
+const NEG_ZOMBIE_X = -2.25;
+const POS_ZOMBIE_X = 2.25;
 const NEG_ZOMBIE_Y = -0.5;
-const POS_ZOMBIE_Y = 2;
+const POS_ZOMBIE_Y = 1.75;
 // These are the constants that control the "Brownian motion" of the zombies.
 // Note that POS in the y category indicates the main direction we want the object moving.
 
