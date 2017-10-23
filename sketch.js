@@ -851,7 +851,7 @@ function initializeHuman(index) {
 		size: random(MIN_SIZE, MAX_SIZE),
 		x: random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2)),
 		y: random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)),
-		color: color(random(50, 255), random(50, 255), random(50, 255), random(50, 150))
+		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150))
 	};
 }
 
@@ -902,7 +902,7 @@ function trapZombie(index) {
 
 function drawHumans() {
 
-	fill(random(50, 255), random(50, 255), random(50, 255));
+	fill(random(0, 30), random(0, 200), random(250, 255));
 	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
 
 	for (var c = 0; c < NUMBER_OF_HUMANS; c++) {
