@@ -883,7 +883,7 @@ function trapZombie(index) {
 
 	var zombie = zombies[index];
 
-	if ((zombie.x - zombie.size / 2) <= 0){
+	if ((zombie.x - zombie.size / 2) <= 0) {
  		zombie.x = zombie.size / 2;
  	}
  	if ((zombie.x + (zombie.size / 2)) >= windowWidth) {
