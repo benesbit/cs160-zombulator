@@ -778,19 +778,9 @@ const POS_ZOMBIE_Y = 2;
 var NUMBER_OF_ZOMBIES;
 var NUMBER_OF_HUMANS;
 
-// var zombieXs;
-// var zombieYs;
-// var zombieSizes;
-// var zombieColors;
-
 var zombies;
 
 var humans;
-
-// var humanXs;
-// var humanYs;
-// var humanSizes;
-// var humanColors;
 
 function setup() {
 
@@ -815,11 +805,6 @@ function initializeZombies() {
   	
   	NUMBER_OF_ZOMBIES = Math.trunc(NUMBER_OF_ZOMBIES);
 
-  	// zombieXs = [];
-  	// zombieYs = [];
-  	// zombieSizes = [];
-  	// zombieColors = [];
-
   	zombies = [];
 
   	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
@@ -831,7 +816,7 @@ function initializeZombies() {
 function initializeZombie(index) {
 
 	zombies[index] = {
-		size: random(MIN_SIZE, MAX_SIZE), // Had to put this first, size used right after
+		size: random(MIN_SIZE, MAX_SIZE), 
 		x: random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2)),
 		y: random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150))
@@ -852,11 +837,6 @@ function initializeHumans() {
 
 	NUMBER_OF_HUMANS = MAX_POPULATION - NUMBER_OF_ZOMBIES;
 
-	// humanXs = [];
-	// humanYs = [];
-	// humanSizes = [];
-	// humanColors = [];
-
 	humans = [];
 
 	for (var c = 0; c < NUMBER_OF_HUMANS; c++) {
@@ -873,15 +853,6 @@ function initializeHuman(index) {
 		y: random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)),
 		color: color(random(50, 255), random(50, 255), random(50, 255), random(50, 150))
 	};
-
-	// humanSizes[index] = random(MIN_SIZE, MAX_SIZE); // Had to put this first, size is used right after.
-
-	// humanXs[index] = random(humanSizes[index] / 2, windowWidth - (humanSizes[index] / 2));
- //  	humanYs[index] = random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (humanSizes[index] / 2));
- // 	// Keeps humans from spawning outside the window boundaries.
- //  	// humanSizes[c] = random(MIN_SIZE, MAX_SIZE);
-
- //  	humanColors[index] = color(random(50, 255), random(50, 255), random(50, 255), random(50, 150));
 }
 
 function drawZombies() {
@@ -903,9 +874,6 @@ function drawZombie(index) {
 
 	fill(zombie.color);
 	ellipse(zombie.x, zombie.y, zombie.size, zombie.size);
-
-    // fill(zombieColors[index]);
-    // ellipse(zombieXs[index], zombieYs[index], zombieSizes[index], zombieSizes[index]);
 
     zombie.x += random(NEG_ZOMBIE_X, POS_ZOMBIE_X);
     zombie.y += random(NEG_ZOMBIE_Y, POS_ZOMBIE_Y);
@@ -952,9 +920,6 @@ function drawHuman(index) {
 
 	fill(human.color);
 	ellipse(human.x, human.y, human.size, human.size);
-
-  	// fill(humanColors[index]);
-  	// ellipse(humanXs[index], humanYs[index], humanSizes[index], humanSizes[index]);
 
   	human.x += random(NEG_HUMAN_X, POS_HUMAN_X);
   	human.y -= random(NEG_HUMAN_Y, POS_HUMAN_Y);
