@@ -958,6 +958,7 @@ function trapHuman(index) {
 // Zombulator by Benjamin Nesbit
 // CS 160 Exercise 15: Zombie Objects vs Human Objects
 // Challenge 1 : Complete!
+// All Challenges completed through previous self-challenges or code clean up!
 
 var backgroundColor;
 
@@ -1024,13 +1025,13 @@ function initializePopulation() {
   		
   		initializeBeing(i, false);
 
-  	}
+  	} // Zombies.
 
   	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
   		
   		initializeBeing(i, true);
 
-  	}
+  	} // Humans.
 }
 
 function initializeBeing(index, alive) {
@@ -1107,8 +1108,7 @@ function drawZombie(index) {
 
 	var zombie = populationTotal[index];
 
-	fill(random(200, 255), random(50, 100), random(50, 100));
-	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, 200);
+	zombieText();
 	 	
 	trapZombie(index);
 
@@ -1116,6 +1116,11 @@ function drawZombie(index) {
 	ellipse(zombie.x, zombie.y, zombie.size, zombie.size);
 
 	moveZombie(index);
+}
+
+function zombieText() {
+	fill(random(200, 255), random(50, 100), random(50, 100));
+	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, 200);
 }
 
 function trapZombie(index) {
@@ -1151,8 +1156,7 @@ function drawHuman(index) {
 
 	var human = populationTotal[index];
 
-	fill(random(0, 30), random(0, 200), random(250, 255));
-	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
+	humanText();
 
 	trapHuman(index);
 
@@ -1160,6 +1164,12 @@ function drawHuman(index) {
 	ellipse(human.x, human.y, human.size, human.size);
 
 	moveHuman(index);
+}
+
+function humanText() {
+
+	fill(random(0, 30), random(0, 200), random(250, 255));
+	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
 }
 
 function trapHuman(index) {
@@ -1184,6 +1194,7 @@ function trapHuman(index) {
 }
 
 function moveHuman(index) {
+
 	var human = populationTotal[index];
 
 	human.x += random(NEG_HUMAN_X, POS_HUMAN_X);
