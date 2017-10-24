@@ -1130,7 +1130,7 @@ function zombieText() {
 	fill(random(200, 255), random(50, 100), random(50, 100));
 	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, 200);
 
-}
+} // Displays the amount of zombies on the screen
 
 function trapZombie(index) {
 
@@ -1183,7 +1183,7 @@ function humanText() {
 	fill(random(0, 30), random(0, 200), random(250, 255));
 	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
 
-}
+} // Writes the number of humans that are on the screen.
 
 function trapHuman(index) {
 
