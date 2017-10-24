@@ -965,17 +965,17 @@ var backgroundColor;
 const MIN_SIZE = 10; 
 const MAX_SIZE = 25;
 const MAX_POPULATION = 1000;
-const LOWER_ZOMBIE_POP_BOUND = .4;
+const LOWER_ZOMBIE_POP_BOUND = .3;
 const UPPER_ZOMBIE_POP_BOUND = .6;
 // Using these to create a percentage change based off max population. These are passed to
-// the random function so we get between a 40% and 60% ratio, randomly.
+// the random function so we get between a 30% and 60% ratio, randomly.
 
 const HUMAN_SPAWN_BOUND = 150;
 const ZOMBIE_SPAWN_BOUND = 150;
 // The distance from the respective boundaries that each human and zombie can spawn.
 // AKA: The distance each 'army' will spawn from eachother. HOWEVER, the code is set
-// up such that these numbers do represent the max spawn distance from the top and 
-// bottom boundaries.
+// up such that these numbers ACTUALLY represent the max spawn distance from the top
+// and bottom boundaries.
 
 const NEG_HUMAN_X = -3;
 const POS_HUMAN_X = 3;
@@ -983,6 +983,7 @@ const NEG_HUMAN_Y = -1;
 const POS_HUMAN_Y = 3;
 // These are the constants that control the "Brownian motion" of the humans.
 // Note that POS in the y category indicates the main direction we want the object moving.
+
 const NEG_ZOMBIE_X = -2.25;
 const POS_ZOMBIE_X = 2.25;
 const NEG_ZOMBIE_Y = -0.5;
@@ -993,8 +994,6 @@ const POS_ZOMBIE_Y = 1.75;
 var NUMBER_OF_ZOMBIES;
 var NUMBER_OF_HUMANS;
 
-// var zombies;
-// var humans;
 var populationTotal;
 
 function setup() {
@@ -1003,6 +1002,7 @@ function setup() {
   	backgroundColor = color('lightgray');
 
   	initializePopulation();
+
 }
 
 function draw() {
@@ -1011,6 +1011,7 @@ function draw() {
   	noStroke();
 
   	drawPopulation();
+
 }
 
 function initializePopulation() {
@@ -1032,6 +1033,7 @@ function initializePopulation() {
   		initializeBeing(i, true);
 
   	} // Humans.
+
 }
 
 function initializeBeing(index, alive) {
@@ -1059,6 +1061,7 @@ function initializeZombie(index) {
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanity: false
 	};
+
 }
 
 function initializeHuman(index) {
@@ -1070,6 +1073,7 @@ function initializeHuman(index) {
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanity: true
 	};
+
 }
 
 function drawPopulation() {
@@ -1084,7 +1088,8 @@ function drawPopulation() {
  		
  		drawBeing(i);
 
-  	}  	
+  	}
+
 }
 
 function drawBeing(index) {
@@ -1095,13 +1100,14 @@ function drawBeing(index) {
 		
 		drawZombie(index);
 
-	} // For the zombie, nees to be put in own function
+	} // Zombie.
 
 	if (being.humanity == true) {
 
 		drawHuman(index);
 
-	}
+	} // Human.
+
 }
 
 function drawZombie(index) {
@@ -1116,11 +1122,14 @@ function drawZombie(index) {
 	ellipse(zombie.x, zombie.y, zombie.size, zombie.size);
 
 	moveZombie(index);
+
 }
 
 function zombieText() {
+
 	fill(random(200, 255), random(50, 100), random(50, 100));
 	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, 200);
+
 }
 
 function trapZombie(index) {
@@ -1142,6 +1151,7 @@ function trapZombie(index) {
  	if ((zombie.y + (zombie.size / 2)) >= windowHeight) {
  		zombie.y = (windowHeight - (zombie.size / 2));
  	} // Creates an lower boundary for the zombies. They will not leave the screen.
+
 }
 
 function moveZombie(index) {
@@ -1150,6 +1160,7 @@ function moveZombie(index) {
 
 	zombie.x += random(NEG_ZOMBIE_X, POS_ZOMBIE_X);
     zombie.y += random(NEG_ZOMBIE_Y, POS_ZOMBIE_Y);
+
 }
 
 function drawHuman(index) {
@@ -1164,12 +1175,14 @@ function drawHuman(index) {
 	ellipse(human.x, human.y, human.size, human.size);
 
 	moveHuman(index);
+
 }
 
 function humanText() {
 
 	fill(random(0, 30), random(0, 200), random(250, 255));
 	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
+
 }
 
 function trapHuman(index) {
@@ -1191,6 +1204,7 @@ function trapHuman(index) {
  	if ((human.y - (human.size / 2)) <= 0) {
  		human.y = (human.size / 2);
  	} // Creates an upper boundary for the humans.
+
 }
 
 function moveHuman(index) {
@@ -1199,4 +1213,5 @@ function moveHuman(index) {
 
 	human.x += random(NEG_HUMAN_X, POS_HUMAN_X);
   	human.y -= random(NEG_HUMAN_Y, POS_HUMAN_Y);
+
 }
