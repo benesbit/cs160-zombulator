@@ -964,7 +964,7 @@ var backgroundColor;
 
 const MIN_SIZE = 10; 
 const MAX_SIZE = 25;
-const MAX_POPULATION = 1000;
+const MAX_POPULATION = 250;
 const LOWER_ZOMBIE_POP_BOUND = .3;
 const UPPER_ZOMBIE_POP_BOUND = .6;
 // Using these to create a percentage change based off max population. These are passed to
@@ -999,7 +999,7 @@ var populationTotal;
 function setup() {
 
   	createCanvas(windowWidth, windowHeight);
-  	backgroundColor = color('lightgray');
+  	backgroundColor = color('darkgray');
 
   	initializePopulation();
 
