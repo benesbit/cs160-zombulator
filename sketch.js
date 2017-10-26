@@ -1254,6 +1254,8 @@ const NEG_HUMAN_X = -3;
 const POS_HUMAN_X = 3;
 const NEG_HUMAN_Y = 1.5;
 const POS_HUMAN_Y = 2.5;
+const HUMAN_SPEED_MAX = 3.0;
+const HUMAN_SPEED_MIN = 0.5;
 // These are the constants that control the "Brownian motion" of the humans.
 // Note that POS in the y category indicates the main direction we want the object moving.
 
@@ -1335,7 +1337,7 @@ function initializeZombie(index) {
 		y: random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanity: false,
-		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_Y),
+		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_X),
 		ySpeed: random(ZOMBIE_SPEED_MIN, ZOMBIE_SPEED_MAX)
 	};
 
@@ -1348,7 +1350,9 @@ function initializeHuman(index) {
 		x: random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2)),
 		y: random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
-		humanity: true
+		humanity: true,
+		xSpeed: random(NEG_HUMAN_X, POS_HUMAN_X),
+		ySpeed: random(HUMAN_SPEED_MIN, HUMAN_SPEED_MAX)
 	};
 
 }
@@ -1476,7 +1480,7 @@ function trapHuman(human) {
 
 function moveHuman(human) {
 
-	human.x += random(NEG_HUMAN_X, POS_HUMAN_X);
-  	human.y -= random(NEG_HUMAN_Y, POS_HUMAN_Y);
+	human.x += random(-1 * (human.xSpeed), human.xSpeed);
+    human.y -= random(-0.2 * (human.ySpeed), human.ySpeed);
 
 }
