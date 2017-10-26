@@ -1379,7 +1379,7 @@ function drawBeing(index) {
 
 	if (being.humanity == true) {
 
-		drawHuman(index);
+		drawHuman(populationTotal[index]);
 
 	} // Human.
 
@@ -1439,9 +1439,9 @@ function moveZombie(index) {
 
 }
 
-function drawHuman(index) {
+function drawHuman(human) {
 
-	var human = populationTotal[index];
+	// var human = populationTotal[index];
 
 	humanText();
 
