@@ -1357,31 +1357,29 @@ function drawPopulation() {
 
  	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
  		
- 		drawBeing(i);
+ 		drawBeing(populationTotal[i]);
 
   	}
 
 	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
  		
- 		drawBeing(i);
+ 		drawBeing(populationTotal[i]);
 
   	}
 
 }
 
-function drawBeing(index) {
-
-	var being = populationTotal[index];
+function drawBeing(being) {
 
 	if (being.humanity == false) {
 		
-		drawZombie(populationTotal[index]);
+		drawZombie(being);
 
 	} // Zombie.
 
 	if (being.humanity == true) {
 
-		drawHuman(populationTotal[index]);
+		drawHuman(being);
 
 	} // Human.
 
