@@ -1391,13 +1391,12 @@ function drawZombie(index) {
 
 	zombieText();
 	 	
-	// trapZombie(index);
+	trapZombie(zombie);
 
 	fill(zombie.color);
 	ellipse(zombie.x, zombie.y, zombie.size, zombie.size);
 
-	moveZombie(index);
-	trapZombie(index);
+	moveZombie(zombie);
 	
 }
 
@@ -1408,9 +1407,7 @@ function zombieText() {
 
 } // Displays the amount of zombies on the screen
 
-function trapZombie(index) {
-
-	var zombie = populationTotal[index];
+function trapZombie(zombie) {
 
 	if ((zombie.x - zombie.size / 2) <= 0) {
  		zombie.x = zombie.size / 2;
@@ -1430,9 +1427,7 @@ function trapZombie(index) {
 
 }
 
-function moveZombie(index) {
-
-	var zombie = populationTotal[index];
+function moveZombie(zombie) {
 
 	zombie.x += random(-1 * (zombie.xSpeed), zombie.xSpeed);
     zombie.y += random(-0.2 * (NEG_ZOMBIE_Y), zombie.ySpeed);
@@ -1440,8 +1435,6 @@ function moveZombie(index) {
 }
 
 function drawHuman(human) {
-
-	// var human = populationTotal[index];
 
 	humanText();
 
