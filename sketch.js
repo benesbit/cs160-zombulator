@@ -979,14 +979,14 @@ const ZOMBIE_SPAWN_BOUND = 150;
 
 const NEG_HUMAN_X = -3;
 const POS_HUMAN_X = 3;
-const NEG_HUMAN_Y = -1;
-const POS_HUMAN_Y = 3;
+const NEG_HUMAN_Y = 1.5;
+const POS_HUMAN_Y = 2.5;
 // These are the constants that control the "Brownian motion" of the humans.
 // Note that POS in the y category indicates the main direction we want the object moving.
 
 const NEG_ZOMBIE_X = -2.25;
 const POS_ZOMBIE_X = 2.25;
-const NEG_ZOMBIE_Y = -0.5;
+const NEG_ZOMBIE_Y = 0.5;
 const POS_ZOMBIE_Y = 1.75;
 // These are the constants that control the "Brownian motion" of the zombies.
 // Note that POS in the y category indicates the main direction we want the object moving.
@@ -1059,7 +1059,9 @@ function initializeZombie(index) {
 		x: random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2)),
 		y: random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
-		humanity: false
+		humanity: false,
+		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_Y),
+		ySpeed: random(NEG_ZOMBIE_Y, POS_ZOMBIE_Y)
 	};
 
 }
@@ -1158,8 +1160,8 @@ function moveZombie(index) {
 
 	var zombie = populationTotal[index];
 
-	zombie.x += random(NEG_ZOMBIE_X, POS_ZOMBIE_X);
-    zombie.y += random(NEG_ZOMBIE_Y, POS_ZOMBIE_Y);
+	zombie.x += random(-1 * (zombie.xSpeed), zombie.xSpeed);
+    zombie.y += random(-0.2 * (NEG_ZOMBIE_Y), zombie.ySpeed);
 
 }
 
