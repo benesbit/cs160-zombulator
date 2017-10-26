@@ -1445,7 +1445,7 @@ function drawHuman(index) {
 
 	humanText();
 
-	trapHuman(index);
+	trapHuman(human);
 
 	fill(human.color);
 	ellipse(human.x, human.y, human.size, human.size);
@@ -1461,9 +1461,7 @@ function humanText() {
 
 } // Writes the number of humans that are on the screen.
 
-function trapHuman(index) {
-
-	var human = populationTotal[index];
+function trapHuman(human) {
 
 	if ((human.x - (human.size / 2)) <= 0) {
  		human.x = human.size / 2;
