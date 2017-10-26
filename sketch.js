@@ -1261,6 +1261,8 @@ const NEG_ZOMBIE_X = -2.25;
 const POS_ZOMBIE_X = 2.25;
 const NEG_ZOMBIE_Y = 0.5;
 const POS_ZOMBIE_Y = 1.75;
+const ZOMBIE_SPEED_MAX = 2.0;
+const ZOMBIE_SPEED_MIN = 0.5;
 // These are the constants that control the "Brownian motion" of the zombies.
 // Note that POS in the y category indicates the main direction we want the object moving.
 
@@ -1334,7 +1336,7 @@ function initializeZombie(index) {
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanity: false,
 		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_Y),
-		ySpeed: random(NEG_ZOMBIE_Y, POS_ZOMBIE_Y)
+		ySpeed: random(ZOMBIE_SPEED_MIN, ZOMBIE_SPEED_MAX)
 	};
 
 }
@@ -1373,7 +1375,7 @@ function drawBeing(index) {
 
 	if (being.humanity == false) {
 		
-		drawZombie(index);
+		drawZombie(populationTotal[index]);
 
 	} // Zombie.
 
@@ -1385,9 +1387,9 @@ function drawBeing(index) {
 
 }
 
-function drawZombie(index) {
+function drawZombie(zombie) {
 
-	var zombie = populationTotal[index];
+	// var zombie = populationTotal[index];
 
 	zombieText();
 	 	
@@ -1430,7 +1432,7 @@ function trapZombie(zombie) {
 function moveZombie(zombie) {
 
 	zombie.x += random(-1 * (zombie.xSpeed), zombie.xSpeed);
-    zombie.y += random(-0.2 * (NEG_ZOMBIE_Y), zombie.ySpeed);
+    zombie.y += random(-0.2 * (zombie.ySpeed), zombie.ySpeed);
 
 }
 
