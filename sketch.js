@@ -960,6 +960,7 @@ function trapHuman(index) {
 // Challenge 1 : Complete!
 // All Challenges completed through previous self-challenges or code clean up!
 
+/*
 var backgroundColor;
 
 const MIN_SIZE = 10; 
@@ -1118,12 +1119,13 @@ function drawZombie(index) {
 
 	zombieText();
 	 	
-	trapZombie(index);
+	// trapZombie(index);
 
 	fill(zombie.color);
 	ellipse(zombie.x, zombie.y, zombie.size, zombie.size);
 
 	moveZombie(index);
+	trapZombie(index);
 
 }
 
@@ -1212,6 +1214,276 @@ function trapHuman(index) {
 function moveHuman(index) {
 
 	var human = populationTotal[index];
+
+	human.x += random(NEG_HUMAN_X, POS_HUMAN_X);
+  	human.y -= random(NEG_HUMAN_Y, POS_HUMAN_Y);
+
+}
+*/
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Excercise 16
+
+// http://tinyurl.com/cs160ex15
+// Zombulator by Benjamin Nesbit
+// CS 160 Exercise 15: Zombie Objects vs Human Objects
+// Challenge 1 : Complete!
+// All Challenges completed through previous self-challenges or code clean up!
+
+var backgroundColor;
+
+const MIN_SIZE = 10; 
+const MAX_SIZE = 25;
+const MAX_POPULATION = 250;
+const LOWER_ZOMBIE_POP_BOUND = .3;
+const UPPER_ZOMBIE_POP_BOUND = .6;
+// Using these to create a percentage change based off max population. These are passed to
+// the random function so we get between a 30% and 60% ratio, randomly.
+
+const HUMAN_SPAWN_BOUND = 150;
+const ZOMBIE_SPAWN_BOUND = 150;
+// The distance from the respective boundaries that each human and zombie can spawn.
+// AKA: The distance each 'army' will spawn from eachother. HOWEVER, the code is set
+// up such that these numbers ACTUALLY represent the max spawn distance from the top
+// and bottom boundaries.
+
+const NEG_HUMAN_X = -3;
+const POS_HUMAN_X = 3;
+const NEG_HUMAN_Y = 1.5;
+const POS_HUMAN_Y = 2.5;
+// These are the constants that control the "Brownian motion" of the humans.
+// Note that POS in the y category indicates the main direction we want the object moving.
+
+const NEG_ZOMBIE_X = -2.25;
+const POS_ZOMBIE_X = 2.25;
+const NEG_ZOMBIE_Y = 0.5;
+const POS_ZOMBIE_Y = 1.75;
+// These are the constants that control the "Brownian motion" of the zombies.
+// Note that POS in the y category indicates the main direction we want the object moving.
+
+var NUMBER_OF_ZOMBIES;
+var NUMBER_OF_HUMANS;
+
+var populationTotal;
+
+function setup() {
+
+  	createCanvas(windowWidth, windowHeight);
+  	backgroundColor = color('darkgray');
+
+  	initializePopulation();
+
+}
+
+function draw() {
+
+  	background(backgroundColor);
+  	noStroke();
+
+  	drawPopulation();
+
+}
+
+function initializePopulation() {
+
+	NUMBER_OF_ZOMBIES = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));  	
+  	NUMBER_OF_ZOMBIES = Math.trunc(NUMBER_OF_ZOMBIES);
+  	NUMBER_OF_HUMANS = MAX_POPULATION - NUMBER_OF_ZOMBIES;
+
+  	populationTotal = [];
+
+  	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
+  		
+  		initializeBeing(i, false);
+
+  	} // Zombies.
+
+  	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
+  		
+  		initializeBeing(i, true);
+
+  	} // Humans.
+
+}
+
+function initializeBeing(index, alive) {
+
+	if (alive == false) {
+		
+		initializeZombie(index);
+
+	} // Zombies.
+
+	if (alive == true) {
+		
+		initializeHuman(index);
+
+	} // Humans.
+
+}
+
+function initializeZombie(index) {
+
+	populationTotal[index] = {
+		size: random(MIN_SIZE, MAX_SIZE), 
+		x: random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2)),
+		y: random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND),
+		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
+		humanity: false,
+		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_Y),
+		ySpeed: random(NEG_ZOMBIE_Y, POS_ZOMBIE_Y)
+	};
+
+}
+
+function initializeHuman(index) {
+
+	populationTotal[index] = {
+		size: random(MIN_SIZE, MAX_SIZE),
+		x: random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2)),
+		y: random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)),
+		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
+		humanity: true
+	};
+
+}
+
+function drawPopulation() {
+
+ 	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
+ 		
+ 		drawBeing(i);
+
+  	}
+
+	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
+ 		
+ 		drawBeing(i);
+
+  	}
+
+}
+
+function drawBeing(index) {
+
+	var being = populationTotal[index];
+
+	if (being.humanity == false) {
+		
+		drawZombie(index);
+
+	} // Zombie.
+
+	if (being.humanity == true) {
+
+		drawHuman(index);
+
+	} // Human.
+
+}
+
+function drawZombie(index) {
+
+	var zombie = populationTotal[index];
+
+	zombieText();
+	 	
+	// trapZombie(index);
+
+	fill(zombie.color);
+	ellipse(zombie.x, zombie.y, zombie.size, zombie.size);
+
+	moveZombie(index);
+	trapZombie(index);
+	
+}
+
+function zombieText() {
+
+	fill(random(200, 255), random(50, 100), random(50, 100));
+	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, 200);
+
+} // Displays the amount of zombies on the screen
+
+function trapZombie(index) {
+
+	var zombie = populationTotal[index];
+
+	if ((zombie.x - zombie.size / 2) <= 0) {
+ 		zombie.x = zombie.size / 2;
+ 	}
+ 	if ((zombie.x + (zombie.size / 2)) >= windowWidth) {
+ 		zombie.x = windowWidth - (zombie.size / 2);
+ 	}
+ 	// These two 'if' loops keep zombies from going outside vertical boundaries (side walls)
+ 	// They basically check all of the zombieX postions, and if it finds any part
+ 	// of them to outside the vertical boundaries (side walls), it adjusts their position so that
+ 	// they are 100% within the boundary, and just sets them on the very edge of the boundary 
+ 	// that they tried to leave.
+
+ 	if ((zombie.y + (zombie.size / 2)) >= windowHeight) {
+ 		zombie.y = (windowHeight - (zombie.size / 2));
+ 	} // Creates an lower boundary for the zombies. They will not leave the screen.
+
+}
+
+function moveZombie(index) {
+
+	var zombie = populationTotal[index];
+
+	zombie.x += random(-1 * (zombie.xSpeed), zombie.xSpeed);
+    zombie.y += random(-0.2 * (NEG_ZOMBIE_Y), zombie.ySpeed);
+
+}
+
+function drawHuman(index) {
+
+	var human = populationTotal[index];
+
+	humanText();
+
+	trapHuman(index);
+
+	fill(human.color);
+	ellipse(human.x, human.y, human.size, human.size);
+
+	moveHuman(human);
+
+}
+
+function humanText() {
+
+	fill(random(0, 30), random(0, 200), random(250, 255));
+	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
+
+} // Writes the number of humans that are on the screen.
+
+function trapHuman(index) {
+
+	var human = populationTotal[index];
+
+	if ((human.x - (human.size / 2)) <= 0) {
+ 		human.x = human.size / 2;
+ 	}
+ 	if ((human.x + (human.size / 2)) >= windowWidth) {
+ 		human.x = windowWidth - (human.size / 2);
+ 	}
+ 	// These two 'if' loops keep humans from going outside vertical boundaries (side walls)
+ 	// They basically check all of the humanX postions, and if it finds any part
+ 	// of them to outside the vertical boundaries (side walls), it adjust their position so that
+ 	// they are 100% within the boundary, and just sets them on the very edge of the boundary
+ 	// that they tried to leave.
+
+ 	if ((human.y - (human.size / 2)) <= 0) {
+ 		human.y = (human.size / 2);
+ 	} // Creates an upper boundary for the humans.
+
+}
+
+function moveHuman(human) {
 
 	human.x += random(NEG_HUMAN_X, POS_HUMAN_X);
   	human.y -= random(NEG_HUMAN_Y, POS_HUMAN_Y);
