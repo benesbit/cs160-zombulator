@@ -21,10 +21,10 @@ const HUMAN_SPAWN_BOUND = 150;
 const ZOMBIE_SPAWN_BOUND = 150;
 // The distance from the respective boundaries that each human and zombie can spawn.
 
-const NEG_HUMAN_X = -3;
-const POS_HUMAN_X = 3;
-const NEG_HUMAN_Y = 1.5;
-const POS_HUMAN_Y = 2.5;
+const NEG_HUMAN_X = -2;
+const POS_HUMAN_X = 2;
+const NEG_HUMAN_Y = 1.0;
+const POS_HUMAN_Y = 2.0;
 const HUMAN_SPEED_MAX = 3.0;
 const HUMAN_SPEED_MIN = 0.5;
 // These are the constants that control the "Brownian motion" of the humans.
@@ -62,7 +62,8 @@ function draw() {
   	noStroke();
 
   	drawPopulation();
-
+  	movePopulation();
+  	trapPopulation();
 }
 
 function initializePopulation() {
@@ -101,6 +102,21 @@ function initializePopulation() {
 
   	} // Humans.
 
+}
+
+function trapPopulation() {
+
+	 for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
+ 		
+ 		trapZombie(populationTotal[i]);
+
+  	}
+
+	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
+ 		
+ 		trapHuman(populationTotal[i]);
+
+  	}
 }
 
 function initializeBeing(index, alive) {
@@ -163,6 +179,21 @@ function drawPopulation() {
 
 }
 
+function movePopulation() {
+
+	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
+ 		
+ 		moveZombie(populationTotal[i]);
+
+  	}
+
+	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
+ 		
+ 		moveHuman(populationTotal[i]);
+
+  	}
+}
+
 function drawBeing(being) {
 
 	if (being.humanity == false) {
@@ -181,17 +212,10 @@ function drawBeing(being) {
 
 function drawZombie(zombie) {
 
-	// var zombie = populationTotal[index];
-
 	zombieText();
-	 	
-	trapZombie(zombie);
 
 	fill(zombie.color);
 	ellipse(zombie.x, zombie.y, zombie.size, zombie.size);
-
-	moveZombie(zombie);
-	
 }
 
 function zombieText() {
@@ -227,12 +251,8 @@ function drawHuman(human) {
 
 	humanText();
 
-	trapHuman(human);
-
 	fill(human.color);
 	ellipse(human.x, human.y, human.size, human.size);
-
-	moveHuman(human);
 
 }
 
