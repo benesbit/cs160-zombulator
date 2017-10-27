@@ -44,6 +44,9 @@ var NUMBER_OF_HUMANS;
 
 var populationTotal;
 
+var counter;
+var determine;
+
 function setup() {
 
   	createCanvas(windowWidth, windowHeight);
@@ -63,6 +66,22 @@ function draw() {
 }
 
 function initializePopulation() {
+
+	// for (var i = 0; i < MAX_POPULATION; ++i) {
+
+	// 	determine = random(1);
+
+	// 	if (determine == 0) {
+
+	// 		initializeBeing(i, false);
+
+	// 	}
+
+	// 	else {
+
+	// 		initializeBeing(i, true);
+	// 	}
+	// }
 
 	NUMBER_OF_ZOMBIES = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));  	
   	NUMBER_OF_ZOMBIES = Math.trunc(NUMBER_OF_ZOMBIES);
@@ -92,7 +111,7 @@ function initializeBeing(index, alive) {
 
 	} // Zombies.
 
-	if (alive == true) {
+	else {
 		
 		initializeHuman(index);
 
