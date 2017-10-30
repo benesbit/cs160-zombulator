@@ -337,30 +337,28 @@ function initializeHuman() {
 
 	return {
 		size: random(MIN_SIZE, MAX_SIZE),
-		x: random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2)),
-		y: random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)),
+		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		// humanity: true,
 		xSpeed: random(NEG_HUMAN_X, POS_HUMAN_X),
 		ySpeed: random(HUMAN_SPEED_MIN, HUMAN_SPEED_MAX),
 		draw: function() {
 			fill(this.color);
-			ellipse(this.x, this.y, this.size, this.size);
+			ellipse(this.vector.x, this.vector.y, this.size, this.size);
 		},
 		move: function() {
-			this.x += random(-1 * (this.xSpeed), this.xSpeed);
-    		this.y -= random(-0.2 * (this.ySpeed), this.ySpeed);
+			this.vector.add((random(-1 * (this.xSpeed), this.xSpeed)), (-1 *random(-0.2 * (this.ySpeed), this.ySpeed)));
 		},
 		trap: function() {
-			if ((this.x - (this.size / 2)) <= 0) {
- 				this.x = this.size / 2;
+			if ((this.vector.x - (this.size / 2)) <= 0) {
+ 				this.vector.x = this.size / 2;
  			}
- 			if ((this.x + (this.size / 2)) >= windowWidth) {
- 				this.x = windowWidth - (this.size / 2);
+ 			if ((this.vector.x + (this.size / 2)) >= windowWidth) {
+ 				this.vector.x = windowWidth - (this.size / 2);
  			} // Side boundaries
 
- 			if ((this.y - (this.size / 2)) <= 0) {
- 				this.y = (this.size / 2);
+ 			if ((this.vector.y - (this.size / 2)) <= 0) {
+ 				this.vector.y = (this.size / 2);
  			} // Upper boundary
 		}
 	};
