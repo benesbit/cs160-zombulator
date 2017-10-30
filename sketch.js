@@ -108,7 +108,7 @@ function initializeZombie() {
  			}
  			if ((this.x + (this.size / 2)) >= windowWidth) {
  				this.x = windowWidth - (this.size / 2);
- 			} // Side boundary
+ 			} // Side boundaries
 
  			if ((this.y + (this.size / 2)) >= windowHeight) {
  				this.y = (windowHeight - (this.size / 2));
@@ -210,4 +210,4 @@ function humanText() {
 	fill(random(0, 30), random(0, 200), random(250, 255));
 	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
 
-}
+} // Displays the amount of humans on the screen
