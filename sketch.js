@@ -384,21 +384,6 @@ function initializePopulation() {
 
 }
 
-function trapPopulation() {
-
-	 for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
- 		
- 		trapZombie(populationTotal[i]);
-
-  	}
-
-	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
- 		
- 		trapHuman(populationTotal[i]);
-
-  	}
-}
-
 function initializeZombie() {
 
 	return {
@@ -416,6 +401,18 @@ function initializeZombie() {
 		move: function() {
 			this.x += random(-1 * (this.xSpeed), this.xSpeed);
     		this.y += random(-0.2 * (this.ySpeed), this.ySpeed);
+		},
+		trap: function() {
+			if ((this.x - this.size / 2) <= 0) {
+ 				this.x = this.size / 2;
+ 			}
+ 			if ((this.x + (this.size / 2)) >= windowWidth) {
+ 				this.x = windowWidth - (this.size / 2);
+ 			} // Side boundary
+
+ 			if ((this.y + (this.size / 2)) >= windowHeight) {
+ 				this.y = (windowHeight - (this.size / 2));
+ 			} // Lower boundary
 		}
 	};
 
@@ -438,6 +435,18 @@ function initializeHuman() {
 		move: function() {
 			this.x += random(-1 * (this.xSpeed), this.xSpeed);
     		this.y -= random(-0.2 * (this.ySpeed), this.ySpeed);
+		},
+		trap: function() {
+			if ((this.x - (this.size / 2)) <= 0) {
+ 				this.x = this.size / 2;
+ 			}
+ 			if ((this.x + (this.size / 2)) >= windowWidth) {
+ 				this.x = windowWidth - (this.size / 2);
+ 			} // Side boundaries
+
+ 			if ((this.y - (this.size / 2)) <= 0) {
+ 				this.y = (this.size / 2);
+ 			} // Upper boundary
 		}
 	};
 
@@ -474,6 +483,21 @@ function movePopulation() {
   	}
 }
 
+function trapPopulation() {
+
+	 for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
+ 		
+ 		populationTotal[i].trap();
+
+  	}
+
+	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
+ 		
+ 		populationTotal[i].trap();
+
+  	}
+}
+
 function zombieText() {
 
 	fill(random(200, 255), random(50, 100), random(50, 100));
@@ -481,40 +505,9 @@ function zombieText() {
 
 } // Displays the amount of zombies on the screen
 
-function trapZombie(zombie) {
-
-	if ((zombie.x - zombie.size / 2) <= 0) {
- 		zombie.x = zombie.size / 2;
- 	}
- 	if ((zombie.x + (zombie.size / 2)) >= windowWidth) {
- 		zombie.x = windowWidth - (zombie.size / 2);
- 	} // Side boundary
-
- 	if ((zombie.y + (zombie.size / 2)) >= windowHeight) {
- 		zombie.y = (windowHeight - (zombie.size / 2));
- 	} // Lower boundary
-
-}
-
 function humanText() {
 
 	fill(random(0, 30), random(0, 200), random(250, 255));
 	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
-
-}
-
-function trapHuman(human) {
-
-	if ((human.x - (human.size / 2)) <= 0) {
- 		human.x = human.size / 2;
- 	}
- 	if ((human.x + (human.size / 2)) >= windowWidth) {
- 		human.x = windowWidth - (human.size / 2);
- 	}
- 	// Side boundaries
-
- 	if ((human.y - (human.size / 2)) <= 0) {
- 		human.y = (human.size / 2);
- 	} // Upper boundary
 
 }
