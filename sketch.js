@@ -412,6 +412,10 @@ function initializeZombie() {
 		draw: function() {
 			fill(this.color);
 			ellipse(this.x, this.y, this.size, this.size);
+		},
+		move: function() {
+			this.x += random(-1 * (this.xSpeed), this.xSpeed);
+    		this.y += random(-0.2 * (this.ySpeed), this.ySpeed);
 		}
 	};
 
@@ -430,6 +434,10 @@ function initializeHuman() {
 		draw: function() {
 			fill(this.color);
 			ellipse(this.x, this.y, this.size, this.size);
+		},
+		move: function() {
+			this.x += random(-1 * (this.xSpeed), this.xSpeed);
+    		this.y -= random(-0.2 * (this.ySpeed), this.ySpeed);
 		}
 	};
 
@@ -455,32 +463,16 @@ function movePopulation() {
 
 	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
  		
- 		moveZombie(populationTotal[i]);
+ 		populationTotal[i].move();
 
   	}
 
 	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
  		
- 		moveHuman(populationTotal[i]);
+ 		populationTotal[i].move();
 
   	}
 }
-
-// function drawBeing(being) {
-
-// 	if (being.humanity == false) {
-		
-// 		drawZombie(being);
-
-// 	} // Zombie.
-
-// 	if (being.humanity == true) {
-
-// 		drawHuman(being);
-
-// 	} // Human.
-
-// }
 
 function zombieText() {
 
@@ -504,22 +496,6 @@ function trapZombie(zombie) {
 
 }
 
-function moveZombie(zombie) {
-
-	zombie.x += random(-1 * (zombie.xSpeed), zombie.xSpeed);
-    zombie.y += random(-0.2 * (zombie.ySpeed), zombie.ySpeed);
-
-}
-
-// function drawHuman(human) {
-
-// 	humanText();
-
-// 	fill(human.color);
-// 	ellipse(human.x, human.y, human.size, human.size);
-
-// }
-
 function humanText() {
 
 	fill(random(0, 30), random(0, 200), random(250, 255));
@@ -540,12 +516,5 @@ function trapHuman(human) {
  	if ((human.y - (human.size / 2)) <= 0) {
  		human.y = (human.size / 2);
  	} // Upper boundary
-
-}
-
-function moveHuman(human) {
-
-	human.x += random(-1 * (human.xSpeed), human.xSpeed);
-    human.y -= random(-0.2 * (human.ySpeed), human.ySpeed);
 
 }
