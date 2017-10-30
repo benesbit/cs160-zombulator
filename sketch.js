@@ -1,5 +1,3 @@
-// Zombulator by Ben Nesbit
-
 // Zombulator by Benjamin Nesbit 
 // CS 160 Exercise 18
 
