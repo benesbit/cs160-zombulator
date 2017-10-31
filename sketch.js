@@ -20,7 +20,7 @@ const POS_HUMAN_X = 2;
 const NEG_HUMAN_Y = 1.0;
 const POS_HUMAN_Y = 2.0;
 const HUMAN_SPEED_MAX = 3.0;
-const HUMAN_SPEED_MIN = 0.5;
+const HUMAN_SPEED_MIN = 0.75;
 // These are the constants that control the "Brownian motion" of the humans.
 // Note that POS in the y category indicates the main direction we want the object moving.
 
@@ -42,6 +42,8 @@ function setup() {
 
   	createCanvas(windowWidth, windowHeight);
   	backgroundColor = color('darkgray');
+  	// createCanvas(720, 400);
+  	// backgroundColor = loadImage("https://www.homoq.com/wp-content/uploads/2017/08/lesco-grass-seed-720x400.jpg");
 
   	initializePopulation();
 
@@ -195,13 +197,13 @@ function trapPopulation() {
 function zombieText() {
 
 	fill(random(200, 255), random(50, 100), random(50, 100));
-	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, 200);
+	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, windowHeight / 4);
 
 } // Displays the amount of zombies on the screen
 
 function humanText() {
 
 	fill(random(0, 30), random(0, 200), random(250, 255));
-	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight - 200);
+	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight / 1.5);
 
 } // Displays the amount of humans on the screen
