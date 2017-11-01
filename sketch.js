@@ -9,7 +9,7 @@ const MAX_POPULATION = 500;
 const LOWER_ZOMBIE_POP_BOUND = .35;
 const UPPER_ZOMBIE_POP_BOUND = .6;
 // Using these to create a percentage change based off max population. These are passed to
-// the random function so we get between a 30% and 60% ratio, randomly.
+// the random function so we get between a 35% and 60% ratio, randomly.
 
 const HUMAN_SPAWN_BOUND = 150;
 const ZOMBIE_SPAWN_BOUND = 150;
