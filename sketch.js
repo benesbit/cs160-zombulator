@@ -34,7 +34,10 @@ const ZOMBIE_SPEED_MIN = 0.5;
 // Note that POS in the y category indicates the main direction we want the object moving.
 
 var NUMBER_OF_ZOMBIES = 0;
+var NUMBER_OF_SUPER_ZOMBIES = 0;
+
 var NUMBER_OF_HUMANS = 0;
+var NUMBER_OF_SUPER_HUMANS = 0;
 
 var populationTotal = [];
 
@@ -84,17 +87,31 @@ function initializePopulation() {
 
   		var humanoid_type = random(0, 100);
 
-  		if (humanoid_type <= 50) {
+  		if (humanoid_type <= 5) {
+
+  			populationTotal[i] = initializeSuperZombie();
+
+  			NUMBER_OF_ZOMBIES ++;
+  			NUMBER_OF_SUPER_ZOMBIES ++;
+  		}
+  		else if (humanoid_type <= 50) {
 
   			populationTotal[i] = initializeZombie();
 
   			NUMBER_OF_ZOMBIES ++;
   		}
-  		else {
+  		else if (humanoid_type <= 95) {
 
   			populationTotal[i] = initializeHuman();
 
   			NUMBER_OF_HUMANS ++;
+  		}
+  		else {
+
+  			populationTotal[i] = initializeSuperHuman();
+
+  			NUMBER_OF_HUMANS ++;
+  			NUMBER_OF_SUPER_HUMANS ++;
   		}
   	}
 
@@ -115,6 +132,38 @@ function initializeZombie() {
 		},
 		move: function() {
      		this.vector.add((random(-1 * (this.xSpeed), this.xSpeed)), (random(-0.2 * (this.ySpeed), this.ySpeed)));
+		},
+		trap: function() {
+			if ((this.vector.x - this.size / 2) <= 0) {
+ 				this.vector.x = this.size / 2;
+ 			}
+ 			if ((this.vector.x + (this.size / 2)) >= windowWidth) {
+ 				this.vector.x = windowWidth - (this.size / 2);
+ 			} // Side boundaries
+
+ 			if ((this.vector.y + (this.size / 2)) >= windowHeight) {
+ 				this.vector.y = (windowHeight - (this.size / 2));
+ 			} // Lower boundary
+		}
+	};
+
+}
+
+function initializeSuperZombie() {
+
+	return {
+		size: random(MAX_SIZE*1.5, MAX_SIZE*2), // BIGGER
+		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
+		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
+		// humanity: false,
+		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_X),
+		ySpeed: random(ZOMBIE_SPEED_MIN * 5, ZOMBIE_SPEED_MAX * 2), // FASTER
+		draw: function() {
+			fill(this.color);
+			ellipse(this.vector.x, this.vector.y, this.size, this.size);
+		},
+		move: function() {
+     		this.vector.add((random(-0.2 * (this.xSpeed), this.xSpeed)), (random(-0.2 * (this.ySpeed), this.ySpeed)));
 		},
 		trap: function() {
 			if ((this.vector.x - this.size / 2) <= 0) {
@@ -164,6 +213,38 @@ function initializeHuman() {
 
 }
 
+function initializeSuperHuman() {
+
+	return {
+		size: random(MAX_SIZE * 1.5, MAX_SIZE * 2), // BIGGER
+		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
+		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
+		// humanity: true,
+		xSpeed: random(NEG_HUMAN_X, POS_HUMAN_X),
+		ySpeed: random(HUMAN_SPEED_MIN * 5, HUMAN_SPEED_MAX * 2), // FASTER
+		draw: function() {
+			fill(this.color);
+			ellipse(this.vector.x, this.vector.y, this.size, this.size);
+		},
+		move: function() {
+			this.vector.add((random(-1 * (this.xSpeed), this.xSpeed)), (-1 *random(-0.1 * (this.ySpeed), this.ySpeed)));
+		},
+		trap: function() {
+			if ((this.vector.x - (this.size / 2)) <= 0) {
+ 				this.vector.x = this.size / 2;
+ 			}
+ 			if ((this.vector.x + (this.size / 2)) >= windowWidth) {
+ 				this.vector.x = windowWidth - (this.size / 2);
+ 			} // Side boundaries
+
+ 			if ((this.vector.y - (this.size / 2)) <= 0) {
+ 				this.vector.y = (this.size / 2);
+ 			} // Upper boundary
+		}
+	};
+
+}
+
 function drawPopulation() {
 
  	for (var i = 0; i < MAX_POPULATION; ++i) {
@@ -195,6 +276,7 @@ function zombieText() {
 
 	fill(random(200, 255), random(50, 100), random(50, 100));
 	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, windowHeight / 4);
+	text('Hulk Zombies Percentage: ' + Math.round((NUMBER_OF_SUPER_ZOMBIES/NUMBER_OF_ZOMBIES) * 100) + '%', windowWidth / 2, (windowHeight / 4) + 11);
 
 } // Displays the amount of zombies on the screen
 
@@ -202,5 +284,6 @@ function humanText() {
 
 	fill(random(0, 30), random(0, 200), random(250, 255));
 	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight / 1.5);
+	text('Super Humans Percentage: ' + Math.round((NUMBER_OF_SUPER_HUMANS/NUMBER_OF_HUMANS) * 100) + '%', windowWidth / 2, (windowHeight / 1.5) + 11);
 
 } // Displays the amount of humans on the screen
