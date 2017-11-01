@@ -61,8 +61,7 @@ function draw() {
   	movePopulation();
   	trapPopulation();
 
-  	zombieText();
-  	humanText();
+  	drawText();
 }
 
 function initializePopulation() {
@@ -270,6 +269,12 @@ function trapPopulation() {
  		populationTotal[i].trap();
 
   	}
+}
+
+function drawText() {
+
+	zombieText();
+	humanText();
 }
 
 function zombieText() {
