@@ -1,5 +1,5 @@
 // Zombulator by Benjamin Nesbit 
-// CS 160 Exercise 18
+// CS 160 Exercise 19 - Polymorphism
 
 var backgroundColor;
 
@@ -33,10 +33,10 @@ const ZOMBIE_SPEED_MIN = 0.5;
 // These are the constants that control the "Brownian motion" of the zombies.
 // Note that POS in the y category indicates the main direction we want the object moving.
 
-var NUMBER_OF_ZOMBIES;
-var NUMBER_OF_HUMANS;
+var NUMBER_OF_ZOMBIES = 0;
+var NUMBER_OF_HUMANS = 0;
 
-var populationTotal;
+var populationTotal = [];
 
 function setup() {
 
@@ -64,23 +64,39 @@ function draw() {
 
 function initializePopulation() {
 
-	NUMBER_OF_ZOMBIES = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));  	
-  	NUMBER_OF_ZOMBIES = Math.round(NUMBER_OF_ZOMBIES);
-  	NUMBER_OF_HUMANS = MAX_POPULATION - NUMBER_OF_ZOMBIES;
+	// NUMBER_OF_ZOMBIES = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));  	
+ //  	NUMBER_OF_ZOMBIES = Math.round(NUMBER_OF_ZOMBIES);
+ //  	NUMBER_OF_HUMANS = MAX_POPULATION - NUMBER_OF_ZOMBIES;
 
-  	populationTotal = [];
-
-  	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
+ //  	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
   		
-  		populationTotal[i] = initializeZombie();
+ //  		populationTotal[i] = initializeZombie();
 
-  	} // Zombies.
+ //  	} // Zombies.
 
-  	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
+ //  	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
   		
-  		populationTotal[i] = initializeHuman();
+ //  		populationTotal[i] = initializeHuman();
 
-  	} // Humans.
+ //  	} // Humans.
+
+  	for (var i = 0; i < MAX_POPULATION; ++i) {
+
+  		var humanoid_type = random(0, 100);
+
+  		if (humanoid_type <= 50) {
+
+  			populationTotal[i] = initializeZombie();
+
+  			NUMBER_OF_ZOMBIES ++;
+  		}
+  		else {
+
+  			populationTotal[i] = initializeHuman();
+
+  			NUMBER_OF_HUMANS ++;
+  		}
+  	}
 
 }
 
@@ -150,29 +166,16 @@ function initializeHuman() {
 
 function drawPopulation() {
 
- 	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
+ 	for (var i = 0; i < MAX_POPULATION; ++i) {
  		
  		populationTotal[i].draw();
 
   	}
-
-	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
- 		
- 		populationTotal[i].draw();
-
-  	}
-
 }
 
 function movePopulation() {
 
-	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
- 		
- 		populationTotal[i].move();
-
-  	}
-
-	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
+	for (var i = 0; i < MAX_POPULATION; ++i) {
  		
  		populationTotal[i].move();
 
@@ -181,13 +184,7 @@ function movePopulation() {
 
 function trapPopulation() {
 
-	 for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
- 		
- 		populationTotal[i].trap();
-
-  	}
-
-	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
+	 for (var i = 0; i < MAX_POPULATION; ++i) {
  		
  		populationTotal[i].trap();
 
