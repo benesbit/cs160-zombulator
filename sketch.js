@@ -5,7 +5,7 @@ var backgroundColor;
 
 const MIN_SIZE = 10; 
 const MAX_SIZE = 25;
-const MAX_POPULATION = 500;
+const MAX_POPULATION = 50;
 const LOWER_ZOMBIE_POP_BOUND = .35;
 const UPPER_ZOMBIE_POP_BOUND = .6;
 // Using these to create a percentage change based off max population. These are passed to
@@ -62,6 +62,8 @@ function draw() {
   	trapPopulation();
 
   	drawText();
+
+  	collisionDetect();
 }
 
 function initializePopulation() {
@@ -122,7 +124,7 @@ function initializeZombie() {
 		size: random(MIN_SIZE, MAX_SIZE),
 		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
-		// humanity: false,
+		humanity: false,
 		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_X),
 		ySpeed: random(ZOMBIE_SPEED_MIN, ZOMBIE_SPEED_MAX),
 		draw: function() {
@@ -154,7 +156,7 @@ function initializeSuperZombie() {
 		size: random(MAX_SIZE*1.5, MAX_SIZE*2), // BIGGER
 		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
-		// humanity: false,
+		humanity: false,
 		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_X),
 		ySpeed: random(ZOMBIE_SPEED_MIN * 5, ZOMBIE_SPEED_MAX * 2), // FASTER
 		draw: function() {
@@ -186,7 +188,7 @@ function initializeHuman() {
 		size: random(MIN_SIZE, MAX_SIZE),
 		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
-		// humanity: true,
+		humanity: true,
 		xSpeed: random(NEG_HUMAN_X, POS_HUMAN_X),
 		ySpeed: random(HUMAN_SPEED_MIN, HUMAN_SPEED_MAX),
 		draw: function() {
@@ -218,7 +220,7 @@ function initializeSuperHuman() {
 		size: random(MAX_SIZE * 1.5, MAX_SIZE * 2), // BIGGER
 		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
-		// humanity: true,
+		humanity: true,
 		xSpeed: random(NEG_HUMAN_X, POS_HUMAN_X),
 		ySpeed: random(HUMAN_SPEED_MIN * 5, HUMAN_SPEED_MAX * 2), // FASTER
 		draw: function() {
@@ -281,7 +283,7 @@ function zombieText() {
 
 	fill(random(200, 255), random(50, 100), random(50, 100));
 	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, windowHeight / 4);
-	text('Hulk Zombies Percentage: ' + Math.round((NUMBER_OF_SUPER_ZOMBIES/NUMBER_OF_ZOMBIES) * 100) + '%', windowWidth / 2, (windowHeight / 4) + 11);
+	text('Percentage of Hulk Zombies: ' + Math.round((NUMBER_OF_SUPER_ZOMBIES/NUMBER_OF_ZOMBIES) * 100) + '%', windowWidth / 2, (windowHeight / 4) + 11);
 
 } // Displays the amount of zombies on the screen
 
@@ -289,6 +291,34 @@ function humanText() {
 
 	fill(random(0, 30), random(0, 200), random(250, 255));
 	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight / 1.5);
-	text('Super Humans Percentage: ' + Math.round((NUMBER_OF_SUPER_HUMANS/NUMBER_OF_HUMANS) * 100) + '%', windowWidth / 2, (windowHeight / 1.5) + 11);
+	text('Percentage of Super Humans: ' + Math.round((NUMBER_OF_SUPER_HUMANS/NUMBER_OF_HUMANS) * 100) + '%', windowWidth / 2, (windowHeight / 1.5) + 11);
 
 } // Displays the amount of humans on the screen
+
+function collisionDetect() {
+
+	for (var i = 0; i < (MAX_POPULATION - 1); ++i) {
+
+		var body1 = populationTotal[i];
+		var body2 = populationTotal[i+1];
+
+		if ((body1.humanity == false && body2.humanity == true) || (body1.humanity == true && body2.humanity == false)) {
+
+			// for (var k = i + 1; k < MAX_POPULATION; ++i) {
+
+				// var body2 = populationTotal[k];
+
+				// if (body2.humanity == true) {
+
+					var dx = body1.vector.x - body2.vector.x;
+					var dy = body1.vector.y - body2.vector.y;
+					var distance = Math.sqrt((dx * dx) + (dy *dy));
+
+					if (distance < ((body1.size)) + ((body2.size))) {
+						print("FIGHT!!");
+					}
+				// }
+			// }
+		}
+	}
+}
