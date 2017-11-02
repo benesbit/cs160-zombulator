@@ -66,23 +66,6 @@ function draw() {
 }
 
 function initializePopulation() {
-
-	// numberOfZombies = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));  	
- //  	numberOfZombies = Math.round(numberOfZombies);
- //  	numberOfHumans = MAX_POPULATION - numberOfZombies;
-
- //  	for (var i = 0; i < numberOfZombies; ++i) {
-  		
- //  		population[i] = initializeZombie();
-
- //  	} // Zombies.
-
- //  	for (var i = numberOfZombies; i < MAX_POPULATION; ++i) {
-  		
- //  		population[i] = initializeHuman();
-
- //  	} // Humans.
-
   	for (var i = 0; i < MAX_POPULATION; ++i) {
   		var humanoid_type = random(0, 100);
   		if (humanoid_type <= 5) {
@@ -106,28 +89,28 @@ function initializePopulation() {
 function initializeZombie() {
 	return {
 		size: random(MIN_SIZE, MAX_SIZE),
-		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
+		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanoid_type: 'zombie',
 		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_X),
 		ySpeed: random(ZOMBIE_SPEED_MIN, ZOMBIE_SPEED_MAX),
 		draw: function() {
 			fill(this.color);
-			ellipse(this.vector.x, this.vector.y, this.size, this.size);
+			ellipse(this.position.x, this.position.y, this.size, this.size);
 		},
 		move: function() {
-     		this.vector.add((random(-1 * (this.xSpeed), this.xSpeed)), (random(-0.2 * (this.ySpeed), this.ySpeed)));
+     		this.position.add((random(-1 * (this.xSpeed), this.xSpeed)), (random(-0.2 * (this.ySpeed), this.ySpeed)));
 		},
 		trap: function() {
-			if ((this.vector.x - this.size / 2) <= 0) {
- 				this.vector.x = this.size / 2;
+			if ((this.position.x - this.size / 2) <= 0) {
+ 				this.position.x = this.size / 2;
  			}
- 			if ((this.vector.x + (this.size / 2)) >= windowWidth) {
- 				this.vector.x = windowWidth - (this.size / 2);
+ 			if ((this.position.x + (this.size / 2)) >= windowWidth) {
+ 				this.position.x = windowWidth - (this.size / 2);
  			} // Side boundaries
 
- 			if ((this.vector.y + (this.size / 2)) >= windowHeight) {
- 				this.vector.y = (windowHeight - (this.size / 2));
+ 			if ((this.position.y + (this.size / 2)) >= windowHeight) {
+ 				this.position.y = (windowHeight - (this.size / 2));
  			} // Lower boundary
 		}
 	};
@@ -138,28 +121,28 @@ function initializeSuperZombie() {
 
 	return {
 		size: random(MAX_SIZE*1.5, MAX_SIZE*2), // BIGGER
-		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
+		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanoid_type: 'super zombie',
 		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_X),
 		ySpeed: random(ZOMBIE_SPEED_MIN * 5, ZOMBIE_SPEED_MAX * 2), // FASTER
 		draw: function() {
 			fill(this.color);
-			ellipse(this.vector.x, this.vector.y, this.size, this.size);
+			ellipse(this.position.x, this.position.y, this.size, this.size);
 		},
 		move: function() {
-     		this.vector.add((random(-0.2 * (this.xSpeed), this.xSpeed)), (random(-0.2 * (this.ySpeed), this.ySpeed)));
+     		this.position.add((random(-0.2 * (this.xSpeed), this.xSpeed)), (random(-0.2 * (this.ySpeed), this.ySpeed)));
 		},
 		trap: function() {
-			if ((this.vector.x - this.size / 2) <= 0) {
- 				this.vector.x = this.size / 2;
+			if ((this.position.x - this.size / 2) <= 0) {
+ 				this.position.x = this.size / 2;
  			}
- 			if ((this.vector.x + (this.size / 2)) >= windowWidth) {
- 				this.vector.x = windowWidth - (this.size / 2);
+ 			if ((this.position.x + (this.size / 2)) >= windowWidth) {
+ 				this.position.x = windowWidth - (this.size / 2);
  			} // Side boundaries
 
- 			if ((this.vector.y + (this.size / 2)) >= windowHeight) {
- 				this.vector.y = (windowHeight - (this.size / 2));
+ 			if ((this.position.y + (this.size / 2)) >= windowHeight) {
+ 				this.position.y = (windowHeight - (this.size / 2));
  			} // Lower boundary
 		}
 	};
@@ -170,28 +153,28 @@ function initializeHuman() {
 
 	return {
 		size: random(MIN_SIZE, MAX_SIZE),
-		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
+		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'human',
 		xSpeed: random(NEG_HUMAN_X, POS_HUMAN_X),
 		ySpeed: random(HUMAN_SPEED_MIN, HUMAN_SPEED_MAX),
 		draw: function() {
 			fill(this.color);
-			ellipse(this.vector.x, this.vector.y, this.size, this.size);
+			ellipse(this.position.x, this.position.y, this.size, this.size);
 		},
 		move: function() {
-			this.vector.add((random(-1 * (this.xSpeed), this.xSpeed)), (-1 *random(-0.2 * (this.ySpeed), this.ySpeed)));
+			this.position.add((random(-1 * (this.xSpeed), this.xSpeed)), (-1 *random(-0.2 * (this.ySpeed), this.ySpeed)));
 		},
 		trap: function() {
-			if ((this.vector.x - (this.size / 2)) <= 0) {
- 				this.vector.x = this.size / 2;
+			if ((this.position.x - (this.size / 2)) <= 0) {
+ 				this.position.x = this.size / 2;
  			}
- 			if ((this.vector.x + (this.size / 2)) >= windowWidth) {
- 				this.vector.x = windowWidth - (this.size / 2);
+ 			if ((this.position.x + (this.size / 2)) >= windowWidth) {
+ 				this.position.x = windowWidth - (this.size / 2);
  			} // Side boundaries
 
- 			if ((this.vector.y - (this.size / 2)) <= 0) {
- 				this.vector.y = (this.size / 2);
+ 			if ((this.position.y - (this.size / 2)) <= 0) {
+ 				this.position.y = (this.size / 2);
  			} // Upper boundary
 		}
 	};
@@ -202,28 +185,28 @@ function initializeSuperHuman() {
 
 	return {
 		size: random(MAX_SIZE * 1.5, MAX_SIZE * 2), // BIGGER
-		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
+		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'super human',
 		xSpeed: random(NEG_HUMAN_X, POS_HUMAN_X),
 		ySpeed: random(HUMAN_SPEED_MIN * 5, HUMAN_SPEED_MAX * 2), // FASTER
 		draw: function() {
 			fill(this.color);
-			ellipse(this.vector.x, this.vector.y, this.size, this.size);
+			ellipse(this.position.x, this.position.y, this.size, this.size);
 		},
 		move: function() {
-			this.vector.add((random(-1 * (this.xSpeed), this.xSpeed)), (-1 *random(-0.1 * (this.ySpeed), this.ySpeed)));
+			this.position.add((random(-1 * (this.xSpeed), this.xSpeed)), (-1 *random(-0.1 * (this.ySpeed), this.ySpeed)));
 		},
 		trap: function() {
-			if ((this.vector.x - (this.size / 2)) <= 0) {
- 				this.vector.x = this.size / 2;
+			if ((this.position.x - (this.size / 2)) <= 0) {
+ 				this.position.x = this.size / 2;
  			}
- 			if ((this.vector.x + (this.size / 2)) >= windowWidth) {
- 				this.vector.x = windowWidth - (this.size / 2);
+ 			if ((this.position.x + (this.size / 2)) >= windowWidth) {
+ 				this.position.x = windowWidth - (this.size / 2);
  			} // Side boundaries
 
- 			if ((this.vector.y - (this.size / 2)) <= 0) {
- 				this.vector.y = (this.size / 2);
+ 			if ((this.position.y - (this.size / 2)) <= 0) {
+ 				this.position.y = (this.size / 2);
  			} // Upper boundary
 		}
 	};
