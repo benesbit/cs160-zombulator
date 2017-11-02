@@ -62,7 +62,7 @@ function draw() {
 
   	drawText();
 
-  	collisionDetect();
+  	//collisionDetect();
 }
 
 function initializePopulation() {
@@ -104,12 +104,11 @@ function initializePopulation() {
 }
 
 function initializeZombie() {
-
 	return {
 		size: random(MIN_SIZE, MAX_SIZE),
 		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
-		humanity: false,
+		humanoid_type: 'zombie',
 		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_X),
 		ySpeed: random(ZOMBIE_SPEED_MIN, ZOMBIE_SPEED_MAX),
 		draw: function() {
@@ -141,7 +140,7 @@ function initializeSuperZombie() {
 		size: random(MAX_SIZE*1.5, MAX_SIZE*2), // BIGGER
 		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
-		humanity: false,
+		humanoid_type: 'super zombie',
 		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_X),
 		ySpeed: random(ZOMBIE_SPEED_MIN * 5, ZOMBIE_SPEED_MAX * 2), // FASTER
 		draw: function() {
@@ -173,7 +172,7 @@ function initializeHuman() {
 		size: random(MIN_SIZE, MAX_SIZE),
 		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
-		humanity: true,
+		humanoid_type: 'human',
 		xSpeed: random(NEG_HUMAN_X, POS_HUMAN_X),
 		ySpeed: random(HUMAN_SPEED_MIN, HUMAN_SPEED_MAX),
 		draw: function() {
@@ -205,7 +204,7 @@ function initializeSuperHuman() {
 		size: random(MAX_SIZE * 1.5, MAX_SIZE * 2), // BIGGER
 		vector: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
-		humanity: true,
+		humanoid_type: 'super human',
 		xSpeed: random(NEG_HUMAN_X, POS_HUMAN_X),
 		ySpeed: random(HUMAN_SPEED_MIN * 5, HUMAN_SPEED_MAX * 2), // FASTER
 		draw: function() {
