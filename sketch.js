@@ -24,8 +24,8 @@ const HUMAN_SPEED_MIN = 0.75;
 // These are the constants that control the "Brownian motion" of the humans.
 // Note that POS in the y category indicates the main direction we want the object moving.
 
-const NEG_ZOMBIE_X = -2.25;
-const POS_ZOMBIE_X = 2.25;
+const MIN_ZOMBIE_HORIZONTAL_VELOCITY = -2.25;
+const MAX_ZOMBIE_HORIZONTAL_VELOCITY = 2.25;
 const NEG_ZOMBIE_Y = 0.5;
 const POS_ZOMBIE_Y = 1.75;
 const ZOMBIE_SPEED_MAX = 2.0;
@@ -92,14 +92,16 @@ function initializeZombie() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanoid_type: 'zombie',
-		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_X),
-		ySpeed: random(ZOMBIE_SPEED_MIN, ZOMBIE_SPEED_MAX),
+		velocity: createVector(random(MIN_ZOMBIE_HORIZONTAL_VELOCITY, MAX_ZOMBIE_HORIZONTAL_VELOCITY), random(ZOMBIE_SPEED_MIN, ZOMBIE_SPEED_MAX)),
 		draw: function() {
 			fill(this.color);
 			ellipse(this.position.x, this.position.y, this.size, this.size);
 		},
 		move: function() {
-     		this.position.add((random(-1 * (this.xSpeed), this.xSpeed)), (random(-0.2 * (this.ySpeed), this.ySpeed)));
+     		this.position.add(this.velocity);
+     		var acceleration = createVector(random(-2, 2), random(0, 1));
+     		this.velocity.add(acceleration);
+     		this.velocity.limit(2);
 		},
 		trap: function() {
 			if ((this.position.x - this.size / 2) <= 0) {
@@ -108,7 +110,6 @@ function initializeZombie() {
  			if ((this.position.x + (this.size / 2)) >= windowWidth) {
  				this.position.x = windowWidth - (this.size / 2);
  			} // Side boundaries
-
  			if ((this.position.y + (this.size / 2)) >= windowHeight) {
  				this.position.y = (windowHeight - (this.size / 2));
  			} // Lower boundary
@@ -124,7 +125,7 @@ function initializeSuperZombie() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanoid_type: 'super zombie',
-		xSpeed: random(NEG_ZOMBIE_X, POS_ZOMBIE_X),
+		xSpeed: random(MIN_ZOMBIE_HORIZONTAL_VELOCITY, MAX_ZOMBIE_HORIZONTAL_VELOCITY),
 		ySpeed: random(ZOMBIE_SPEED_MIN * 5, ZOMBIE_SPEED_MAX * 2), // FASTER
 		draw: function() {
 			fill(this.color);
