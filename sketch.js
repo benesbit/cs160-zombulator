@@ -33,11 +33,10 @@ const ZOMBIE_SPEED_MIN = 0.5;
 // These are the constants that control the "Brownian motion" of the zombies.
 // Note that POS in the y category indicates the main direction we want the object moving.
 
-var NUMBER_OF_ZOMBIES = 0;
-var NUMBER_OF_SUPER_ZOMBIES = 0;
-
-var NUMBER_OF_HUMANS = 0;
-var NUMBER_OF_SUPER_HUMANS = 0;
+var numberOfZombies = 0;
+var numberOfSuperZombies = 0;
+var numberOfHumans = 0;
+var numberOfSuperHumans = 0;
 
 var population = [];
 
@@ -68,17 +67,17 @@ function draw() {
 
 function initializePopulation() {
 
-	// NUMBER_OF_ZOMBIES = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));  	
- //  	NUMBER_OF_ZOMBIES = Math.round(NUMBER_OF_ZOMBIES);
- //  	NUMBER_OF_HUMANS = MAX_POPULATION - NUMBER_OF_ZOMBIES;
+	// numberOfZombies = random((MAX_POPULATION * LOWER_ZOMBIE_POP_BOUND), (MAX_POPULATION * UPPER_ZOMBIE_POP_BOUND));  	
+ //  	numberOfZombies = Math.round(numberOfZombies);
+ //  	numberOfHumans = MAX_POPULATION - numberOfZombies;
 
- //  	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
+ //  	for (var i = 0; i < numberOfZombies; ++i) {
   		
  //  		population[i] = initializeZombie();
 
  //  	} // Zombies.
 
- //  	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
+ //  	for (var i = numberOfZombies; i < MAX_POPULATION; ++i) {
   		
  //  		population[i] = initializeHuman();
 
@@ -88,18 +87,18 @@ function initializePopulation() {
   		var humanoid_type = random(0, 100);
   		if (humanoid_type <= 5) {
   			population.push(initializeSuperZombie());
-  			NUMBER_OF_ZOMBIES ++;
-  			NUMBER_OF_SUPER_ZOMBIES ++;
+  			numberOfZombies++;
+  			numberOfSuperZombies++;
   		} else if (humanoid_type <= 50) {
   			population.push(initializeZombie());
-  			NUMBER_OF_ZOMBIES ++;
+  			numberOfZombies++;
   		} else if (humanoid_type <= 95) {
   			population.push(initializeHuman());
-  			NUMBER_OF_HUMANS ++;
+  			numberOfHumans++;
   		} else {
   			population.push(initializeSuperHuman());
-  			NUMBER_OF_HUMANS ++;
-  			NUMBER_OF_SUPER_HUMANS ++;
+  			numberOfHumans++;
+  			numberOfSuperHumans++;
   		}
   	}
 }
@@ -268,16 +267,16 @@ function drawText() {
 function zombieText() {
 
 	fill(random(200, 255), random(50, 100), random(50, 100));
-	text('Zombies: ' + NUMBER_OF_ZOMBIES, windowWidth / 2, windowHeight / 4);
-	text('Percentage of Hulk Zombies: ' + Math.round((NUMBER_OF_SUPER_ZOMBIES/NUMBER_OF_ZOMBIES) * 100) + '%', windowWidth / 2, (windowHeight / 4) + 11);
+	text('Zombies: ' + numberOfZombies, windowWidth / 2, windowHeight / 4);
+	text('Percentage of Hulk Zombies: ' + Math.round((numberOfSuperZombies/numberOfZombies) * 100) + '%', windowWidth / 2, (windowHeight / 4) + 11);
 
 } // Displays the amount of zombies on the screen
 
 function humanText() {
 
 	fill(random(0, 30), random(0, 200), random(250, 255));
-	text('Humans: ' + NUMBER_OF_HUMANS, windowWidth / 2, windowHeight / 1.5);
-	text('Percentage of Super Humans: ' + Math.round((NUMBER_OF_SUPER_HUMANS/NUMBER_OF_HUMANS) * 100) + '%', windowWidth / 2, (windowHeight / 1.5) + 11);
+	text('Humans: ' + numberOfHumans, windowWidth / 2, windowHeight / 1.5);
+	text('Percentage of Super Humans: ' + Math.round((numberOfSuperHumans/numberOfHumans) * 100) + '%', windowWidth / 2, (windowHeight / 1.5) + 11);
 
 } // Displays the amount of humans on the screen
 
