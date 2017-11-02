@@ -233,43 +233,32 @@ function drawPopulation() {
 }
 
 function movePopulation() {
-
-	for (var i = 0; i < MAX_POPULATION; ++i) {
- 		
+	for (var i = 0; i < MAX_POPULATION; ++i) {	
  		population[i].move();
-
   	}
 }
 
 function trapPopulation() {
-
-	 for (var i = 0; i < MAX_POPULATION; ++i) {
- 		
+	 for (var i = 0; i < MAX_POPULATION; ++i) { 		
  		population[i].trap();
-
   	}
 }
 
 function drawText() {
-
 	zombieText();
 	humanText();
 }
 
 function zombieText() {
-
 	fill(random(200, 255), random(50, 100), random(50, 100));
 	text('Zombies: ' + numberOfZombies, windowWidth / 2, windowHeight / 4);
 	text('Percentage of Hulk Zombies: ' + Math.round((numberOfSuperZombies/numberOfZombies) * 100) + '%', windowWidth / 2, (windowHeight / 4) + 11);
-
 } // Displays the amount of zombies on the screen
 
 function humanText() {
-
 	fill(random(0, 30), random(0, 200), random(250, 255));
 	text('Humans: ' + numberOfHumans, windowWidth / 2, windowHeight / 1.5);
 	text('Percentage of Super Humans: ' + Math.round((numberOfSuperHumans/numberOfHumans) * 100) + '%', windowWidth / 2, (windowHeight / 1.5) + 11);
-
 } // Displays the amount of humans on the screen
 
 function collisionDetect() {
@@ -280,6 +269,7 @@ function collisionDetect() {
 		for (var k = (i + 1); k < MAX_POPULATION; ++k) {
 			var human = population[k];
 			if (human.isZombie()) continue;
+
 
 			if (zombie.position.dist(human.position) <= zombie.size/2 + human.size/2) {
 				print("FIGHT");
