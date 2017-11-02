@@ -39,7 +39,7 @@ var NUMBER_OF_SUPER_ZOMBIES = 0;
 var NUMBER_OF_HUMANS = 0;
 var NUMBER_OF_SUPER_HUMANS = 0;
 
-var populationTotal = [];
+var population = [];
 
 function setup() {
 
@@ -74,48 +74,34 @@ function initializePopulation() {
 
  //  	for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
   		
- //  		populationTotal[i] = initializeZombie();
+ //  		population[i] = initializeZombie();
 
  //  	} // Zombies.
 
  //  	for (var i = NUMBER_OF_ZOMBIES; i < MAX_POPULATION; ++i) {
   		
- //  		populationTotal[i] = initializeHuman();
+ //  		population[i] = initializeHuman();
 
  //  	} // Humans.
 
   	for (var i = 0; i < MAX_POPULATION; ++i) {
-
   		var humanoid_type = random(0, 100);
-
   		if (humanoid_type <= 5) {
-
-  			populationTotal[i] = initializeSuperZombie();
-
+  			population.push(initializeSuperZombie());
   			NUMBER_OF_ZOMBIES ++;
   			NUMBER_OF_SUPER_ZOMBIES ++;
-  		}
-  		else if (humanoid_type <= 50) {
-
-  			populationTotal[i] = initializeZombie();
-
+  		} else if (humanoid_type <= 50) {
+  			population.push(initializeZombie());
   			NUMBER_OF_ZOMBIES ++;
-  		}
-  		else if (humanoid_type <= 95) {
-
-  			populationTotal[i] = initializeHuman();
-
+  		} else if (humanoid_type <= 95) {
+  			population.push(initializeHuman());
   			NUMBER_OF_HUMANS ++;
-  		}
-  		else {
-
-  			populationTotal[i] = initializeSuperHuman();
-
+  		} else {
+  			population.push(initializeSuperHuman());
   			NUMBER_OF_HUMANS ++;
   			NUMBER_OF_SUPER_HUMANS ++;
   		}
   	}
-
 }
 
 function initializeZombie() {
@@ -250,7 +236,7 @@ function drawPopulation() {
 
  	for (var i = 0; i < MAX_POPULATION; ++i) {
  		
- 		populationTotal[i].draw();
+ 		population[i].draw();
 
   	}
 }
@@ -259,7 +245,7 @@ function movePopulation() {
 
 	for (var i = 0; i < MAX_POPULATION; ++i) {
  		
- 		populationTotal[i].move();
+ 		population[i].move();
 
   	}
 }
@@ -268,7 +254,7 @@ function trapPopulation() {
 
 	 for (var i = 0; i < MAX_POPULATION; ++i) {
  		
- 		populationTotal[i].trap();
+ 		population[i].trap();
 
   	}
 }
@@ -299,14 +285,14 @@ function collisionDetect() {
 
 	for (var i = 0; i < (MAX_POPULATION - 1); ++i) {
 
-		var body1 = populationTotal[i];
-		// var body2 = populationTotal[i+1];
+		var body1 = population[i];
+		// var body2 = population[i+1];
 
 		// if ((body1.humanity == false && body2.humanity == true) || (body1.humanity == true && body2.humanity == false)) {
 
 			for (var k = (i + 1); k < MAX_POPULATION; ++k) {
 
-				var body2 = populationTotal[k];
+				var body2 = population[k];
 
 				// if (body2.humanity == true) {
 				if ((body1.humanity == false && body2.humanity == true) || (body1.humanity == true && body2.humanity == false)) {	
