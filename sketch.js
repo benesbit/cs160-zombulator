@@ -300,25 +300,26 @@ function collisionDetect() {
 	for (var i = 0; i < (MAX_POPULATION - 1); ++i) {
 
 		var body1 = populationTotal[i];
-		var body2 = populationTotal[i+1];
+		// var body2 = populationTotal[i+1];
 
-		if ((body1.humanity == false && body2.humanity == true) || (body1.humanity == true && body2.humanity == false)) {
+		// if ((body1.humanity == false && body2.humanity == true) || (body1.humanity == true && body2.humanity == false)) {
 
-			// for (var k = i + 1; k < MAX_POPULATION; ++i) {
+			for (var k = (i + 1); k < MAX_POPULATION; ++k) {
 
-				// var body2 = populationTotal[k];
+				var body2 = populationTotal[k];
 
 				// if (body2.humanity == true) {
+				if ((body1.humanity == false && body2.humanity == true) || (body1.humanity == true && body2.humanity == false)) {	
 
 					var dx = body1.vector.x - body2.vector.x;
 					var dy = body1.vector.y - body2.vector.y;
-					var distance = Math.sqrt((dx * dx) + (dy *dy));
+					var distance = Math.sqrt(dx * dx + dy *dy);
 
 					if (distance < ((body1.size)) + ((body2.size))) {
 						print("FIGHT!!");
 					}
-				// }
-			// }
-		}
+				}
+			}
+		// }
 	}
 }
