@@ -62,7 +62,7 @@ function draw() {
 
   	drawText();
 
-  	//collisionDetect();
+  	collisionDetect();
 }
 
 function initializePopulation() {
@@ -113,6 +113,9 @@ function initializeZombie() {
  			if ((this.position.y + (this.size / 2)) >= windowHeight) {
  				this.position.y = (windowHeight - (this.size / 2));
  			} // Lower boundary
+		},
+		isZombie: function() {
+			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		}
 	};
 
@@ -145,6 +148,9 @@ function initializeSuperZombie() {
  			if ((this.position.y + (this.size / 2)) >= windowHeight) {
  				this.position.y = (windowHeight - (this.size / 2));
  			} // Lower boundary
+		},
+		isZombie: function() {
+			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		}
 	};
 
@@ -177,6 +183,9 @@ function initializeHuman() {
  			if ((this.position.y - (this.size / 2)) <= 0) {
  				this.position.y = (this.size / 2);
  			} // Upper boundary
+		},
+		isZombie: function() {
+			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		}
 	};
 
@@ -209,17 +218,17 @@ function initializeSuperHuman() {
  			if ((this.position.y - (this.size / 2)) <= 0) {
  				this.position.y = (this.size / 2);
  			} // Upper boundary
+		},
+		isZombie: function() {
+			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		}
 	};
 
 }
 
 function drawPopulation() {
-
- 	for (var i = 0; i < MAX_POPULATION; ++i) {
- 		
+ 	for (var i = 0; i < MAX_POPULATION; ++i) {		
  		population[i].draw();
-
   	}
 }
 
@@ -264,30 +273,33 @@ function humanText() {
 } // Displays the amount of humans on the screen
 
 function collisionDetect() {
+	for (var i = 0; i < MAX_POPULATION; ++i) {
+		var zombie = population[i];
+		if (zombie == undefined || !zombie.isZombie()) continue;
 
-	for (var i = 0; i < (MAX_POPULATION - 1); ++i) {
+		for (var k = (i + 1); k < MAX_POPULATION; ++k) {
+			var human = population[k];
+			if (human.isZombie()) continue;
 
-		var body1 = population[i];
-		// var body2 = population[i+1];
-
-		// if ((body1.humanity == false && body2.humanity == true) || (body1.humanity == true && body2.humanity == false)) {
-
-			for (var k = (i + 1); k < MAX_POPULATION; ++k) {
-
-				var body2 = population[k];
-
-				// if (body2.humanity == true) {
-				if ((body1.humanity == false && body2.humanity == true) || (body1.humanity == true && body2.humanity == false)) {	
-
-					var dx = body1.vector.x - body2.vector.x;
-					var dy = body1.vector.y - body2.vector.y;
-					var distance = Math.sqrt(dx * dx + dy *dy);
-
-					if (distance < ((body1.size)) + ((body2.size))) {
-						print("FIGHT!!");
-					}
-				}
+			if (zombie.position.dist(human.position) <= zombie.size/2 + human.size/2) {
+				print("FIGHT");
 			}
+
+			// if (zombie.isTouching(human)) {
+			// 	zombie.fight(human);
+			// }
+
+			// if ((body1.humanity == false && body2.humanity == true) || (body1.humanity == true && body2.humanity == false)) {	
+
+			// 	var dx = body1.vector.x - body2.vector.x;
+			// 	var dy = body1.vector.y - body2.vector.y;
+			// 	var distance = Math.sqrt(dx * dx + dy *dy);
+
+			// 	if (distance < ((body1.size)) + ((body2.size))) {
+			// 		print("FIGHT!!");
+			// 	}
+			// }
+		}
 		// }
 	}
 }
