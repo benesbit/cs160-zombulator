@@ -13,25 +13,16 @@ const UPPER_ZOMBIE_POP_BOUND = .6;
 
 const HUMAN_SPAWN_BOUND = 150;
 const ZOMBIE_SPAWN_BOUND = 150;
-// The distance from the respective boundaries that each human and zombie can spawn.
 
 const MIN_HUMAN_HORIZONTAL_VELOCITY = -2;
 const MAX_HUMAN_HORIZONTAL_VELOCITY = 2;
-const NEG_HUMAN_Y = 1.0;
-const POS_HUMAN_Y = 2.0;
-const HUMAN_SPEED_MAX = 3.0;
+const HUMAN_SPEED_MAX = 2.2;
 const HUMAN_SPEED_MIN = 0.75;
-// These are the constants that control the "Brownian motion" of the humans.
-// Note that POS in the y category indicates the main direction we want the object moving.
 
 const MIN_ZOMBIE_HORIZONTAL_VELOCITY = -2.25;
 const MAX_ZOMBIE_HORIZONTAL_VELOCITY = 2.25;
-const NEG_ZOMBIE_Y = 0.5;
-const POS_ZOMBIE_Y = 1.75;
-const ZOMBIE_SPEED_MAX = 2.0;
+const ZOMBIE_SPEED_MAX = 1.1;
 const ZOMBIE_SPEED_MIN = 0.5;
-// These are the constants that control the "Brownian motion" of the zombies.
-// Note that POS in the y category indicates the main direction we want the object moving.
 
 var numberOfZombies = 0;
 var numberOfSuperZombies = 0;
