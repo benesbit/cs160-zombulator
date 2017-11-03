@@ -5,7 +5,7 @@ var backgroundColor;
 
 const MIN_SIZE = 10; 
 const MAX_SIZE = 25;
-const MAX_POPULATION = 100;
+const MAX_POPULATION = 50;
 const LOWER_ZOMBIE_POP_BOUND = .35;
 const UPPER_ZOMBIE_POP_BOUND = .6;
 // Using these to create a percentage change based off max population. These are passed to
@@ -32,7 +32,6 @@ var numberOfSuperHumans = 0;
 var population = [];
 
 function setup() {
-
   	createCanvas(windowWidth, windowHeight);
   	backgroundColor = color('darkgray');
   	
@@ -40,7 +39,6 @@ function setup() {
 }
 
 function draw() {
-
   	background(backgroundColor);
   	noStroke();
 
@@ -50,7 +48,7 @@ function draw() {
 
   	drawText();
 
-  	collisionDetect();
+  	handleCollision();
 }
 
 function initializePopulation() {
@@ -258,17 +256,22 @@ function drawText() {
 
 function zombieText() {
 	fill(random(200, 255), random(50, 100), random(50, 100));
+	textSize(20);
+	stroke(5);
+	// strokeColor('black');
 	text('Zombies: ' + numberOfZombies, windowWidth / 2, windowHeight / 4);
-	text('Percentage of Hulk Zombies: ' + Math.round((numberOfSuperZombies/numberOfZombies) * 100) + '%', windowWidth / 2, (windowHeight / 4) + 11);
+	text('Percentage of Hulk Zombies: ' + Math.round((numberOfSuperZombies/numberOfZombies) * 100) + '%', (windowWidth / 2) - 80, (windowHeight / 4) + 20);
 } // Displays the amount of zombies on the screen
 
 function humanText() {
 	fill(random(0, 30), random(0, 200), random(250, 255));
+	textSize(20);
+	stroke(5);
 	text('Humans: ' + numberOfHumans, windowWidth / 2, windowHeight / 1.5);
-	text('Percentage of Super Humans: ' + Math.round((numberOfSuperHumans/numberOfHumans) * 100) + '%', windowWidth / 2, (windowHeight / 1.5) + 11);
+	text('Percentage of Super Humans: ' + Math.round((numberOfSuperHumans/numberOfHumans) * 100) + '%', (windowWidth / 2) - 80, (windowHeight / 1.5) + 20);
 } // Displays the amount of humans on the screen
 
-function collisionDetect() {
+function handleCollision() {
 	for (var i = 0; i < MAX_POPULATION; ++i) {
 		var zombie = population[i];
 		if (zombie == undefined || !zombie.isZombie()) continue;
