@@ -1,5 +1,5 @@
 // Zombulator by Benjamin Nesbit 
-// CS 160 Exercise 19 - Polymorphism
+// CS 160 Exercise 20 - Collisions
 
 var backgroundColor;
 
@@ -123,14 +123,16 @@ function initializeSuperZombie() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanoid_type: 'super zombie',
-		xSpeed: random(MIN_ZOMBIE_HORIZONTAL_VELOCITY, MAX_ZOMBIE_HORIZONTAL_VELOCITY),
-		ySpeed: random(ZOMBIE_SPEED_MIN * 5, ZOMBIE_SPEED_MAX * 2), // FASTER
+		velocity: createVector(random(MIN_ZOMBIE_HORIZONTAL_VELOCITY, MAX_ZOMBIE_HORIZONTAL_VELOCITY), random(ZOMBIE_SPEED_MIN * 5, ZOMBIE_SPEED_MAX * 2)),
 		draw: function() {
 			fill(this.color);
 			ellipse(this.position.x, this.position.y, this.size, this.size);
 		},
 		move: function() {
-     		this.position.add((random(-0.2 * (this.xSpeed), this.xSpeed)), (random(-0.2 * (this.ySpeed), this.ySpeed)));
+			this.position.add(this.velocity);
+     		var acceleration = createVector(random(-3, 3), random(0, 2));
+     		this.velocity.add(acceleration);
+     		this.velocity.limit(3);
 		},
 		trap: function() {
 			if ((this.position.x - this.size / 2) <= 0) {
@@ -259,7 +261,6 @@ function collisionDetect() {
 		for (var k = (i + 1); k < MAX_POPULATION; ++k) {
 			var human = population[k];
 			if (human.isZombie()) continue;
-
 
 			if (zombie.position.dist(human.position) <= zombie.size/2 + human.size/2) {
 				print("FIGHT");
