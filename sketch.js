@@ -5,7 +5,7 @@ var backgroundColor;
 
 const MIN_SIZE = 10; 
 const MAX_SIZE = 25;
-const MAX_POPULATION = 50;
+const MAX_POPULATION = 100;
 const LOWER_ZOMBIE_POP_BOUND = .35;
 const UPPER_ZOMBIE_POP_BOUND = .6;
 // Using these to create a percentage change based off max population. These are passed to
@@ -158,14 +158,16 @@ function initializeHuman() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'human',
-		xSpeed: random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY),
-		ySpeed: random(HUMAN_SPEED_MIN, HUMAN_SPEED_MAX),
+		velocity: createVector(random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY), random(HUMAN_SPEED_MIN, HUMAN_SPEED_MAX),),
 		draw: function() {
 			fill(this.color);
 			ellipse(this.position.x, this.position.y, this.size, this.size);
 		},
 		move: function() {
-			this.position.add((random(-1 * (this.xSpeed), this.xSpeed)), (-1 *random(-0.2 * (this.ySpeed), this.ySpeed)));
+			this.position.add(this.velocity);
+			var acceleration = createVector(random(-2, 2), random(-1, 0));
+			this.velocity.add(acceleration);
+			this.velocity.limit(2);
 		},
 		trap: function() {
 			if ((this.position.x - (this.size / 2)) <= 0) {
@@ -265,7 +267,6 @@ function collisionDetect() {
 			if (zombie.position.dist(human.position) <= zombie.size/2 + human.size/2) {
 				print("FIGHT");
 			}
-
 			// if (zombie.isTouching(human)) {
 			// 	zombie.fight(human);
 			// }
