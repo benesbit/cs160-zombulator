@@ -208,14 +208,16 @@ function initializeSuperHuman() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'super human',
-		xSpeed: random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY),
-		ySpeed: random(HUMAN_SPEED_MIN * 5, HUMAN_SPEED_MAX * 2), // FASTER
+		velocity: createVector(random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY), random(HUMAN_SPEED_MIN * 5, HUMAN_SPEED_MAX * 2)),
 		draw: function() {
 			fill(this.color);
 			ellipse(this.position.x, this.position.y, this.size, this.size);
 		},
 		move: function() {
-			this.position.add((random(-1 * (this.xSpeed), this.xSpeed)), (-1 *random(-0.1 * (this.ySpeed), this.ySpeed)));
+			this.position.add(this.velocity);
+			var acceleration = createVector(random(-3, 3), random(-3, 0));
+			this.velocity.add(acceleration);
+			this.velocity.limit(3);
 		},
 		trap: function() {
 			if ((this.position.x - (this.size / 2)) <= 0) {
