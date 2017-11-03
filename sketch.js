@@ -113,6 +113,11 @@ function initializeZombie() {
 		},
 		isZombie: function() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
+		},
+		isTouching: function(target) {
+			if (this.position.dist(target.position) <= this.size/2 + this.size/2) {
+				return true;
+			}
 		}
 	};
 }
@@ -148,6 +153,11 @@ function initializeSuperZombie() {
 		},
 		isZombie: function() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
+		},
+		isTouching: function(target) {
+			if (this.position.dist(target.position) <= this.size/2 + this.size/2) {
+				return true;
+			}
 		}
 	};
 }
@@ -183,6 +193,11 @@ function initializeHuman() {
 		},
 		isZombie: function() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
+		},
+		isTouching: function(target) {
+			if (this.position.dist(target.position) <= this.size/2 + this.size/2) {
+				return true;
+			}
 		}
 	};
 }
@@ -216,6 +231,11 @@ function initializeSuperHuman() {
 		},
 		isZombie: function() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
+		},
+		isTouching: function(target) {
+			if (this.position.dist(target.position) <= this.size/2 + this.size/2) {
+				return true;
+			}
 		}
 	};
 }
@@ -264,12 +284,10 @@ function collisionDetect() {
 			var human = population[k];
 			if (human.isZombie()) continue;
 
-			if (zombie.position.dist(human.position) <= zombie.size/2 + human.size/2) {
+			if (zombie.isTouching(human)) {
 				print("FIGHT");
+				// 	zombie.fight(human);
 			}
-			// if (zombie.isTouching(human)) {
-			// 	zombie.fight(human);
-			// }
 		}
 	}
 }
