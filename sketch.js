@@ -44,11 +44,8 @@ function setup() {
 
   	createCanvas(windowWidth, windowHeight);
   	backgroundColor = color('darkgray');
-  	// createCanvas(720, 400);
-  	// backgroundColor = loadImage("https://www.homoq.com/wp-content/uploads/2017/08/lesco-grass-seed-720x400.jpg");
-
+  	
   	initializePopulation();
-
 }
 
 function draw() {
@@ -118,11 +115,9 @@ function initializeZombie() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		}
 	};
-
 }
 
 function initializeSuperZombie() {
-
 	return {
 		size: random(MAX_SIZE*1.5, MAX_SIZE*2), // BIGGER
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
@@ -153,11 +148,9 @@ function initializeSuperZombie() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		}
 	};
-
 }
 
 function initializeHuman() {
-
 	return {
 		size: random(MIN_SIZE, MAX_SIZE),
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
@@ -188,11 +181,9 @@ function initializeHuman() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		}
 	};
-
 }
 
 function initializeSuperHuman() {
-
 	return {
 		size: random(MAX_SIZE * 1.5, MAX_SIZE * 2), // BIGGER
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
@@ -223,7 +214,6 @@ function initializeSuperHuman() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		}
 	};
-
 }
 
 function drawPopulation() {
@@ -278,18 +268,6 @@ function collisionDetect() {
 			// if (zombie.isTouching(human)) {
 			// 	zombie.fight(human);
 			// }
-
-			// if ((body1.humanity == false && body2.humanity == true) || (body1.humanity == true && body2.humanity == false)) {	
-
-			// 	var dx = body1.vector.x - body2.vector.x;
-			// 	var dy = body1.vector.y - body2.vector.y;
-			// 	var distance = Math.sqrt(dx * dx + dy *dy);
-
-			// 	if (distance < ((body1.size)) + ((body2.size))) {
-			// 		print("FIGHT!!");
-			// 	}
-			// }
 		}
-		// }
 	}
 }
