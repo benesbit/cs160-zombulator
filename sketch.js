@@ -15,8 +15,8 @@ const HUMAN_SPAWN_BOUND = 150;
 const ZOMBIE_SPAWN_BOUND = 150;
 // The distance from the respective boundaries that each human and zombie can spawn.
 
-const NEG_HUMAN_X = -2;
-const POS_HUMAN_X = 2;
+const MIN_HUMAN_HORIZONTAL_VELOCITY = -2;
+const MAX_HUMAN_HORIZONTAL_VELOCITY = 2;
 const NEG_HUMAN_Y = 1.0;
 const POS_HUMAN_Y = 2.0;
 const HUMAN_SPEED_MAX = 3.0;
@@ -158,7 +158,7 @@ function initializeHuman() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'human',
-		xSpeed: random(NEG_HUMAN_X, POS_HUMAN_X),
+		xSpeed: random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY),
 		ySpeed: random(HUMAN_SPEED_MIN, HUMAN_SPEED_MAX),
 		draw: function() {
 			fill(this.color);
@@ -191,7 +191,7 @@ function initializeSuperHuman() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'super human',
-		xSpeed: random(NEG_HUMAN_X, POS_HUMAN_X),
+		xSpeed: random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY),
 		ySpeed: random(HUMAN_SPEED_MIN * 5, HUMAN_SPEED_MAX * 2), // FASTER
 		draw: function() {
 			fill(this.color);
