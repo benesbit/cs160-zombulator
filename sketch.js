@@ -31,6 +31,11 @@ var numberOfSuperHumans = 0;
 
 var population = [];
 
+// function preload() {
+//  	soundFormats('mp3', 'ogg');
+//  	mySound = loadSound('assets/doorbell.mp3');
+// }
+
 function setup() {
   	createCanvas(windowWidth, windowHeight);
   	backgroundColor = color('darkgray');
@@ -261,7 +266,7 @@ function zombieText() {
 	// strokeColor('black');
 	text('Zombies: ' + numberOfZombies, windowWidth / 2, windowHeight / 4);
 	text('Percentage of Hulk Zombies: ' + Math.round((numberOfSuperZombies/numberOfZombies) * 100) + '%', (windowWidth / 2) - 80, (windowHeight / 4) + 20);
-} // Displays the amount of zombies on the screen
+}
 
 function humanText() {
 	fill(random(0, 30), random(0, 200), random(250, 255));
@@ -269,7 +274,7 @@ function humanText() {
 	stroke(5);
 	text('Humans: ' + numberOfHumans, windowWidth / 2, windowHeight / 1.5);
 	text('Percentage of Super Humans: ' + Math.round((numberOfSuperHumans/numberOfHumans) * 100) + '%', (windowWidth / 2) - 80, (windowHeight / 1.5) + 20);
-} // Displays the amount of humans on the screen
+}
 
 function handleCollision() {
 	for (var i = 0; i < MAX_POPULATION; ++i) {
