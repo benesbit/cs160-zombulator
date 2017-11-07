@@ -5,7 +5,7 @@ var backgroundColor;
 
 const MIN_SIZE = 10; 
 const MAX_SIZE = 25;
-const MAX_POPULATION = 50;
+const MAX_POPULATION = 100;
 const LOWER_ZOMBIE_POP_BOUND = .35;
 const UPPER_ZOMBIE_POP_BOUND = .6;
 // Using these to create a percentage change based off max population. These are passed to
@@ -33,7 +33,7 @@ var population = [];
 
 // function preload() {
 //  	soundFormats('mp3', 'ogg');
-//  	mySound = loadSound('assets/doorbell.mp3');
+//  	var mySound = new Audio('Bite.mp3');
 // }
 
 function setup() {
@@ -109,7 +109,7 @@ function initializeZombie() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		},
 		isTouching: function(target) {
-			if (this.position.dist(target.position) <= this.size/2 + this.size/2) {
+			if (this.position.dist(target.position) <= this.size/2 + target.size/2) {
 				return true;
 			}
 		}
@@ -149,7 +149,7 @@ function initializeSuperZombie() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		},
 		isTouching: function(target) {
-			if (this.position.dist(target.position) <= this.size/2 + this.size/2) {
+			if (this.position.dist(target.position) <= this.size/2 + target.size/2) {
 				return true;
 			}
 		}
@@ -189,7 +189,7 @@ function initializeHuman() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		},
 		isTouching: function(target) {
-			if (this.position.dist(target.position) <= this.size/2 + this.size/2) {
+			if (this.position.dist(target.position) <= this.size/2 + target.size/2) {
 				return true;
 			}
 		}
@@ -229,7 +229,7 @@ function initializeSuperHuman() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		},
 		isTouching: function(target) {
-			if (this.position.dist(target.position) <= this.size/2 + this.size/2) {
+			if (this.position.dist(target.position) <= this.size/2 + target.size/2) {
 				return true;
 			}
 		}
