@@ -36,6 +36,12 @@ var population = [];
 //  	var mySound = new Audio('Bite.mp3');
 // }
 
+var soundID;
+
+function loadSound () {
+  createjs.Sound.registerSound("assets/thunder.mp3", soundID);
+}
+
 function setup() {
   	createCanvas(windowWidth, windowHeight);
   	backgroundColor = color('darkgray');
