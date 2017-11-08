@@ -18,11 +18,13 @@ const MIN_HUMAN_HORIZONTAL_VELOCITY = -2;
 const MAX_HUMAN_HORIZONTAL_VELOCITY = 2;
 const HUMAN_SPEED_MAX = 2.2;
 const HUMAN_SPEED_MIN = 0.75;
+const HUMAN_ACCEL_BOUND = 1.5;
 
-const MIN_ZOMBIE_HORIZONTAL_VELOCITY = -2.25;
-const MAX_ZOMBIE_HORIZONTAL_VELOCITY = 2.25;
-const ZOMBIE_SPEED_MAX = 1.1;
-const ZOMBIE_SPEED_MIN = 0.5;
+const MIN_ZOMBIE_HORIZONTAL_VELOCITY = -1.75;
+const MAX_ZOMBIE_HORIZONTAL_VELOCITY = 1.75;
+const ZOMBIE_SPEED_MAX = 0.1;
+const ZOMBIE_SPEED_MIN = 0.05
+const ZOMBIE_ACCEL_BOUND = 1.4;
 
 var numberOfZombies = 0;
 var numberOfSuperZombies = 0;
@@ -30,11 +32,6 @@ var numberOfHumans = 0;
 var numberOfSuperHumans = 0;
 
 var population = [];
-
-// function preload() {
-//  	soundFormats('mp3', 'ogg');
-//  	var mySound = new Audio('Bite.mp3');
-// }
 
 var soundID;
 
@@ -96,9 +93,9 @@ function initializeZombie() {
 		},
 		move: function() {
      		this.position.add(this.velocity);
-     		var acceleration = createVector(random(-2, 2), random(0, 1));
+     		var acceleration = createVector(random(MIN_ZOMBIE_HORIZONTAL_VELOCITY, MAX_ZOMBIE_HORIZONTAL_VELOCITY), random(0, 1));
      		this.velocity.add(acceleration);
-     		this.velocity.limit(2);
+     		this.velocity.limit(ZOMBIE_ACCEL_BOUND);
 		},
 		trap: function() {
 			if ((this.position.x - this.size / 2) <= 0) {
@@ -137,7 +134,7 @@ function initializeSuperZombie() {
 			this.position.add(this.velocity);
      		var acceleration = createVector(random(-3, 3), random(0, 2));
      		this.velocity.add(acceleration);
-     		this.velocity.limit(3);
+     		this.velocity.limit(ZOMBIE_ACCEL_BOUND * 1.8);
 		},
 		trap: function() {
 			if ((this.position.x - this.size / 2) <= 0) {
@@ -175,9 +172,9 @@ function initializeHuman() {
 		},
 		move: function() {
 			this.position.add(this.velocity);
-			var acceleration = createVector(random(-2, 2), random(-1, 0));
+			var acceleration = createVector(random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY), random(-1, 0));
 			this.velocity.add(acceleration);
-			this.velocity.limit(2);
+			this.velocity.limit(HUMAN_ACCEL_BOUND);
 		},
 		trap: function() {
 			if ((this.position.x - (this.size / 2)) <= 0) {
@@ -217,7 +214,7 @@ function initializeSuperHuman() {
 			this.position.add(this.velocity);
 			var acceleration = createVector(random(-3, 3), random(-3, 0));
 			this.velocity.add(acceleration);
-			this.velocity.limit(3);
+			this.velocity.limit(HUMAN_ACCEL_BOUND * 1.5);
 		},
 		trap: function() {
 			if ((this.position.x - (this.size / 2)) <= 0) {
@@ -293,8 +290,13 @@ function handleCollision() {
 
 			if (zombie.isTouching(human)) {
 				print("FIGHT");
+				// playSound();
 				// 	zombie.fight(human);
 			}
 		}
 	}
+}
+
+function playSound () {
+  createjs.Sound.play(soundID);
 }
