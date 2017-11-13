@@ -122,8 +122,8 @@ function initializeZombie() {
 		},
 		isTouching: function(target) {
 			if ((this.isZombie() && target.isHuman()) || (target.isZombie() && this.isHuman())) {
-				// if(target.isZombie()) return false;
 				if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
+				else return false;
 			}
 			else return false;
 		}
@@ -145,7 +145,7 @@ function initializeSuperZombie() {
 			this.position.add(this.velocity);
      		var acceleration = createVector(random(-3, 3), random(0, 2));
      		this.velocity.add(acceleration);
-     		this.velocity.limit(ZOMBIE_ACCEL_BOUND * 1.8);
+     		this.velocity.limit(ZOMBIE_ACCEL_BOUND * 1.5);
 		},
 		trap: function() {
 			if ((this.position.x - this.size / 2) <= 0) {
@@ -167,7 +167,6 @@ function initializeSuperZombie() {
 		},
 		isTouching: function(target) {
 			if ((this.isZombie() && target.isHuman()) || (target.isZombie() && this.isHuman())) {
-				// if(target.isZombie()) return false;
 				if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
 			}
 			else return false;
@@ -212,7 +211,6 @@ function initializeHuman() {
 		},
 		isTouching: function(target) {
 			if ((this.isZombie() && target.isHuman()) || (target.isZombie() && this.isHuman())) {
-				// if(target.isZombie()) return false;
 				if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
 			}
 			else return false;
@@ -233,9 +231,9 @@ function initializeSuperHuman() {
 		},
 		move: function() {
 			this.position.add(this.velocity);
-			var acceleration = createVector(random(-3, 3), random(-3, 0));
+			var acceleration = createVector(random(-3, 3), random(-2, 0));
 			this.velocity.add(acceleration);
-			this.velocity.limit(HUMAN_ACCEL_BOUND * 1.5);
+			this.velocity.limit(HUMAN_ACCEL_BOUND * 1.25);
 		},
 		trap: function() {
 			if ((this.position.x - (this.size / 2)) <= 0) {
@@ -257,7 +255,6 @@ function initializeSuperHuman() {
 		},
 		isTouching: function(target) {
 			if ((this.isZombie() && target.isHuman()) || (target.isZombie() && this.isHuman())) {
-				// if(target.isZombie()) return false;
 				if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
 			}
 			else return false;
