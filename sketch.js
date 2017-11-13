@@ -26,6 +26,7 @@ var numberOfZombies = 0;
 var numberOfSuperZombies = 0;
 var numberOfHumans = 0;
 var numberOfSuperHumans = 0;
+var currentPopulationCount = 0;
 
 var population = [];
 
@@ -72,16 +73,20 @@ function initializePopulation() {
   			population.push(initializeSuperZombie());
   			++numberOfZombies;
   			++numberOfSuperZombies;
+  			++currentPopulationCount;
   		} else if (humanoid_type <= 50) {
   			population.push(initializeZombie());
   			++numberOfZombies;
+  			++currentPopulationCount;
   		} else if (humanoid_type <= 95) {
   			population.push(initializeHuman());
   			++numberOfHumans;
+  			++currentPopulationCount;
   		} else {
   			population.push(initializeSuperHuman());
   			++numberOfHumans;
   			++numberOfSuperHumans;
+  			++currentPopulationCount;
   		}
   	}
 }
@@ -129,7 +134,17 @@ function initializeZombie() {
 			else return false;
 		},
 		fight: function(target) {
+			if (this.health_points > target.health_points) {
+				this.health_points -= target.health_points;
+				population.splice( , 1);
 
+			}
+			else if (this.health_points < target.health_points) {
+
+			}
+			else {
+
+			}
 		}
 	};
 }
@@ -140,7 +155,7 @@ function initializeSuperZombie() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanoid_type: 'super zombie',
-		health_points: random(150, 200),
+		health_points: random(150, 200), // HEALTHIER
 		velocity: createVector(random(MIN_ZOMBIE_HORIZONTAL_VELOCITY, MAX_ZOMBIE_HORIZONTAL_VELOCITY), random(ZOMBIE_SPEED_MIN * 5, ZOMBIE_SPEED_MAX * 2)),
 		draw: function() {
 			fill(this.color);
@@ -232,7 +247,7 @@ function initializeSuperHuman() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'super human',
-		health_points: random(150, 200),
+		health_points: random(150, 200), // HEALTHIER
 		velocity: createVector(random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY), random(HUMAN_SPEED_MIN * 5, HUMAN_SPEED_MAX * 2)),
 		draw: function() {
 			fill(this.color);
@@ -273,19 +288,19 @@ function initializeSuperHuman() {
 }
 
 function drawPopulation() {
- 	for (var i = 0; i < MAX_POPULATION; ++i) {		
+ 	for (var i = 0; i < currentPopulationCount; ++i) {		
  		population[i].draw();
   	}
 }
 
 function movePopulation() {
-	for (var i = 0; i < MAX_POPULATION; ++i) {	
+	for (var i = 0; i < currentPopulationCount; ++i) {	
  		population[i].move();
   	}
 }
 
 function trapPopulation() {
-	 for (var i = 0; i < MAX_POPULATION; ++i) { 		
+	 for (var i = 0; i < currentPopulationCount; ++i) { 		
  		population[i].trap();
   	}
 }
@@ -312,10 +327,10 @@ function humanText() {
 }
 
 function handleCollision() {
-	for (var i = 0; i < MAX_POPULATION; ++i) {
+	for (var i = 0; i < currentPopulationCount; ++i) {
 		var attacker = population[i];
 		if (attacker == undefined) continue;
-		for (var k = (i + 1); k < MAX_POPULATION; ++k) {
+		for (var k = (i + 1); k < currentPopulationCount; ++k) {
 			var defender = population[k];
 			if (defender == undefined) continue;
 			else if (attacker.isTouching(defender)) {
