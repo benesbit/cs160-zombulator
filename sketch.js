@@ -34,19 +34,29 @@ var numberOfSuperHumans = 0;
 var population = [];
 
 var soundID;
+var myImage;
 
 function loadSound () {
   createjs.Sound.registerSound("assets/thunder.mp3", soundID);
 }
 
+function preLoad() {
+	myImage = loadImage("assets/Image/Link.png");
+	// new p5.Image(25, 25);
+}
+
 function setup() {
+	preLoad();
+
   	createCanvas(windowWidth, windowHeight);
   	backgroundColor = color('darkgray');
-  	
+
   	initializePopulation();
 }
 
 function draw() {
+	image(myImage, 0, 0);
+
   	background(backgroundColor);
   	noStroke();
 
@@ -111,10 +121,15 @@ function initializeZombie() {
 		isZombie: function() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		},
+		isHuman: function() {
+			return this.humanoid_type == 'human' || this.humanoid_type == 'super human';
+		},
 		isTouching: function(target) {
-			if (this.position.dist(target.position) <= this.size/2 + target.size/2) {
-				return true;
+			if (this.isZombie()) {
+				if(target.isZombie()) return false;
+				else if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
 			}
+			else return false;
 		}
 	};
 }
@@ -150,6 +165,9 @@ function initializeSuperZombie() {
 		},
 		isZombie: function() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
+		},
+		isHuman: function() {
+			return this.humanoid_type == 'human' || this.humanoid_type == 'super human';
 		},
 		isTouching: function(target) {
 			if (this.position.dist(target.position) <= this.size/2 + target.size/2) {
@@ -191,6 +209,9 @@ function initializeHuman() {
 		isZombie: function() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
 		},
+		isHuman: function() {
+			return this.humanoid_type == 'human' || this.humanoid_type == 'super human';
+		},
 		isTouching: function(target) {
 			if (this.position.dist(target.position) <= this.size/2 + target.size/2) {
 				return true;
@@ -230,6 +251,9 @@ function initializeSuperHuman() {
 		},
 		isZombie: function() {
 			return this.humanoid_type == 'zombie' || this.humanoid_type == 'super zombie';
+		},
+		isHuman: function() {
+			return this.humanoid_type == 'human' || this.humanoid_type == 'super human';
 		},
 		isTouching: function(target) {
 			if (this.position.dist(target.position) <= this.size/2 + target.size/2) {
@@ -281,22 +305,22 @@ function humanText() {
 
 function handleCollision() {
 	for (var i = 0; i < MAX_POPULATION; ++i) {
-		var zombie = population[i];
-		if (zombie == undefined || !zombie.isZombie()) continue;
+		var attacker = population[i];
+		if (attacker == undefined) continue;
 
 		for (var k = (i + 1); k < MAX_POPULATION; ++k) {
-			var human = population[k];
-			if (human.isZombie()) continue;
+			var defender = population[k];
+			// if (defender.isZombie()) continue;
 
-			if (zombie.isTouching(human)) {
+			if (attacker.isTouching(defender)) {
 				print("FIGHT");
 				// playSound();
-				// 	zombie.fight(human);
+				// attacker.fight(defender);
 			}
 		}
 	}
 }
 
-function playSound () {
-  createjs.Sound.play(soundID);
+function playSound() {
+	createjs.Sound.play(soundID);
 }
