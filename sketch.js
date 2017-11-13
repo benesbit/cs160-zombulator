@@ -37,7 +37,7 @@ function loadSound () {
 }
 
 function preLoad() {
-	myImage = loadImage("assets/Image/Link.png");
+	myImage = loadImage("assets/Link.png");
 	// new p5.Image(25, 25);
 }
 
@@ -292,7 +292,6 @@ function zombieText() {
 	fill(random(200, 255), random(50, 100), random(50, 100));
 	textSize(20);
 	stroke(5);
-	// strokeColor('black');
 	text('Zombies: ' + numberOfZombies, windowWidth / 2, windowHeight / 4);
 	text('Percentage of Hulk Zombies: ' + Math.round((numberOfSuperZombies/numberOfZombies) * 100) + '%', (windowWidth / 2) - 80, (windowHeight / 4) + 20);
 }
