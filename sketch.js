@@ -70,18 +70,18 @@ function initializePopulation() {
   		var humanoid_type = random(0, 100);
   		if (humanoid_type <= 5) {
   			population.push(initializeSuperZombie());
-  			numberOfZombies++;
-  			numberOfSuperZombies++;
+  			++numberOfZombies;
+  			++numberOfSuperZombies;
   		} else if (humanoid_type <= 50) {
   			population.push(initializeZombie());
-  			numberOfZombies++;
+  			++numberOfZombies;
   		} else if (humanoid_type <= 95) {
   			population.push(initializeHuman());
-  			numberOfHumans++;
+  			++numberOfHumans;
   		} else {
   			population.push(initializeSuperHuman());
-  			numberOfHumans++;
-  			numberOfSuperHumans++;
+  			++numberOfHumans;
+  			++numberOfSuperHumans;
   		}
   	}
 }
