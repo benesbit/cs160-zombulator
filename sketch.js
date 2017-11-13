@@ -135,7 +135,7 @@ function initializeZombie() {
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
-				population.splice(indexOf(target), 1);
+				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 			}
 		}
@@ -187,7 +187,7 @@ function initializeSuperZombie() {
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
-				population.splice(indexOf(target), 1);
+				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 			}
 		}
@@ -239,7 +239,7 @@ function initializeHuman() {
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
-				population.splice(indexOf(target), 1);
+				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 			}
 		}
@@ -291,7 +291,7 @@ function initializeSuperHuman() {
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
-				population.splice(indexOf(target), 1);
+				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 			}
 		}
@@ -319,6 +319,7 @@ function trapPopulation() {
 function drawText() {
 	zombieText();
 	humanText();
+	totalPopulationText();
 }
 
 function zombieText() {
@@ -335,6 +336,14 @@ function humanText() {
 	stroke(5);
 	text('Humans: ' + numberOfHumans, windowWidth / 2, windowHeight / 1.5);
 	text('Percentage of Super Humans: ' + Math.round((numberOfSuperHumans/numberOfHumans) * 100) + '%', (windowWidth / 2) - 80, (windowHeight / 1.5) + 20);
+}
+
+function totalPopulationText() {
+	fill(000000);
+	textSize(20);
+	stroke(5);
+	text('Total population count: ' + currentPopulationCount, (windowWidth / 2) - 80, windowHeight / 2);
+	// text('Total Percentage of Supers: ' + Math.round((numberOfSuperHumans/numberOfHumans) * 100) + '%', (windowWidth / 2) - 80, (windowHeight / 1.5) + 20);
 }
 
 function handleCollision() {
