@@ -358,6 +358,19 @@ function initializeSuperHuman() {
 				}
 				return;
 			}
+			else {
+				var combatFinisher = random(0, 100);
+				if (combatFinisher <= 10) {
+					// Remove both objects
+				}
+				if (combatFinisher <= 60) {
+					// Remove 'this' object
+				}
+				if (combatFinisher <= 100) {
+					// Remove 'target' object
+				}
+				return;
+			}
 		}
 	};
 }
