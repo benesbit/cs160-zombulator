@@ -135,15 +135,8 @@ function initializeZombie() {
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
-				this.health_points -= target.health_points;
-				population.splice( , 1);
-
-			}
-			else if (this.health_points < target.health_points) {
-
-			}
-			else {
-
+				population.splice(indexOf(target), 1);
+				--currentPopulationCount;
 			}
 		}
 	};
@@ -191,6 +184,12 @@ function initializeSuperZombie() {
 				else return false;
 			}
 			else return false;
+		},
+		fight: function(target) {
+			if (this.health_points > target.health_points) {
+				population.splice(indexOf(target), 1);
+				--currentPopulationCount;
+			}
 		}
 	};
 }
@@ -237,6 +236,12 @@ function initializeHuman() {
 				else return false;
 			}
 			else return false;
+		},
+		fight: function(target) {
+			if (this.health_points > target.health_points) {
+				population.splice(indexOf(target), 1);
+				--currentPopulationCount;
+			}
 		}
 	};
 }
@@ -283,6 +288,12 @@ function initializeSuperHuman() {
 				else return false;
 			}
 			else return false;
+		},
+		fight: function(target) {
+			if (this.health_points > target.health_points) {
+				population.splice(indexOf(target), 1);
+				--currentPopulationCount;
+			}
 		}
 	};
 }
@@ -336,7 +347,7 @@ function handleCollision() {
 			else if (attacker.isTouching(defender)) {
 				print("FIGHT");
 				// playSound();
-				// attacker.fight(defender);
+				attacker.fight(defender);
 			}
 		}
 	}
