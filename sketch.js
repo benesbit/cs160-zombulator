@@ -135,13 +135,23 @@ function initializeZombie() {
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
+				this.health_points -= target.health_points;
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
+				if (this.health_points <= 0) {
+					population.splice(population.indexOf(this), 1);
+					--currentPopulationCount;
+				}
 				return;
 			}
 			else if (target.health_points > this.health_points) {
+				target.health_points -= this.health_points;
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
+				if (target.health_points <= 0) {
+					population.splice(indexOf(target), 1);
+					--currentPopulationCount;
+				}
 				return;
 			}
 		}
@@ -193,13 +203,23 @@ function initializeSuperZombie() {
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
+				this.health_points -= target.health_points;
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
+				if (this.health_points <= 0) {
+					population.splice(population.indexOf(this), 1);
+					--currentPopulationCount;
+				}
 				return;
 			}
 			else if (target.health_points > this.health_points) {
+				target.health_points -= this.health_points;
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
+				if (target.health_points <= 0) {
+					population.splice(indexOf(target), 1);
+					--currentPopulationCount;
+				}
 				return;
 			}
 		}
@@ -251,13 +271,23 @@ function initializeHuman() {
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
+				this.health_points -= target.health_points;
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
+				if (this.health_points <= 0) {
+					population.splice(population.indexOf(this), 1);
+					--currentPopulationCount;
+				}
 				return;
 			}
 			else if (target.health_points > this.health_points) {
+				target.health_points -= this.health_points;
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
+				if (target.health_points <= 0) {
+					population.splice(indexOf(target), 1);
+					--currentPopulationCount;
+				}
 				return;
 			}
 		}
@@ -309,13 +339,23 @@ function initializeSuperHuman() {
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
+				this.health_points -= target.health_points;
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
+				if (this.health_points <= 0) {
+					population.splice(population.indexOf(this), 1);
+					--currentPopulationCount;
+				}
 				return;
 			}
 			else if (target.health_points > this.health_points) {
+				target.health_points -= this.health_points;
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
+				if (target.health_points <= 0) {
+					population.splice(indexOf(target), 1);
+					--currentPopulationCount;
+				}
 				return;
 			}
 		}
