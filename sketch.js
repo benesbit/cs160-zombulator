@@ -154,6 +154,19 @@ function initializeZombie() {
 				}
 				return;
 			}
+			else {
+				var combatFinisher = random(0, 100);
+				if (combatFinisher <= 10) {
+					// Remove both objects
+				}
+				if (combatFinisher <= 60) {
+					// Remove 'this' object
+				}
+				if (combatFinisher <= 100) {
+					// Remove 'target' object
+				}
+				return;
+			}
 		}
 	};
 }
@@ -222,6 +235,19 @@ function initializeSuperZombie() {
 				}
 				return;
 			}
+			else {
+				var combatFinisher = random(0, 100);
+				if (combatFinisher <= 10) {
+					// Remove both objects
+				}
+				if (combatFinisher <= 60) {
+					// Remove 'this' object
+				}
+				if (combatFinisher <= 100) {
+					// Remove 'target' object
+				}
+				return;
+			}
 		}
 	};
 }
@@ -287,6 +313,19 @@ function initializeHuman() {
 				if (target.health_points <= 0) {
 					population.splice(indexOf(target), 1);
 					--currentPopulationCount;
+				}
+				return;
+			}
+			else {
+				var combatFinisher = random(0, 100);
+				if (combatFinisher <= 10) {
+					// Remove both objects
+				}
+				if (combatFinisher <= 60) {
+					// Remove 'this' object
+				}
+				if (combatFinisher <= 100) {
+					// Remove 'target' object
 				}
 				return;
 			}
