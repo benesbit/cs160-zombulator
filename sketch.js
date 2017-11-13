@@ -6,8 +6,8 @@ var backgroundColor;
 const MIN_SIZE = 10; 
 const MAX_SIZE = 25;
 const MAX_POPULATION = 100;
-const LOWER_ZOMBIE_POP_BOUND = .35;
-const UPPER_ZOMBIE_POP_BOUND = .6;
+// const LOWER_ZOMBIE_POP_BOUND = .35;
+// const UPPER_ZOMBIE_POP_BOUND = .6;
 // Using these to create a percentage change based off max population. These are passed to
 // the random function so we get between a 35% and 60% ratio, randomly.
 
