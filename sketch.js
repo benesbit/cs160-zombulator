@@ -92,6 +92,7 @@ function initializeZombie() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanoid_type: 'zombie',
+		health_points: random(100, 150),
 		velocity: createVector(random(MIN_ZOMBIE_HORIZONTAL_VELOCITY, MAX_ZOMBIE_HORIZONTAL_VELOCITY), random(ZOMBIE_SPEED_MIN, ZOMBIE_SPEED_MAX)),
 		draw: function() {
 			fill(this.color);
@@ -126,6 +127,9 @@ function initializeZombie() {
 				else return false;
 			}
 			else return false;
+		},
+		fight: function(target) {
+
 		}
 	};
 }
@@ -136,6 +140,7 @@ function initializeSuperZombie() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanoid_type: 'super zombie',
+		health_points: random(150, 200),
 		velocity: createVector(random(MIN_ZOMBIE_HORIZONTAL_VELOCITY, MAX_ZOMBIE_HORIZONTAL_VELOCITY), random(ZOMBIE_SPEED_MIN * 5, ZOMBIE_SPEED_MAX * 2)),
 		draw: function() {
 			fill(this.color);
@@ -181,6 +186,7 @@ function initializeHuman() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'human',
+		health_points: random(100, 150),
 		velocity: createVector(random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY), random(HUMAN_SPEED_MIN, HUMAN_SPEED_MAX),),
 		draw: function() {
 			fill(this.color);
@@ -226,6 +232,7 @@ function initializeSuperHuman() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'super human',
+		health_points: random(150, 200),
 		velocity: createVector(random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY), random(HUMAN_SPEED_MIN * 5, HUMAN_SPEED_MAX * 2)),
 		draw: function() {
 			fill(this.color);
