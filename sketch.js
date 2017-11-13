@@ -168,6 +168,7 @@ function initializeSuperZombie() {
 		isTouching: function(target) {
 			if ((this.isZombie() && target.isHuman()) || (target.isZombie() && this.isHuman())) {
 				if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
+				else return false;
 			}
 			else return false;
 		}
@@ -212,6 +213,7 @@ function initializeHuman() {
 		isTouching: function(target) {
 			if ((this.isZombie() && target.isHuman()) || (target.isZombie() && this.isHuman())) {
 				if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
+				else return false;
 			}
 			else return false;
 		}
@@ -256,6 +258,7 @@ function initializeSuperHuman() {
 		isTouching: function(target) {
 			if ((this.isZombie() && target.isHuman()) || (target.isZombie() && this.isHuman())) {
 				if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
+				else return false;
 			}
 			else return false;
 		}
@@ -306,12 +309,10 @@ function handleCollision() {
 	for (var i = 0; i < MAX_POPULATION; ++i) {
 		var attacker = population[i];
 		if (attacker == undefined) continue;
-
 		for (var k = (i + 1); k < MAX_POPULATION; ++k) {
 			var defender = population[k];
-			// if (defender.isZombie()) continue;
-
-			if (attacker.isTouching(defender)) {
+			if (defender == undefined) continue;
+			else if (attacker.isTouching(defender)) {
 				print("FIGHT");
 				// playSound();
 				// attacker.fight(defender);
