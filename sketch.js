@@ -125,9 +125,9 @@ function initializeZombie() {
 			return this.humanoid_type == 'human' || this.humanoid_type == 'super human';
 		},
 		isTouching: function(target) {
-			if (this.isZombie()) {
-				if(target.isZombie()) return false;
-				else if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
+			if ((this.isZombie() && target.isHuman()) || (target.isZombie() && this.isHuman())) {
+				// if(target.isZombie()) return false;
+				if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
 			}
 			else return false;
 		}
@@ -170,9 +170,11 @@ function initializeSuperZombie() {
 			return this.humanoid_type == 'human' || this.humanoid_type == 'super human';
 		},
 		isTouching: function(target) {
-			if (this.position.dist(target.position) <= this.size/2 + target.size/2) {
-				return true;
+			if ((this.isZombie() && target.isHuman()) || (target.isZombie() && this.isHuman())) {
+				// if(target.isZombie()) return false;
+				if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
 			}
+			else return false;
 		}
 	};
 }
@@ -213,9 +215,11 @@ function initializeHuman() {
 			return this.humanoid_type == 'human' || this.humanoid_type == 'super human';
 		},
 		isTouching: function(target) {
-			if (this.position.dist(target.position) <= this.size/2 + target.size/2) {
-				return true;
+			if ((this.isZombie() && target.isHuman()) || (target.isZombie() && this.isHuman())) {
+				// if(target.isZombie()) return false;
+				if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
 			}
+			else return false;
 		}
 	};
 }
@@ -256,9 +260,11 @@ function initializeSuperHuman() {
 			return this.humanoid_type == 'human' || this.humanoid_type == 'super human';
 		},
 		isTouching: function(target) {
-			if (this.position.dist(target.position) <= this.size/2 + target.size/2) {
-				return true;
+			if ((this.isZombie() && target.isHuman()) || (target.isZombie() && this.isHuman())) {
+				// if(target.isZombie()) return false;
+				if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
 			}
+			else return false;
 		}
 	};
 }
