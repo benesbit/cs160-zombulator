@@ -137,6 +137,12 @@ function initializeZombie() {
 			if (this.health_points > target.health_points) {
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
+				return;
+			}
+			else if (target.health_points > this.health_points) {
+				population.splice(population.indexOf(this), 1);
+				--currentPopulationCount;
+				return;
 			}
 		}
 	};
@@ -189,6 +195,12 @@ function initializeSuperZombie() {
 			if (this.health_points > target.health_points) {
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
+				return;
+			}
+			else if (target.health_points > this.health_points) {
+				population.splice(population.indexOf(this), 1);
+				--currentPopulationCount;
+				return;
 			}
 		}
 	};
@@ -241,6 +253,12 @@ function initializeHuman() {
 			if (this.health_points > target.health_points) {
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
+				return;
+			}
+			else if (target.health_points > this.health_points) {
+				population.splice(population.indexOf(this), 1);
+				--currentPopulationCount;
+				return;
 			}
 		}
 	};
@@ -293,6 +311,12 @@ function initializeSuperHuman() {
 			if (this.health_points > target.health_points) {
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
+				return;
+			}
+			else if (target.health_points > this.health_points) {
+				population.splice(population.indexOf(this), 1);
+				--currentPopulationCount;
+				return;
 			}
 		}
 	};
