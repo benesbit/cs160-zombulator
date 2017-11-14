@@ -164,6 +164,9 @@ function initializeZombie() {
 					--currentPopulationCount;
 				}
 				return;
+				// If defender/target has more health than attacker/this, defender/target wins.
+				// Attacker/this' remaining health is taken from defender/target.
+				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
 				var combatFinisher = random(0, 100);
@@ -271,6 +274,9 @@ function initializeSuperZombie() {
 					--currentPopulationCount;
 				}
 				return;
+				// If defender/target has more health than attacker/this, defender/target wins.
+				// Attacker/this' remaining health is taken from defender/target.
+				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
 				var combatFinisher = random(0, 100);
@@ -378,6 +384,9 @@ function initializeHuman() {
 					--currentPopulationCount;
 				}
 				return;
+				// If defender/target has more health than attacker/this, defender/target wins.
+				// Attacker/this' remaining health is taken from defender/target.
+				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
 				var combatFinisher = random(0, 100);
@@ -485,6 +494,9 @@ function initializeSuperHuman() {
 					--currentPopulationCount;
 				}
 				return;
+				// If defender/target has more health than attacker/this, defender/target wins.
+				// Attacker/this' remaining health is taken from defender/target.
+				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
 				var combatFinisher = random(0, 100);
