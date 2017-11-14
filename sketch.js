@@ -3,7 +3,7 @@
 
 const MIN_SIZE = 10; 
 const MAX_SIZE = 25;
-const MAX_POPULATION = 100;
+const MAX_POPULATION = 250;
 
 const HUMAN_SPAWN_BOUND = 150;
 const ZOMBIE_SPAWN_BOUND = 150;
@@ -169,8 +169,8 @@ function initializeZombie() {
 				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
-				var combatFinisher = random(0, 100);
-				if (combatFinisher <= 10) {
+				var showdowDeterimination = random(0, 100);
+				if (showdowDeterimination <= 10) {
 					population.splice(population.indexOf(target), 1);
 					population.splice(population.indexOf(this), 1);
 					currentPopulationCount -= 2;
@@ -178,7 +178,7 @@ function initializeZombie() {
 					--numberOfZombies;
 					// Remove both objects
 				}
-				if (combatFinisher <= 60) {
+				if (showdowDeterimination <= 60) {
 					if (this.isHuman()) --numberOfHumans;
 					else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
@@ -186,7 +186,7 @@ function initializeZombie() {
 					target.health_points = 1;
 					// Remove 'this' object
 				}
-				if (combatFinisher <= 100) {
+				if (showdowDeterimination <= 100) {
 					if (target.isHuman()) --numberOfHumans;
 					else if (target.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(target), 1);
@@ -279,8 +279,8 @@ function initializeSuperZombie() {
 				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
-				var combatFinisher = random(0, 100);
-				if (combatFinisher <= 10) {
+				var showdowDeterimination = random(0, 100);
+				if (showdowDeterimination <= 10) {
 					population.splice(population.indexOf(target), 1);
 					population.splice(population.indexOf(this), 1);
 					currentPopulationCount -= 2;
@@ -288,7 +288,7 @@ function initializeSuperZombie() {
 					--numberOfZombies;
 					// Remove both objects
 				}
-				if (combatFinisher <= 60) {
+				if (showdowDeterimination <= 60) {
 					if (this.isHuman()) --numberOfHumans;
 					else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
@@ -296,7 +296,7 @@ function initializeSuperZombie() {
 					target.health_points = 1;
 					// Remove 'this' object
 				}
-				if (combatFinisher <= 100) {
+				if (showdowDeterimination <= 100) {
 					if (target.isHuman()) --numberOfHumans;
 					else if (target.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(target), 1);
@@ -389,8 +389,8 @@ function initializeHuman() {
 				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
-				var combatFinisher = random(0, 100);
-				if (combatFinisher <= 10) {
+				var showdowDeterimination = random(0, 100);
+				if (showdowDeterimination <= 10) {
 					population.splice(population.indexOf(target), 1);
 					population.splice(population.indexOf(this), 1);
 					currentPopulationCount -= 2;
@@ -398,7 +398,7 @@ function initializeHuman() {
 					--numberOfZombies;
 					// Remove both objects
 				}
-				if (combatFinisher <= 60) {
+				if (showdowDeterimination <= 60) {
 					if (this.isHuman()) --numberOfHumans;
 					else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
@@ -406,7 +406,7 @@ function initializeHuman() {
 					target.health_points = 1;
 					// Remove 'this' object
 				}
-				if (combatFinisher <= 100) {
+				if (showdowDeterimination <= 100) {
 					if (target.isHuman()) --numberOfHumans;
 					else if (target.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(target), 1);
@@ -499,8 +499,8 @@ function initializeSuperHuman() {
 				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
-				var combatFinisher = random(0, 100);
-				if (combatFinisher <= 10) {
+				var showdowDeterimination = random(0, 100);
+				if (showdowDeterimination <= 10) {
 					population.splice(population.indexOf(target), 1);
 					population.splice(population.indexOf(this), 1);
 					currentPopulationCount -= 2;
@@ -508,7 +508,7 @@ function initializeSuperHuman() {
 					--numberOfZombies;
 					// Remove both objects
 				}
-				if (combatFinisher <= 60) {
+				if (showdowDeterimination <= 60) {
 					if (this.isHuman()) --numberOfHumans;
 					else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
@@ -516,7 +516,7 @@ function initializeSuperHuman() {
 					target.health_points = 1;
 					// Remove 'this' object
 				}
-				if (combatFinisher <= 100) {
+				if (showdowDeterimination <= 100) {
 					if (target.isHuman()) --numberOfHumans;
 					else if (target.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(target), 1);
