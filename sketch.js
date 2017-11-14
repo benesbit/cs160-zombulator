@@ -1,8 +1,6 @@
 // Zombulator by Benjamin Nesbit 
 // CS 160 Exercise 20 - Collisions
 
-var backgroundColor;
-
 const MIN_SIZE = 10; 
 const MAX_SIZE = 25;
 const MAX_POPULATION = 100;
@@ -21,6 +19,8 @@ const MAX_ZOMBIE_HORIZONTAL_VELOCITY = 1.75;
 const ZOMBIE_SPEED_MAX = 0.1;
 const ZOMBIE_SPEED_MIN = 0.05
 const ZOMBIE_ACCEL_BOUND = 1.4;
+
+var backgroundColor;
 
 var numberOfZombies = 0;
 var numberOfSuperZombies = 0;
@@ -136,19 +136,30 @@ function initializeZombie() {
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.health_points;
+				if (target.isHuman()) --numberOfHumans;
+				else if (target.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 				if (this.health_points <= 0) {
+					if (this.isHuman()) --numberOfHumans;
+					else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 				}
 				return;
+				// If attacker/this has more health than defender/target, attacker/this wins.
+				// Defender/target's remaining health is taken from attacker/this.
+				// If attacker/this runs out of health, it is defeated as well.
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.health_points;
+				if (this.isHuman()) --numberOfHumans;
+				else if (this.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
 				if (target.health_points <= 0) {
+					if (target.isHuman()) --numberOfHumans;
+					else if (target.isZombie()) --numberOfZombies;
 					population.splice(indexOf(target), 1);
 					--currentPopulationCount;
 				}
@@ -157,12 +168,27 @@ function initializeZombie() {
 			else {
 				var combatFinisher = random(0, 100);
 				if (combatFinisher <= 10) {
+					population.splice(population.indexOf(target), 1);
+					population.splice(population.indexOf(this), 1);
+					currentPopulationCount -= 2;
+					--numberOfHumans;
+					--numberOfZombies;
 					// Remove both objects
 				}
 				if (combatFinisher <= 60) {
+					if (this.isHuman()) --numberOfHumans;
+					else if (this.isZombie()) --numberOfZombies;
+					population.splice(population.indexOf(this), 1);
+					--currentPopulationCount;
+					target.health_points = 1;
 					// Remove 'this' object
 				}
 				if (combatFinisher <= 100) {
+					if (target.isHuman()) --numberOfHumans;
+					else if (target.isZombie()) --numberOfZombies;
+					population.splice(population.indexOf(target), 1);
+					--currentPopulationCount;
+					this.health_points = 1;
 					// Remove 'target' object
 				}
 				return;
@@ -217,19 +243,30 @@ function initializeSuperZombie() {
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.health_points;
+				if (target.isHuman()) --numberOfHumans;
+				else if (target.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 				if (this.health_points <= 0) {
+					if (this.isHuman()) --numberOfHumans;
+					else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 				}
 				return;
+				// If attacker/this has more health than defender/target, attacker/this wins.
+				// Defender/target's remaining health is taken from attacker/this.
+				// If attacker/this runs out of health, it is defeated as well.
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.health_points;
+				if (this.isHuman()) --numberOfHumans;
+				else if (this.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
 				if (target.health_points <= 0) {
+					if (target.isHuman()) --numberOfHumans;
+					else if (target.isZombie()) --numberOfZombies;
 					population.splice(indexOf(target), 1);
 					--currentPopulationCount;
 				}
@@ -238,12 +275,27 @@ function initializeSuperZombie() {
 			else {
 				var combatFinisher = random(0, 100);
 				if (combatFinisher <= 10) {
+					population.splice(population.indexOf(target), 1);
+					population.splice(population.indexOf(this), 1);
+					currentPopulationCount -= 2;
+					--numberOfHumans;
+					--numberOfZombies;
 					// Remove both objects
 				}
 				if (combatFinisher <= 60) {
+					if (this.isHuman()) --numberOfHumans;
+					else if (this.isZombie()) --numberOfZombies;
+					population.splice(population.indexOf(this), 1);
+					--currentPopulationCount;
+					target.health_points = 1;
 					// Remove 'this' object
 				}
 				if (combatFinisher <= 100) {
+					if (target.isHuman()) --numberOfHumans;
+					else if (target.isZombie()) --numberOfZombies;
+					population.splice(population.indexOf(target), 1);
+					--currentPopulationCount;
+					this.health_points = 1;
 					// Remove 'target' object
 				}
 				return;
@@ -298,19 +350,30 @@ function initializeHuman() {
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.health_points;
+				if (target.isHuman()) --numberOfHumans;
+				else if (target.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 				if (this.health_points <= 0) {
+					if (this.isHuman()) --numberOfHumans;
+					else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 				}
 				return;
+				// If attacker/this has more health than defender/target, attacker/this wins.
+				// Defender/target's remaining health is taken from attacker/this.
+				// If attacker/this runs out of health, it is defeated as well.
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.health_points;
+				if (this.isHuman()) --numberOfHumans;
+				else if (this.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
 				if (target.health_points <= 0) {
+					if (target.isHuman()) --numberOfHumans;
+					else if (target.isZombie()) --numberOfZombies;
 					population.splice(indexOf(target), 1);
 					--currentPopulationCount;
 				}
@@ -319,12 +382,27 @@ function initializeHuman() {
 			else {
 				var combatFinisher = random(0, 100);
 				if (combatFinisher <= 10) {
+					population.splice(population.indexOf(target), 1);
+					population.splice(population.indexOf(this), 1);
+					currentPopulationCount -= 2;
+					--numberOfHumans;
+					--numberOfZombies;
 					// Remove both objects
 				}
 				if (combatFinisher <= 60) {
+					if (this.isHuman()) --numberOfHumans;
+					else if (this.isZombie()) --numberOfZombies;
+					population.splice(population.indexOf(this), 1);
+					--currentPopulationCount;
+					target.health_points = 1;
 					// Remove 'this' object
 				}
 				if (combatFinisher <= 100) {
+					if (target.isHuman()) --numberOfHumans;
+					else if (target.isZombie()) --numberOfZombies;
+					population.splice(population.indexOf(target), 1);
+					--currentPopulationCount;
+					this.health_points = 1;
 					// Remove 'target' object
 				}
 				return;
@@ -379,19 +457,30 @@ function initializeSuperHuman() {
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.health_points;
+				if (target.isHuman()) --numberOfHumans;
+				else if (target.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 				if (this.health_points <= 0) {
+					if (this.isHuman()) --numberOfHumans;
+					else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 				}
 				return;
+				// If attacker/this has more health than defender/target, attacker/this wins.
+				// Defender/target's remaining health is taken from attacker/this.
+				// If attacker/this runs out of health, it is defeated as well.
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.health_points;
+				if (this.isHuman()) --numberOfHumans;
+				else if (this.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
 				if (target.health_points <= 0) {
+					if (target.isHuman()) --numberOfHumans;
+					else if (target.isZombie()) --numberOfZombies;
 					population.splice(indexOf(target), 1);
 					--currentPopulationCount;
 				}
@@ -400,12 +489,27 @@ function initializeSuperHuman() {
 			else {
 				var combatFinisher = random(0, 100);
 				if (combatFinisher <= 10) {
+					population.splice(population.indexOf(target), 1);
+					population.splice(population.indexOf(this), 1);
+					currentPopulationCount -= 2;
+					--numberOfHumans;
+					--numberOfZombies;
 					// Remove both objects
 				}
 				if (combatFinisher <= 60) {
+					if (this.isHuman()) --numberOfHumans;
+					else if (this.isZombie()) --numberOfZombies;
+					population.splice(population.indexOf(this), 1);
+					--currentPopulationCount;
+					target.health_points = 1;
 					// Remove 'this' object
 				}
 				if (combatFinisher <= 100) {
+					if (target.isHuman()) --numberOfHumans;
+					else if (target.isZombie()) --numberOfZombies;
+					population.splice(population.indexOf(target), 1);
+					--currentPopulationCount;
+					this.health_points = 1;
 					// Remove 'target' object
 				}
 				return;
