@@ -143,14 +143,10 @@ function initializeZombie() {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.health_points;
 				target.lowerCount();
-				// if (target.isHuman()) --numberOfHumans;
-				// else if (target.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 				if (this.health_points <= 0) {
 					this.lowerCount();
-					// if (this.isHuman()) --numberOfHumans;
-					// else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 				}
@@ -162,14 +158,10 @@ function initializeZombie() {
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.health_points;
 				this.lowerCount();
-				// if (this.isHuman()) --numberOfHumans;
-				// else if (this.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
 				if (target.health_points <= 0) {
 					target.lowerCount();
-					// if (target.isHuman()) --numberOfHumans;
-					// else if (target.isZombie()) --numberOfZombies;
 					population.splice(indexOf(target), 1);
 					--currentPopulationCount;
 				}
@@ -179,30 +171,24 @@ function initializeZombie() {
 				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
-				var showdowDeterimination = random(0, 100);
-				if (showdowDeterimination <= 10) {
+				var showdownDetermination = random(0, 100);
+				if (showdownDetermination <= 10) {
 					target.lowerCount();
 					this.lowerCount();
 					population.splice(population.indexOf(target), 1);
 					population.splice(population.indexOf(this), 1);
 					currentPopulationCount -= 2;
-					// --numberOfHumans;
-					// --numberOfZombies;
 					// Remove both objects
 				}
-				if (showdowDeterimination <= 60) {
+				else if (showdownDetermination <= 60) {
 					this.lowerCount();
-					// if (this.isHuman()) --numberOfHumans;
-					// else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 					target.health_points = 1;
 					// Remove 'this' object
 				}
-				if (showdowDeterimination <= 100) {
+				else if (showdownDetermination <= 100) {
 					target.lowerCount();
-					// if (target.isHuman()) --numberOfHumans;
-					// else if (target.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(target), 1);
 					--currentPopulationCount;
 					this.health_points = 1;
@@ -267,18 +253,10 @@ function initializeSuperZombie() {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.health_points;
 				target.lowerCount();
-				// if (target.isHuman()) --numberOfHumans;
-				// else if (target.isZombie()) --numberOfZombies;
-				// else if (target.humanoid_type == 'super human') --numberOfSuperHumans;
-				// else if (target.humanoid_type == 'super zombie') --numberOfSuperZombies;
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 				if (this.health_points <= 0) {
 					this.lowerCount();
-					// if (this.isHuman()) --numberOfHumans;
-					// else if (this.isZombie()) --numberOfZombies;
-					// else if (this.humanoid_type == 'super human') --numberOfSuperHumans;
-					// else if (this.humanoid_type == 'super zombie') --numberOfSuperZombies;
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 				}
@@ -290,14 +268,10 @@ function initializeSuperZombie() {
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.health_points;
 				this.lowerCount();
-				// if (this.isHuman()) --numberOfHumans;
-				// else if (this.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
 				if (target.health_points <= 0) {
 					target.lowerCount();
-					// if (target.isHuman()) --numberOfHumans;
-					// else if (target.isZombie()) --numberOfZombies;
 					population.splice(indexOf(target), 1);
 					--currentPopulationCount;
 				}
@@ -307,30 +281,24 @@ function initializeSuperZombie() {
 				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
-				var showdowDeterimination = random(0, 100);
-				if (showdowDeterimination <= 10) {
+				var showdownDetermination = random(0, 100);
+				if (showdownDetermination <= 10) {
 					target.lowerCount();
 					this.lowerCount();
 					population.splice(population.indexOf(target), 1);
 					population.splice(population.indexOf(this), 1);
 					currentPopulationCount -= 2;
-					// --numberOfHumans;
-					// --numberOfZombies;
 					// Remove both objects
 				}
-				if (showdowDeterimination <= 60) {
+				else if (showdownDetermination <= 60) {
 					this.lowerCount();
-					// if (this.isHuman()) --numberOfHumans;
-					// else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 					target.health_points = 1;
 					// Remove 'this' object
 				}
-				if (showdowDeterimination <= 100) {
+				else if (showdownDetermination <= 100) {
 					target.lowerCount();
-					// if (target.isHuman()) --numberOfHumans;
-					// else if (target.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(target), 1);
 					--currentPopulationCount;
 					this.health_points = 1;
@@ -395,14 +363,10 @@ function initializeHuman() {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.health_points;
 				target.lowerCount();
-				// if (target.isHuman()) --numberOfHumans;
-				// else if (target.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 				if (this.health_points <= 0) {
 					this.lowerCount();
-					// if (this.isHuman()) --numberOfHumans;
-					// else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 				}
@@ -414,14 +378,10 @@ function initializeHuman() {
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.health_points;
 				this.lowerCount();
-				// if (this.isHuman()) --numberOfHumans;
-				// else if (this.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
 				if (target.health_points <= 0) {
 					target.lowerCount();
-					// if (target.isHuman()) --numberOfHumans;
-					// else if (target.isZombie()) --numberOfZombies;
 					population.splice(indexOf(target), 1);
 					--currentPopulationCount;
 				}
@@ -431,30 +391,24 @@ function initializeHuman() {
 				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
-				var showdowDeterimination = random(0, 100);
-				if (showdowDeterimination <= 10) {
+				var showdownDetermination = random(0, 100);
+				if (showdownDetermination <= 10) {
 					target.lowerCount();
 					this.lowerCount();
 					population.splice(population.indexOf(target), 1);
 					population.splice(population.indexOf(this), 1);
 					currentPopulationCount -= 2;
-					// --numberOfHumans;
-					// --numberOfZombies;
 					// Remove both objects
 				}
-				if (showdowDeterimination <= 60) {
+				else if (showdownDetermination <= 60) {
 					this.lowerCount();
-					// if (this.isHuman()) --numberOfHumans;
-					// else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 					target.health_points = 1;
 					// Remove 'this' object
 				}
-				if (showdowDeterimination <= 100) {
+				else if (showdownDetermination <= 100) {
 					target.lowerCount();
-					// if (target.isHuman()) --numberOfHumans;
-					// else if (target.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(target), 1);
 					--currentPopulationCount;
 					this.health_points = 1;
@@ -519,14 +473,10 @@ function initializeSuperHuman() {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.health_points;
 				target.lowerCount();
-				// if (target.isHuman()) --numberOfHumans;
-				// else if (target.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 				if (this.health_points <= 0) {
 					this.lowerCount();
-					// if (this.isHuman()) --numberOfHumans;
-					// else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 				}
@@ -538,14 +488,10 @@ function initializeSuperHuman() {
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.health_points;
 				this.lowerCount();
-				// if (this.isHuman()) --numberOfHumans;
-				// else if (this.isZombie()) --numberOfZombies;
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
 				if (target.health_points <= 0) {
 					target.lowerCount();
-					// if (target.isHuman()) --numberOfHumans;
-					// else if (target.isZombie()) --numberOfZombies;
 					population.splice(indexOf(target), 1);
 					--currentPopulationCount;
 				}
@@ -555,30 +501,24 @@ function initializeSuperHuman() {
 				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
-				var showdowDeterimination = random(0, 100);
-				if (showdowDeterimination <= 10) {
+				var showdownDetermination = random(0, 100);
+				if (showdownDetermination <= 10) {
 					target.lowerCount();
 					this.lowerCount();
 					population.splice(population.indexOf(target), 1);
 					population.splice(population.indexOf(this), 1);
 					currentPopulationCount -= 2;
-					// --numberOfHumans;
-					// --numberOfZombies;
 					// Remove both objects
 				}
-				if (showdowDeterimination <= 60) {
+				else if (showdownDetermination <= 60) {
 					this.lowerCount();
-					// if (this.isHuman()) --numberOfHumans;
-					// else if (this.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 					target.health_points = 1;
 					// Remove 'this' object
 				}
-				if (showdowDeterimination <= 100) {
+				else if (showdownDetermination <= 100) {
 					target.lowerCount();
-					// if (target.isHuman()) --numberOfHumans;
-					// else if (target.isZombie()) --numberOfZombies;
 					population.splice(population.indexOf(target), 1);
 					--currentPopulationCount;
 					this.health_points = 1;
