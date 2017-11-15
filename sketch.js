@@ -19,6 +19,8 @@ const SUPER_HUMAN_MIN_HP = 175;
 const SUPER_HUMAN_MAX_HP = 275;
 const HUMAN_MIN_AP = 5;
 const HUMAN_MAX_AP = 15;
+const SUPER_HUMAN_MIN_AP = 10;
+const SUPER_HUMAN_MAX_AP = 30;
 
 const MIN_ZOMBIE_HORIZONTAL_VELOCITY = -1.75;
 const MAX_ZOMBIE_HORIZONTAL_VELOCITY = 1.75;
@@ -31,6 +33,8 @@ const SUPER_ZOMBIE_MIN_HP = 175;
 const SUPER_ZOMBIE_MAX_HP = 275;
 const ZOMBIE_MIN_AP = 5;
 const ZOMBIE_MAX_AP = 15;
+const SUPER_ZOMBIE_MIN_AP = 10;
+const SUPER_ZOMBIE_MAX_AP = 30;
 
 var backgroundColor;
 
@@ -220,7 +224,7 @@ function initializeSuperZombie() {
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanoid_type: 'super zombie',
 		health_points: random(SUPER_ZOMBIE_MIN_HP, SUPER_ZOMBIE_MAX_HP), // HEALTHIER
-		attack_points: random(ZOMBIE_MIN_AP * 1.5, ZOMBIE_MAX_AP * 2), // STRONGER
+		attack_points: random(SUPER_ZOMBIE_MIN_AP, SUPER_ZOMBIE_MAX_AP), // STRONGER
 		velocity: createVector(random(MIN_ZOMBIE_HORIZONTAL_VELOCITY, MAX_ZOMBIE_HORIZONTAL_VELOCITY), random(ZOMBIE_SPEED_MIN * 5, ZOMBIE_SPEED_MAX * 2)),
 		draw: function() {
 			fill(this.color);
@@ -442,7 +446,7 @@ function initializeSuperHuman() {
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'super human',
 		health_points: random(SUPER_HUMAN_MIN_HP, SUPER_HUMAN_MAX_HP), // HEALTHIER
-		attack_points: random(HUMAN_MIN_AP * 1.5, HUMAN_MAX_AP * 2), // STRONGER
+		attack_points: random(SUPER_HUMAN_MIN_AP, SUPER_HUMAN_MAX_AP), // STRONGER
 		velocity: createVector(random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY), random(HUMAN_SPEED_MIN * 5, HUMAN_SPEED_MAX * 2)),
 		draw: function() {
 			fill(this.color);
