@@ -438,6 +438,7 @@ function initializeSuperHuman() {
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'super human',
 		health_points: random(HUMAN_MIN_HP * 1.5, HUMAN_MAX_HP * 2), // HEALTHIER
+		attack_points: random(HUMAN_MIN_AP * 1.5, HUMAN_MAX_AP * 2), // STRONGER
 		velocity: createVector(random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY), random(HUMAN_SPEED_MIN * 5, HUMAN_SPEED_MAX * 2)),
 		draw: function() {
 			fill(this.color);
