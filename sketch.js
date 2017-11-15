@@ -133,7 +133,7 @@ function initializeZombie() {
 			}
 			else return false;
 		},
-		lowerCount: function() {
+		lowerCorrectCounter: function() {
 			if (this.isHuman()) --numberOfHumans;
 			else if (this.isZombie()) --numberOfZombies;
 			if (this.humanoid_type == 'super human') --numberOfSuperHumans;
@@ -142,11 +142,11 @@ function initializeZombie() {
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.health_points;
-				target.lowerCount();
+				target.lowerCorrectCounter();
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 				if (this.health_points <= 0) {
-					this.lowerCount();
+					this.lowerCorrectCounter();
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 				}
@@ -157,11 +157,11 @@ function initializeZombie() {
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.health_points;
-				this.lowerCount();
+				this.lowerCorrectCounter();
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
 				if (target.health_points <= 0) {
-					target.lowerCount();
+					target.lowerCorrectCounter();
 					population.splice(indexOf(target), 1);
 					--currentPopulationCount;
 				}
@@ -173,22 +173,22 @@ function initializeZombie() {
 			else {
 				var showdownDetermination = random(0, 100);
 				if (showdownDetermination <= 10) {
-					target.lowerCount();
-					this.lowerCount();
+					target.lowerCorrectCounter();
+					this.lowerCorrectCounter();
 					population.splice(population.indexOf(target), 1);
 					population.splice(population.indexOf(this), 1);
 					currentPopulationCount -= 2;
 					// Remove both objects
 				}
 				else if (showdownDetermination <= 60) {
-					this.lowerCount();
+					this.lowerCorrectCounter();
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 					target.health_points = 1;
 					// Remove 'this' object
 				}
 				else if (showdownDetermination <= 100) {
-					target.lowerCount();
+					target.lowerCorrectCounter();
 					population.splice(population.indexOf(target), 1);
 					--currentPopulationCount;
 					this.health_points = 1;
@@ -243,7 +243,7 @@ function initializeSuperZombie() {
 			}
 			else return false;
 		},
-		lowerCount: function() {
+		lowerCorrectCounter: function() {
 			if (this.isHuman()) --numberOfHumans;
 			else if (this.isZombie()) --numberOfZombies;
 			if (this.humanoid_type == 'super human') --numberOfSuperHumans;
@@ -252,11 +252,11 @@ function initializeSuperZombie() {
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.health_points;
-				target.lowerCount();
+				target.lowerCorrectCounter();
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 				if (this.health_points <= 0) {
-					this.lowerCount();
+					this.lowerCorrectCounter();
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 				}
@@ -267,11 +267,11 @@ function initializeSuperZombie() {
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.health_points;
-				this.lowerCount();
+				this.lowerCorrectCounter();
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
 				if (target.health_points <= 0) {
-					target.lowerCount();
+					target.lowerCorrectCounter();
 					population.splice(indexOf(target), 1);
 					--currentPopulationCount;
 				}
@@ -283,22 +283,22 @@ function initializeSuperZombie() {
 			else {
 				var showdownDetermination = random(0, 100);
 				if (showdownDetermination <= 10) {
-					target.lowerCount();
-					this.lowerCount();
+					target.lowerCorrectCounter();
+					this.lowerCorrectCounter();
 					population.splice(population.indexOf(target), 1);
 					population.splice(population.indexOf(this), 1);
 					currentPopulationCount -= 2;
 					// Remove both objects
 				}
 				else if (showdownDetermination <= 60) {
-					this.lowerCount();
+					this.lowerCorrectCounter();
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 					target.health_points = 1;
 					// Remove 'this' object
 				}
 				else if (showdownDetermination <= 100) {
-					target.lowerCount();
+					target.lowerCorrectCounter();
 					population.splice(population.indexOf(target), 1);
 					--currentPopulationCount;
 					this.health_points = 1;
@@ -353,7 +353,7 @@ function initializeHuman() {
 			}
 			else return false;
 		},
-		lowerCount: function() {
+		lowerCorrectCounter: function() {
 			if (this.isHuman()) --numberOfHumans;
 			else if (this.isZombie()) --numberOfZombies;
 			if (this.humanoid_type == 'super human') --numberOfSuperHumans;
@@ -362,11 +362,11 @@ function initializeHuman() {
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.health_points;
-				target.lowerCount();
+				target.lowerCorrectCounter();
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 				if (this.health_points <= 0) {
-					this.lowerCount();
+					this.lowerCorrectCounter();
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 				}
@@ -377,11 +377,11 @@ function initializeHuman() {
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.health_points;
-				this.lowerCount();
+				this.lowerCorrectCounter();
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
 				if (target.health_points <= 0) {
-					target.lowerCount();
+					target.lowerCorrectCounter();
 					population.splice(indexOf(target), 1);
 					--currentPopulationCount;
 				}
@@ -393,22 +393,22 @@ function initializeHuman() {
 			else {
 				var showdownDetermination = random(0, 100);
 				if (showdownDetermination <= 10) {
-					target.lowerCount();
-					this.lowerCount();
+					target.lowerCorrectCounter();
+					this.lowerCorrectCounter();
 					population.splice(population.indexOf(target), 1);
 					population.splice(population.indexOf(this), 1);
 					currentPopulationCount -= 2;
 					// Remove both objects
 				}
 				else if (showdownDetermination <= 60) {
-					this.lowerCount();
+					this.lowerCorrectCounter();
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 					target.health_points = 1;
 					// Remove 'this' object
 				}
 				else if (showdownDetermination <= 100) {
-					target.lowerCount();
+					target.lowerCorrectCounter();
 					population.splice(population.indexOf(target), 1);
 					--currentPopulationCount;
 					this.health_points = 1;
@@ -463,7 +463,7 @@ function initializeSuperHuman() {
 			}
 			else return false;
 		},
-		lowerCount: function() {
+		lowerCorrectCounter: function() {
 			if (this.isHuman()) --numberOfHumans;
 			else if (this.isZombie()) --numberOfZombies;
 			if (this.humanoid_type == 'super human') --numberOfSuperHumans;
@@ -472,11 +472,11 @@ function initializeSuperHuman() {
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.health_points;
-				target.lowerCount();
+				target.lowerCorrectCounter();
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
 				if (this.health_points <= 0) {
-					this.lowerCount();
+					this.lowerCorrectCounter();
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 				}
@@ -487,11 +487,11 @@ function initializeSuperHuman() {
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.health_points;
-				this.lowerCount();
+				this.lowerCorrectCounter();
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
 				if (target.health_points <= 0) {
-					target.lowerCount();
+					target.lowerCorrectCounter();
 					population.splice(indexOf(target), 1);
 					--currentPopulationCount;
 				}
@@ -503,22 +503,22 @@ function initializeSuperHuman() {
 			else {
 				var showdownDetermination = random(0, 100);
 				if (showdownDetermination <= 10) {
-					target.lowerCount();
-					this.lowerCount();
+					target.lowerCorrectCounter();
+					this.lowerCorrectCounter();
 					population.splice(population.indexOf(target), 1);
 					population.splice(population.indexOf(this), 1);
 					currentPopulationCount -= 2;
 					// Remove both objects
 				}
 				else if (showdownDetermination <= 60) {
-					this.lowerCount();
+					this.lowerCorrectCounter();
 					population.splice(population.indexOf(this), 1);
 					--currentPopulationCount;
 					target.health_points = 1;
 					// Remove 'this' object
 				}
 				else if (showdownDetermination <= 100) {
-					target.lowerCount();
+					target.lowerCorrectCounter();
 					population.splice(population.indexOf(target), 1);
 					--currentPopulationCount;
 					this.health_points = 1;
