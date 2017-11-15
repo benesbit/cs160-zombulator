@@ -10,15 +10,19 @@ const ZOMBIE_SPAWN_BOUND = 150;
 
 const MIN_HUMAN_HORIZONTAL_VELOCITY = -2;
 const MAX_HUMAN_HORIZONTAL_VELOCITY = 2;
-const HUMAN_SPEED_MAX = 2.2;
 const HUMAN_SPEED_MIN = 0.75;
+const HUMAN_SPEED_MAX = 2.2;
 const HUMAN_ACCEL_BOUND = 1.5;
+const HUMAN_MIN_HP = 100;
+const HUMAN_MAX_HP = 150;
 
 const MIN_ZOMBIE_HORIZONTAL_VELOCITY = -1.75;
 const MAX_ZOMBIE_HORIZONTAL_VELOCITY = 1.75;
-const ZOMBIE_SPEED_MAX = 0.1;
 const ZOMBIE_SPEED_MIN = 0.05
+const ZOMBIE_SPEED_MAX = 0.1;
 const ZOMBIE_ACCEL_BOUND = 1.4;
+const ZOMBIE_MIN_HP = 100;
+const ZOMBIE_MAX_HP = 150;
 
 var backgroundColor;
 
@@ -61,9 +65,9 @@ function draw() {
   	movePopulation();
   	trapPopulation();
 
-  	drawText();
-
   	handleCollision();
+
+  	drawText();
 }
 
 function initializePopulation() {
@@ -97,7 +101,7 @@ function initializeZombie() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanoid_type: 'zombie',
-		health_points: random(100, 150),
+		health_points: random(ZOMBIE_MIN_HP, ZOMBIE_MAX_HP),
 		velocity: createVector(random(MIN_ZOMBIE_HORIZONTAL_VELOCITY, MAX_ZOMBIE_HORIZONTAL_VELOCITY), random(ZOMBIE_SPEED_MIN, ZOMBIE_SPEED_MAX)),
 		draw: function() {
 			fill(this.color);
@@ -206,7 +210,7 @@ function initializeSuperZombie() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanoid_type: 'super zombie',
-		health_points: random(150, 200), // HEALTHIER
+		health_points: random(ZOMBIE_MIN_HP * 1.5, ZOMBIE_MAX_HP * 2), // HEALTHIER
 		velocity: createVector(random(MIN_ZOMBIE_HORIZONTAL_VELOCITY, MAX_ZOMBIE_HORIZONTAL_VELOCITY), random(ZOMBIE_SPEED_MIN * 5, ZOMBIE_SPEED_MAX * 2)),
 		draw: function() {
 			fill(this.color);
@@ -316,7 +320,7 @@ function initializeHuman() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'human',
-		health_points: random(100, 150),
+		health_points: random(HUMAN_MIN_HP, HUMAN_MAX_HP),
 		velocity: createVector(random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY), random(HUMAN_SPEED_MIN, HUMAN_SPEED_MAX),),
 		draw: function() {
 			fill(this.color);
@@ -426,7 +430,7 @@ function initializeSuperHuman() {
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'super human',
-		health_points: random(150, 200), // HEALTHIER
+		health_points: random(HUMAN_MIN_HP * 1.5, HUMAN_MAX_HP * 2), // HEALTHIER
 		velocity: createVector(random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY), random(HUMAN_SPEED_MIN * 5, HUMAN_SPEED_MAX * 2)),
 		draw: function() {
 			fill(this.color);
@@ -559,6 +563,7 @@ function zombieText() {
 	textSize(20);
 	stroke(5);
 	text('Zombies: ' + numberOfZombies, windowWidth / 2, windowHeight / 4);
+	if (numberOfSuperZombies < 0) numberOfSuperZombies = 0;
 	text('Percentage of Hulk Zombies: ' + Math.round((numberOfSuperZombies/numberOfZombies) * 100) + '%', (windowWidth / 2) - 80, (windowHeight / 4) + 20);
 }
 
@@ -567,6 +572,7 @@ function humanText() {
 	textSize(20);
 	stroke(5);
 	text('Humans: ' + numberOfHumans, windowWidth / 2, windowHeight / 1.5);
+	if (numberOfSuperHumans < 0) numberOfSuperHumans = 0;
 	text('Percentage of Super Humans: ' + Math.round((numberOfSuperHumans/numberOfHumans) * 100) + '%', (windowWidth / 2) - 80, (windowHeight / 1.5) + 20);
 }
 
