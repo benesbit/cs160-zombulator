@@ -543,19 +543,19 @@ function initializeSuperHuman() {
 }
 
 function drawPopulation() {
- 	for (var i = 0; i < currentPopulationCount; ++i) {		
+ 	for (var i = 0; i < population.length; ++i) {		
  		population[i].draw();
   	}
 }
 
 function movePopulation() {
-	for (var i = 0; i < currentPopulationCount; ++i) {	
+	for (var i = 0; i < population.length; ++i) {	
  		population[i].move();
   	}
 }
 
 function trapPopulation() {
-	 for (var i = 0; i < currentPopulationCount; ++i) { 		
+	 for (var i = 0; i < population.length; ++i) { 		
  		population[i].trap();
   	}
 }
@@ -593,10 +593,10 @@ function totalPopulationText() {
 }
 
 function handleCollision() {
-	for (var i = 0; i < currentPopulationCount; ++i) {
+	for (var i = 0; i < population.length; ++i) {
 		var attacker = population[i];
 		if (attacker == undefined) continue;
-		for (var k = (i + 1); k < currentPopulationCount; ++k) {
+		for (var k = (i + 1); k < population.length; ++k) {
 			var defender = population[k];
 			if (defender == undefined) continue;
 			else if (attacker.isTouching(defender)) {
