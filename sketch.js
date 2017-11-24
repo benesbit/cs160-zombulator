@@ -13,7 +13,10 @@ const MAX_HUMAN_HORIZONTAL_VELOCITY = 2;
 const HUMAN_SPEED_MIN = 0.75;
 const HUMAN_SPEED_MAX = 2.2;
 const HUMAN_ACCEL_BOUND = 1.5;
-const HUMAN_MIN_HP = 100;
+const HUMAN_MIN_HP = 100; //Change HP to a var that is based off size.
+
+//ALSO: NEED TO HAVE DEAD HUMANS TURN INTO ZOMBIES!!
+
 const HUMAN_MAX_HP = 150;
 const SUPER_HUMAN_MIN_HP = 175;
 const SUPER_HUMAN_MAX_HP = 275;
@@ -145,7 +148,7 @@ function initializeZombie() {
 		},
 		isTouching: function(target) {
 			if ((this.isZombie() && target.isHuman()) || (target.isZombie() && this.isHuman())) {
-				if (this.position.dist(target.position) <= this.size/2 + target.size/2) return true;
+				if (this.position.dist(target.position) <= (this.size/2) + (target.size/2)) return true;
 				else return false;
 			}
 			else return false;
