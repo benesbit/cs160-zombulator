@@ -1,5 +1,6 @@
 // Zombulator by Benjamin Nesbit 
-// CS 160 Exercise 20 - Collisions
+// CS 160 - Oregon State University - Bend, OR
+// This program is a simple model simulation of a zombie outbreak
 
 const MIN_SIZE = 10; 
 const MAX_SIZE = 25;
@@ -13,7 +14,7 @@ const MAX_HUMAN_HORIZONTAL_VELOCITY = 2;
 const HUMAN_SPEED_MIN = 0.75;
 const HUMAN_SPEED_MAX = 2.2;
 const HUMAN_ACCEL_BOUND = 1.5;
-const HUMAN_MIN_HP = 100; //Change HP to a var that is based off size.
+const HUMAN_MIN_HP = 100; //Change HP to a var that is based off size. Make it a range, so a smaller one can still win.
 
 //ALSO: NEED TO HAVE DEAD HUMANS TURN INTO ZOMBIES!!
 
