@@ -19,8 +19,8 @@ const HUMAN_MIN_AP = 5;
 const HUMAN_MAX_AP = 15;
 const SUPER_HUMAN_MIN_AP = 10;
 const SUPER_HUMAN_MAX_AP = 30;
-const HUMAN_HP_MODIFIER = 4;
-const SUPER_HUMAN_HP_MODIFIER = 6;
+const HUMAN_HP_MODIFIER = 2;
+const SUPER_HUMAN_HP_MODIFIER = 4;
 
 const MIN_ZOMBIE_HORIZONTAL_VELOCITY = -1.75;
 const MAX_ZOMBIE_HORIZONTAL_VELOCITY = 1.75;
@@ -31,8 +31,8 @@ const ZOMBIE_MIN_AP = 5;
 const ZOMBIE_MAX_AP = 15;
 const SUPER_ZOMBIE_MIN_AP = 10;
 const SUPER_ZOMBIE_MAX_AP = 30;
-const ZOMBIE_HP_MODIFIER = 4;
-const SUPER_ZOMBIE_HP_MODIFIER = 6;
+const ZOMBIE_HP_MODIFIER = 2;
+const SUPER_ZOMBIE_HP_MODIFIER = 4;
 
 var backgroundColor;
 
@@ -156,7 +156,7 @@ function initializeZombie() {
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
-				this.health_points -= target.health_points;
+				this.health_points -= target.attack_points;
 				target.lowerCorrectCounter();
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
@@ -171,7 +171,7 @@ function initializeZombie() {
 				// If attacker/this runs out of health, it is defeated as well.
 			}
 			else if (target.health_points > this.health_points) {
-				target.health_points -= this.health_points;
+				target.health_points -= this.attack_points;
 				this.lowerCorrectCounter();
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
@@ -267,7 +267,7 @@ function initializeSuperZombie() {
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
-				this.health_points -= target.health_points;
+				this.health_points -= target.attack_points;
 				target.lowerCorrectCounter();
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
@@ -282,7 +282,7 @@ function initializeSuperZombie() {
 				// If attacker/this runs out of health, it is defeated as well.
 			}
 			else if (target.health_points > this.health_points) {
-				target.health_points -= this.health_points;
+				target.health_points -= this.attack_points;
 				this.lowerCorrectCounter();
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
@@ -378,7 +378,7 @@ function initializeHuman() {
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
-				this.health_points -= target.health_points;
+				this.health_points -= target.attack_points;
 				target.lowerCorrectCounter();
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
@@ -393,7 +393,7 @@ function initializeHuman() {
 				// If attacker/this runs out of health, it is defeated as well.
 			}
 			else if (target.health_points > this.health_points) {
-				target.health_points -= this.health_points;
+				target.health_points -= this.attack_points;
 				this.lowerCorrectCounter();
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
@@ -489,7 +489,7 @@ function initializeSuperHuman() {
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
-				this.health_points -= target.health_points;
+				this.health_points -= target.attack_points;
 				target.lowerCorrectCounter();
 				population.splice(population.indexOf(target), 1);
 				--currentPopulationCount;
@@ -504,7 +504,7 @@ function initializeSuperHuman() {
 				// If attacker/this runs out of health, it is defeated as well.
 			}
 			else if (target.health_points > this.health_points) {
-				target.health_points -= this.health_points;
+				target.health_points -= this.attack_points;
 				this.lowerCorrectCounter();
 				population.splice(population.indexOf(this), 1);
 				--currentPopulationCount;
