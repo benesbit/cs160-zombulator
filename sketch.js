@@ -44,18 +44,6 @@ var currentPopulationCount = 0;
 
 var population = [];
 
-var soundID;
-var myImage;
-
-function loadSound () {
-  createjs.Sound.registerSound("assets/thunder.mp3", soundID);
-}
-
-function preLoad() {
-	myImage = loadImage("assets/Link.png");
-	// new p5.Image(25, 25);
-}
-
 function setup() {
 	preLoad();
 
@@ -605,18 +593,15 @@ function handleCollision() {
 	for (var i = 0; i < population.length; ++i) {
 		var attacker = population[i];
 		if (attacker == undefined) continue;
-		for (var k = (i + 1); k < population.length; ++k) {
-			var defender = population[k];
-			if (defender == undefined) continue;
-			else if (attacker.isTouching(defender)) {
-				print("FIGHT");
-				// playSound();
-				attacker.fight(defender);
+		else {
+			for (var k = (i + 1); k < population.length; ++k) {
+				var defender = population[k];
+				if (defender == undefined) continue;
+				else if (attacker.isTouching(defender)) {
+					// playSound();
+					attacker.fight(defender);
+				}
 			}
 		}
 	}
-}
-
-function playSound() {
-	createjs.Sound.play(soundID);
 }
