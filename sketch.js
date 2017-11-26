@@ -14,7 +14,6 @@ const MAX_HUMAN_HORIZONTAL_VELOCITY = 2;
 const HUMAN_SPEED_MIN = 0.75;
 const HUMAN_SPEED_MAX = 2.2;
 const HUMAN_ACCEL_BOUND = 1.5;
-//ALSO: NEED TO HAVE DEAD HUMANS TURN INTO ZOMBIES!!
 const HUMAN_MIN_AP = 5;
 const HUMAN_MAX_AP = 15;
 const SUPER_HUMAN_MIN_AP = 10;
@@ -140,30 +139,24 @@ function initializeZombie() {
 		},
 		turnZombie: function() {
 			if (this.humanoid_type == 'human') {
-				var temp_hp = this.health_points;
-				var temp_ap = this.attack_points;
-				var temp_size = this.size;
-				var temp_position = this.position;
 				var position_holder = population.indexOf(this);
-				population.splice(population.indexOf(this), 1, population.initializeZombie());
-				population.indexOf(population_holder).size = temp_size;
-				population.indexOf(population_holder).health_points = temp_hp;
-				population.indexOf(population_holder).attack_points = temp_ap;
-				population.indexOf(population_holder).position = temp_position;
+				var temp_zombie = population[position_holder];
+				population.splice(population.indexOf(this), 1, initializeZombie());
+				this.size = temp_zombie.size;
+				this.health_points = temp_zombie.health_points;
+				this.attack_points = temp_zombie.attack_points;
+				this.position = temp_zombie.position;
 				--numberOfHumans;
 				++numberOfZombies;
 			}
 			else if (this.humanoid_type == 'super human') {
-				var temp_hp = this.health_points;
-				var temp_ap = this.attack_points;
-				var temp_size = this.size;
-				var temp_position = this.position;
 				var position_holder = population.indexOf(this);
-				population.splice(population.indexOf(this), 1, population.initializeSuperZombie());
-				population.indexOf(population_holder).size = temp_size;
-				population.indexOf(population_holder).health_points = temp_hp;
-				population.indexOf(population_holder).attack_points = temp_ap;
-				population.indexOf(population_holder).position = temp_position;
+				var temp_zombie = population[position_holder];
+				population.splice(population.indexOf(this), 1, initializeZombie());
+				this.size = temp_zombie.size;
+				this.health_points = temp_zombie.health_points;
+				this.attack_points = temp_zombie.attack_points;
+				this.position = temp_zombie.position;
 				--numberOfSuperHumans;
 				++numberOfSuperZombies;
 			}
@@ -185,9 +178,6 @@ function initializeZombie() {
 					--currentPopulationCount;
 				}
 				return;
-				// If attacker/this has more health than defender/target, attacker/this wins.
-				// Defender/target's remaining health is taken from attacker/this.
-				// If attacker/this runs out of health, it is defeated as well.
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.attack_points;
@@ -205,9 +195,6 @@ function initializeZombie() {
 					--currentPopulationCount;
 				}
 				return;
-				// If defender/target has more health than attacker/this, defender/target wins.
-				// Attacker/this' remaining health is taken from defender/target.
-				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
 				var showdownDetermination = random(0, 100);
@@ -291,30 +278,24 @@ function initializeSuperZombie() {
 		},
 		turnZombie: function() {
 			if (this.humanoid_type == 'human') {
-				var temp_hp = this.health_points;
-				var temp_ap = this.attack_points;
-				var temp_size = this.size;
-				var temp_position = this.position;
 				var position_holder = population.indexOf(this);
-				population.splice(population.indexOf(this), 1, population.initializeZombie());
-				population.indexOf(population_holder).size = temp_size;
-				population.indexOf(population_holder).health_points = temp_hp;
-				population.indexOf(population_holder).attack_points = temp_ap;
-				population.indexOf(population_holder).position = temp_position;
+				var temp_zombie = population[position_holder];
+				population.splice(population.indexOf(this), 1, initializeZombie());
+				this.size = temp_zombie.size;
+				this.health_points = temp_zombie.health_points;
+				this.attack_points = temp_zombie.attack_points;
+				this.position = temp_zombie.position;
 				--numberOfHumans;
 				++numberOfZombies;
 			}
 			else if (this.humanoid_type == 'super human') {
-				var temp_hp = this.health_points;
-				var temp_ap = this.attack_points;
-				var temp_size = this.size;
-				var temp_position = this.position;
 				var position_holder = population.indexOf(this);
-				population.splice(population.indexOf(this), 1, population.initializeSuperZombie());
-				population.indexOf(population_holder).size = temp_size;
-				population.indexOf(population_holder).health_points = temp_hp;
-				population.indexOf(population_holder).attack_points = temp_ap;
-				population.indexOf(population_holder).position = temp_position;
+				var temp_zombie = population[position_holder];
+				population.splice(population.indexOf(this), 1, initializeZombie());
+				this.size = temp_zombie.size;
+				this.health_points = temp_zombie.health_points;
+				this.attack_points = temp_zombie.attack_points;
+				this.position = temp_zombie.position;
 				--numberOfSuperHumans;
 				++numberOfSuperZombies;
 			}
@@ -336,10 +317,6 @@ function initializeSuperZombie() {
 					--currentPopulationCount;
 				}
 				return;
-				// If attacker/this has more health than defender/target, attacker/this wins.
-				// Defender/target's remaining health is taken from attacker/this.
-				// If attacker/this runs out of health, it is defeated as well.
-			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.attack_points;
 				if (this.isZombie) {
@@ -356,9 +333,6 @@ function initializeSuperZombie() {
 					--currentPopulationCount;
 				}
 				return;
-				// If defender/target has more health than attacker/this, defender/target wins.
-				// Attacker/this' remaining health is taken from defender/target.
-				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
 				var showdownDetermination = random(0, 100);
@@ -442,30 +416,24 @@ function initializeHuman() {
 		},
 		turnZombie: function() {
 			if (this.humanoid_type == 'human') {
-				var temp_hp = this.health_points;
-				var temp_ap = this.attack_points;
-				var temp_size = this.size;
-				var temp_position = this.position;
 				var position_holder = population.indexOf(this);
-				population.splice(population.indexOf(this), 1, population.initializeZombie());
-				population.indexOf(population_holder).size = temp_size;
-				population.indexOf(population_holder).health_points = temp_hp;
-				population.indexOf(population_holder).attack_points = temp_ap;
-				population.indexOf(population_holder).position = temp_position;
+				var temp_zombie = population[position_holder];
+				population.splice(population.indexOf(this), 1, initializeZombie());
+				this.size = temp_zombie.size;
+				this.health_points = temp_zombie.health_points;
+				this.attack_points = temp_zombie.attack_points;
+				this.position = temp_zombie.position;
 				--numberOfHumans;
 				++numberOfZombies;
 			}
 			else if (this.humanoid_type == 'super human') {
-				var temp_hp = this.health_points;
-				var temp_ap = this.attack_points;
-				var temp_size = this.size;
-				var temp_position = this.position;
 				var position_holder = population.indexOf(this);
-				population.splice(population.indexOf(this), 1, population.initializeSuperZombie());
-				population.indexOf(population_holder).size = temp_size;
-				population.indexOf(population_holder).health_points = temp_hp;
-				population.indexOf(population_holder).attack_points = temp_ap;
-				population.indexOf(population_holder).position = temp_position;
+				var temp_zombie = population[position_holder];
+				population.splice(population.indexOf(this), 1, initializeZombie());
+				this.size = temp_zombie.size;
+				this.health_points = temp_zombie.health_points;
+				this.attack_points = temp_zombie.attack_points;
+				this.position = temp_zombie.position;
 				--numberOfSuperHumans;
 				++numberOfSuperZombies;
 			}
@@ -487,9 +455,6 @@ function initializeHuman() {
 					--currentPopulationCount;
 				}
 				return;
-				// If attacker/this has more health than defender/target, attacker/this wins.
-				// Defender/target's remaining health is taken from attacker/this.
-				// If attacker/this runs out of health, it is defeated as well.
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.attack_points;
@@ -507,9 +472,6 @@ function initializeHuman() {
 					--currentPopulationCount;
 				}
 				return;
-				// If defender/target has more health than attacker/this, defender/target wins.
-				// Attacker/this' remaining health is taken from defender/target.
-				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
 				var showdownDetermination = random(0, 100);
@@ -593,30 +555,24 @@ function initializeSuperHuman() {
 		},
 		turnZombie: function() {
 			if (this.humanoid_type == 'human') {
-				var temp_hp = this.health_points;
-				var temp_ap = this.attack_points;
-				var temp_size = this.size;
-				var temp_position = this.position;
 				var position_holder = population.indexOf(this);
-				population.splice(population.indexOf(this), 1, population.initializeZombie());
-				population.indexOf(population_holder).size = temp_size;
-				population.indexOf(population_holder).health_points = temp_hp;
-				population.indexOf(population_holder).attack_points = temp_ap;
-				population.indexOf(population_holder).position = temp_position;
+				var temp_zombie = population[position_holder];
+				population.splice(population.indexOf(this), 1, initializeZombie());
+				this.size = temp_zombie.size;
+				this.health_points = temp_zombie.health_points;
+				this.attack_points = temp_zombie.attack_points;
+				this.position = temp_zombie.position;
 				--numberOfHumans;
 				++numberOfZombies;
 			}
 			else if (this.humanoid_type == 'super human') {
-				var temp_hp = this.health_points;
-				var temp_ap = this.attack_points;
-				var temp_size = this.size;
-				var temp_position = this.position;
 				var position_holder = population.indexOf(this);
-				population.splice(population.indexOf(this), 1, population.initializeSuperZombie());
-				population.indexOf(population_holder).size = temp_size;
-				population.indexOf(population_holder).health_points = temp_hp;
-				population.indexOf(population_holder).attack_points = temp_ap;
-				population.indexOf(population_holder).position = temp_position;
+				var temp_zombie = population[position_holder];
+				population.splice(population.indexOf(this), 1, initializeZombie());
+				this.size = temp_zombie.size;
+				this.health_points = temp_zombie.health_points;
+				this.attack_points = temp_zombie.attack_points;
+				this.position = temp_zombie.position;
 				--numberOfSuperHumans;
 				++numberOfSuperZombies;
 			}
@@ -638,9 +594,6 @@ function initializeSuperHuman() {
 					--currentPopulationCount;
 				}
 				return;
-				// If attacker/this has more health than defender/target, attacker/this wins.
-				// Defender/target's remaining health is taken from attacker/this.
-				// If attacker/this runs out of health, it is defeated as well.
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.attack_points;
@@ -658,9 +611,6 @@ function initializeSuperHuman() {
 					--currentPopulationCount;
 				}
 				return;
-				// If defender/target has more health than attacker/this, defender/target wins.
-				// Attacker/this' remaining health is taken from defender/target.
-				// If defender/target runs out of health, it is defeated as well.
 			}
 			else {
 				var showdownDetermination = random(0, 100);
