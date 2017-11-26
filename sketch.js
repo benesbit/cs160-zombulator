@@ -4,7 +4,7 @@
 
 const MIN_SIZE = 10; 
 const MAX_SIZE = 25;
-const MAX_POPULATION = 250;
+const MAX_POPULATION = 150;
 
 const HUMAN_SPAWN_BOUND = 150;
 const ZOMBIE_SPAWN_BOUND = 150;
@@ -150,6 +150,8 @@ function initializeZombie() {
 				population.indexOf(population_holder).health_points = temp_hp;
 				population.indexOf(population_holder).attack_points = temp_ap;
 				population.indexOf(population_holder).position = temp_position;
+				--numberOfHumans;
+				++numberOfZombies;
 			}
 			else if (this.humanoid_type == 'super human') {
 				var temp_hp = this.health_points;
@@ -162,15 +164,17 @@ function initializeZombie() {
 				population.indexOf(population_holder).health_points = temp_hp;
 				population.indexOf(population_holder).attack_points = temp_ap;
 				population.indexOf(population_holder).position = temp_position;
+				--numberOfSuperHumans;
+				++numberOfSuperZombies;
 			}
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.attack_points;
-				target.lowerCorrectCounter();
 				if (target.isZombie) {
 					population.splice(population.indexOf(target), 1);
 					--currentPopulationCount;
+					target.lowerCorrectCounter();
 				}
 				else if (target.isHuman) {
 					target.turnZombie();
@@ -187,9 +191,14 @@ function initializeZombie() {
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.attack_points;
-				this.lowerCorrectCounter();
-				population.splice(population.indexOf(this), 1);
-				--currentPopulationCount;
+				if (this.isZombie) {
+					population.splice(population.indexOf(this), 1);
+					--currentPopulationCount;
+					this.lowerCorrectCounter();
+				}
+				else if (this.isHuman) {
+					this.turnZombie();
+				}
 				if (target.health_points <= 0) {
 					target.lowerCorrectCounter();
 					population.splice(indexOf(target), 1);
@@ -292,6 +301,8 @@ function initializeSuperZombie() {
 				population.indexOf(population_holder).health_points = temp_hp;
 				population.indexOf(population_holder).attack_points = temp_ap;
 				population.indexOf(population_holder).position = temp_position;
+				--numberOfHumans;
+				++numberOfZombies;
 			}
 			else if (this.humanoid_type == 'super human') {
 				var temp_hp = this.health_points;
@@ -304,14 +315,21 @@ function initializeSuperZombie() {
 				population.indexOf(population_holder).health_points = temp_hp;
 				population.indexOf(population_holder).attack_points = temp_ap;
 				population.indexOf(population_holder).position = temp_position;
+				--numberOfSuperHumans;
+				++numberOfSuperZombies;
 			}
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.attack_points;
-				target.lowerCorrectCounter();
-				population.splice(population.indexOf(target), 1);
-				--currentPopulationCount;
+				if (target.isZombie) {
+					population.splice(population.indexOf(target), 1);
+					--currentPopulationCount;
+					target.lowerCorrectCounter();
+				}
+				else if (target.isHuman) {
+					target.turnZombie();
+				}
 				if (this.health_points <= 0) {
 					this.lowerCorrectCounter();
 					population.splice(population.indexOf(this), 1);
@@ -324,9 +342,14 @@ function initializeSuperZombie() {
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.attack_points;
-				this.lowerCorrectCounter();
-				population.splice(population.indexOf(this), 1);
-				--currentPopulationCount;
+				if (this.isZombie) {
+					population.splice(population.indexOf(this), 1);
+					--currentPopulationCount;
+					this.lowerCorrectCounter();
+				}
+				else if (this.isHuman) {
+					this.turnZombie();
+				}
 				if (target.health_points <= 0) {
 					target.lowerCorrectCounter();
 					population.splice(indexOf(target), 1);
@@ -429,6 +452,8 @@ function initializeHuman() {
 				population.indexOf(population_holder).health_points = temp_hp;
 				population.indexOf(population_holder).attack_points = temp_ap;
 				population.indexOf(population_holder).position = temp_position;
+				--numberOfHumans;
+				++numberOfZombies;
 			}
 			else if (this.humanoid_type == 'super human') {
 				var temp_hp = this.health_points;
@@ -441,14 +466,21 @@ function initializeHuman() {
 				population.indexOf(population_holder).health_points = temp_hp;
 				population.indexOf(population_holder).attack_points = temp_ap;
 				population.indexOf(population_holder).position = temp_position;
+				--numberOfSuperHumans;
+				++numberOfSuperZombies;
 			}
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.attack_points;
-				target.lowerCorrectCounter();
-				population.splice(population.indexOf(target), 1);
-				--currentPopulationCount;
+				if (target.isZombie) {
+					population.splice(population.indexOf(target), 1);
+					--currentPopulationCount;
+					target.lowerCorrectCounter();
+				}
+				else if (target.isHuman) {
+					target.turnZombie();
+				}
 				if (this.health_points <= 0) {
 					this.lowerCorrectCounter();
 					population.splice(population.indexOf(this), 1);
@@ -461,9 +493,14 @@ function initializeHuman() {
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.attack_points;
-				this.lowerCorrectCounter();
-				population.splice(population.indexOf(this), 1);
-				--currentPopulationCount;
+				if (this.isZombie) {
+					population.splice(population.indexOf(this), 1);
+					--currentPopulationCount;
+					this.lowerCorrectCounter();
+				}
+				else if (this.isHuman) {
+					this.turnZombie();
+				}
 				if (target.health_points <= 0) {
 					target.lowerCorrectCounter();
 					population.splice(indexOf(target), 1);
@@ -566,6 +603,8 @@ function initializeSuperHuman() {
 				population.indexOf(population_holder).health_points = temp_hp;
 				population.indexOf(population_holder).attack_points = temp_ap;
 				population.indexOf(population_holder).position = temp_position;
+				--numberOfHumans;
+				++numberOfZombies;
 			}
 			else if (this.humanoid_type == 'super human') {
 				var temp_hp = this.health_points;
@@ -578,14 +617,21 @@ function initializeSuperHuman() {
 				population.indexOf(population_holder).health_points = temp_hp;
 				population.indexOf(population_holder).attack_points = temp_ap;
 				population.indexOf(population_holder).position = temp_position;
+				--numberOfSuperHumans;
+				++numberOfSuperZombies;
 			}
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
 				this.health_points -= target.attack_points;
-				target.lowerCorrectCounter();
-				population.splice(population.indexOf(target), 1);
-				--currentPopulationCount;
+				if (target.isZombie) {
+					population.splice(population.indexOf(target), 1);
+					--currentPopulationCount;
+					target.lowerCorrectCounter();
+				}
+				else if (target.isHuman) {
+					target.turnZombie();
+				}
 				if (this.health_points <= 0) {
 					this.lowerCorrectCounter();
 					population.splice(population.indexOf(this), 1);
@@ -598,9 +644,14 @@ function initializeSuperHuman() {
 			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.attack_points;
-				this.lowerCorrectCounter();
-				population.splice(population.indexOf(this), 1);
-				--currentPopulationCount;
+				if (this.isZombie) {
+					population.splice(population.indexOf(this), 1);
+					--currentPopulationCount;
+					this.lowerCorrectCounter();
+				}
+				else if (this.isHuman) {
+					this.turnZombie();
+				}
 				if (target.health_points <= 0) {
 					target.lowerCorrectCounter();
 					population.splice(indexOf(target), 1);
