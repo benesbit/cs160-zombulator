@@ -141,7 +141,8 @@ function initializeZombie() {
 			if (this.humanoid_type == 'human') {
 				var position_holder = population.indexOf(this);
 				var temp_zombie = population[position_holder];
-				population.splice(population.indexOf(this), 1, initializeZombie());
+				// population.splice(population.indexOf(this), 1, initializeZombie());
+				population[position_holder].initializeZombie();
 				this.size = temp_zombie.size;
 				this.health_points = temp_zombie.health_points;
 				this.attack_points = temp_zombie.attack_points;
@@ -152,7 +153,8 @@ function initializeZombie() {
 			else if (this.humanoid_type == 'super human') {
 				var position_holder = population.indexOf(this);
 				var temp_zombie = population[position_holder];
-				population.splice(population.indexOf(this), 1, initializeZombie());
+				// population.splice(population.indexOf(this), 1, initializeZombie());
+				population[position_holder].initializeZombie();
 				this.size = temp_zombie.size;
 				this.health_points = temp_zombie.health_points;
 				this.attack_points = temp_zombie.attack_points;
@@ -280,7 +282,8 @@ function initializeSuperZombie() {
 			if (this.humanoid_type == 'human') {
 				var position_holder = population.indexOf(this);
 				var temp_zombie = population[position_holder];
-				population.splice(population.indexOf(this), 1, initializeZombie());
+				// population.splice(population.indexOf(this), 1, initializeZombie());
+				population[position_holder].initializeZombie();
 				this.size = temp_zombie.size;
 				this.health_points = temp_zombie.health_points;
 				this.attack_points = temp_zombie.attack_points;
@@ -291,7 +294,8 @@ function initializeSuperZombie() {
 			else if (this.humanoid_type == 'super human') {
 				var position_holder = population.indexOf(this);
 				var temp_zombie = population[position_holder];
-				population.splice(population.indexOf(this), 1, initializeZombie());
+				// population.splice(population.indexOf(this), 1, initializeZombie());
+				population[position_holder].initializeZombie();
 				this.size = temp_zombie.size;
 				this.health_points = temp_zombie.health_points;
 				this.attack_points = temp_zombie.attack_points;
@@ -317,6 +321,7 @@ function initializeSuperZombie() {
 					--currentPopulationCount;
 				}
 				return;
+			}
 			else if (target.health_points > this.health_points) {
 				target.health_points -= this.attack_points;
 				if (this.isZombie) {
@@ -418,7 +423,8 @@ function initializeHuman() {
 			if (this.humanoid_type == 'human') {
 				var position_holder = population.indexOf(this);
 				var temp_zombie = population[position_holder];
-				population.splice(population.indexOf(this), 1, initializeZombie());
+				// population.splice(population.indexOf(this), 1, initializeZombie());
+				population[position_holder].initializeZombie();
 				this.size = temp_zombie.size;
 				this.health_points = temp_zombie.health_points;
 				this.attack_points = temp_zombie.attack_points;
@@ -429,7 +435,8 @@ function initializeHuman() {
 			else if (this.humanoid_type == 'super human') {
 				var position_holder = population.indexOf(this);
 				var temp_zombie = population[position_holder];
-				population.splice(population.indexOf(this), 1, initializeZombie());
+				// population.splice(population.indexOf(this), 1, initializeZombie());
+				population[position_holder].initializeZombie();
 				this.size = temp_zombie.size;
 				this.health_points = temp_zombie.health_points;
 				this.attack_points = temp_zombie.attack_points;
@@ -557,7 +564,8 @@ function initializeSuperHuman() {
 			if (this.humanoid_type == 'human') {
 				var position_holder = population.indexOf(this);
 				var temp_zombie = population[position_holder];
-				population.splice(population.indexOf(this), 1, initializeZombie());
+				// population.splice(population.indexOf(this), 1, initializeZombie());
+				population[position_holder].initializeZombie();
 				this.size = temp_zombie.size;
 				this.health_points = temp_zombie.health_points;
 				this.attack_points = temp_zombie.attack_points;
@@ -568,7 +576,8 @@ function initializeSuperHuman() {
 			else if (this.humanoid_type == 'super human') {
 				var position_holder = population.indexOf(this);
 				var temp_zombie = population[position_holder];
-				population.splice(population.indexOf(this), 1, initializeZombie());
+				// population.splice(population.indexOf(this), 1, initializeZombie());
+				population[position_holder].initializeZombie();
 				this.size = temp_zombie.size;
 				this.health_points = temp_zombie.health_points;
 				this.attack_points = temp_zombie.attack_points;
