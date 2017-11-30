@@ -1,8 +1,8 @@
-// Zombulator by Benjamin Nesbit 
+// Zombulator by Benjamin Nesbit
 // CS 160 - Oregon State University - Bend, OR
 // This program is a simple model simulation of a zombie outbreak
 
-const MIN_SIZE = 10; 
+const MIN_SIZE = 10;
 const MAX_SIZE = 25;
 const MAX_POPULATION = 150;
 
@@ -657,21 +657,21 @@ function initializeSuperHuman() {
 
 function drawPopulation() {
  	for (var i = 0; i < population.length; ++i) {
- 		if(population[i] == undefined) continue;	
+ 		if(population[i] == undefined) continue;
  		population[i].draw();
   	}
 }
 
 function movePopulation() {
 	for (var i = 0; i < population.length; ++i) {
-		if(population[i] == undefined) continue;	
+		if(population[i] == undefined) continue;
  		population[i].move();
   	}
 }
 
 function trapPopulation() {
 	 for (var i = 0; i < population.length; ++i) {
-	 	if(population[i] == undefined) continue;	
+	 	if(population[i] == undefined) continue;
  		population[i].trap();
   	}
 }
