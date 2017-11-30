@@ -171,11 +171,11 @@ function initializeZombie() {
 				--currentPopulationCount;
 				target.lowerCorrectCounter();
 
-				if (this.health_points <= 0) {
-					this.lowerCorrectCounter();
-					population.splice(population.indexOf(this), 1);
-					--currentPopulationCount;
-				}
+				// if (this.health_points <= 0) {
+				// 	this.lowerCorrectCounter();
+				// 	population.splice(population.indexOf(this), 1);
+				// 	--currentPopulationCount;
+				// }
 				return;
 			}
 			else if (target.health_points > this.health_points) {
@@ -184,11 +184,11 @@ function initializeZombie() {
 				--currentPopulationCount;
 				this.lowerCorrectCounter();
 
-				if (target.health_points <= 0) {
-					target.lowerCorrectCounter();
-					population.splice(indexOf(target), 1);
-					--currentPopulationCount;
-				}
+				// if (target.health_points <= 0) {
+				// 	target.lowerCorrectCounter();
+				// 	population.splice(indexOf(target), 1);
+				// 	--currentPopulationCount;
+				// }
 				return;
 			}
 			else {
@@ -305,11 +305,11 @@ function initializeSuperZombie() {
 				--currentPopulationCount;
 				target.lowerCorrectCounter();
 
-				if (this.health_points <= 0) {
-					this.lowerCorrectCounter();
-					population.splice(population.indexOf(this), 1);
-					--currentPopulationCount;
-				}
+				// if (this.health_points <= 0) {
+				// 	this.lowerCorrectCounter();
+				// 	population.splice(population.indexOf(this), 1);
+				// 	--currentPopulationCount;
+				// }
 				return;
 			}
 			else if (target.health_points > this.health_points) {
@@ -318,11 +318,11 @@ function initializeSuperZombie() {
 				--currentPopulationCount;
 				this.lowerCorrectCounter();
 
-				if (target.health_points <= 0) {
-					target.lowerCorrectCounter();
-					population.splice(indexOf(target), 1);
-					--currentPopulationCount;
-				}
+				// if (target.health_points <= 0) {
+				// 	target.lowerCorrectCounter();
+				// 	population.splice(indexOf(target), 1);
+				// 	--currentPopulationCount;
+				// }
 				return;
 			}
 			else {
@@ -439,11 +439,11 @@ function initializeHuman() {
 				--currentPopulationCount;
 				target.lowerCorrectCounter();
 
-				if (this.health_points <= 0) {
-					this.lowerCorrectCounter();
-					population.splice(population.indexOf(this), 1);
-					--currentPopulationCount;
-				}
+				// if (this.health_points <= 0) {
+				// 	this.lowerCorrectCounter();
+				// 	population.splice(population.indexOf(this), 1);
+				// 	--currentPopulationCount;
+				// }
 				return;
 			}
 			else if (target.health_points > this.health_points) {
@@ -452,11 +452,11 @@ function initializeHuman() {
 				--currentPopulationCount;
 				this.lowerCorrectCounter();
 
-				if (target.health_points <= 0) {
-					target.lowerCorrectCounter();
-					population.splice(indexOf(target), 1);
-					--currentPopulationCount;
-				}
+				// if (target.health_points <= 0) {
+				// 	target.lowerCorrectCounter();
+				// 	population.splice(indexOf(target), 1);
+				// 	--currentPopulationCount;
+				// }
 				return;
 			}
 			else {
@@ -573,11 +573,11 @@ function initializeSuperHuman() {
 				--currentPopulationCount;
 				target.lowerCorrectCounter();
 
-				if (this.health_points <= 0) {
-					this.lowerCorrectCounter();
-					population.splice(population.indexOf(this), 1);
-					--currentPopulationCount;
-				}
+				// if (this.health_points <= 0) {
+				// 	this.lowerCorrectCounter();
+				// 	population.splice(population.indexOf(this), 1);
+				// 	--currentPopulationCount;
+				// }
 				return;
 			}
 			else if (target.health_points > this.health_points) {
@@ -586,11 +586,11 @@ function initializeSuperHuman() {
 				--currentPopulationCount;
 				this.lowerCorrectCounter();
 
-				if (target.health_points <= 0) {
-					target.lowerCorrectCounter();
-					population.splice(indexOf(target), 1);
-					--currentPopulationCount;
-				}
+				// if (target.health_points <= 0) {
+				// 	target.lowerCorrectCounter();
+				// 	population.splice(indexOf(target), 1);
+				// 	--currentPopulationCount;
+				// }
 				return;
 			}
 			else {
@@ -679,10 +679,20 @@ function totalPopulationText() {
 function handleCollision() {
 	for (var i = 0; i < population.length; ++i) {
 		var attacker = population[i];
+		if (attacker.health_points <= 0) {
+			attacker.lowerCorrectCounter();
+			population.splice(population.indexOf(attacker), 1);
+			--currentPopulationCount;
+		}
 		if (attacker == undefined) continue;
 		else {
 			for (var k = (i + 1); k < population.length; ++k) {
 				var defender = population[k];
+				if (defender.health_points <= 0) {
+					defender.lowerCorrectCounter();
+					population.splice(population.indexOf(defender), 1);
+					--currentPopulationCount;
+				}
 				if (defender == undefined) continue;
 				else if (attacker.isTouching(defender)) {
 					// playSound();
