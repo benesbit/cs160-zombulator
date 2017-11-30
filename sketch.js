@@ -640,18 +640,33 @@ function handleCollision() {
 	for (var i = 0; i < population.length; ++i) {
 		var attacker = population[i];
 		if (attacker.health_points <= 0) {
-			attacker.lowerCorrectCounter();
-			population.splice(population.indexOf(attacker), 1);
-			--currentPopulationCount;
+			print("Attacker no health");
+			if (attacker.isHuman) {
+				attacker.turnZombie();
+			}
+			else if (attacker.isZombie) {
+				print("Dead Zombie");
+				attacker.lowerCorrectCounter();
+				population.splice(population.indexOf(attacker), 1);
+				--currentPopulationCount;
+			}
 		}
 		if (attacker == undefined) continue;
 		else {
 			for (var k = (i + 1); k < population.length; ++k) {
 				var defender = population[k];
 				if (defender.health_points <= 0) {
-					defender.lowerCorrectCounter();
-					population.splice(population.indexOf(defender), 1);
-					--currentPopulationCount;
+					print("Defender no health");
+					if (defender.isHuman) {
+						defender.turnZombie();
+					}
+					else if (defender.isZombie)
+					{
+						print("Dead Zombie");
+						defender.lowerCorrectCounter();
+						population.splice(population.indexOf(defender), 1);
+						--currentPopulationCount;
+					}
 				}
 				if (defender == undefined) continue;
 				else if (attacker.isTouching(defender)) {
