@@ -633,7 +633,7 @@ function totalPopulationText() {
 	textSize(20);
 	stroke(5);
 	text('Total population count: ' + currentPopulationCount, (windowWidth / 2) - 80, windowHeight / 2);
-	// text('Total Percentage of Supers: ' + Math.round((numberOfSuperHumans/numberOfHumans) * 100) + '%', (windowWidth / 2) - 80, (windowHeight / 1.5) + 20);
+	text('Total Percentage of Supers: ' + Math.round(((numberOfSuperHumans + numberOfSuperZombies)/currentPopulationCount) * 100) + '%', (windowWidth / 2) - 80, (windowHeight / 2) + 20);
 }
 
 function handleCollision() {
