@@ -138,30 +138,31 @@ function initializeZombie() {
 			else if (this.humanoid_type == 'super zombie') --numberOfSuperZombies;
 		},
 		turnZombie: function() {
-			if (this.humanoid_type == 'human') {
-				var position_holder = population.indexOf(this);
-				var temp_zombie = population[position_holder];
-				// population.splice(population.indexOf(this), 1, initializeZombie());
-				population[position_holder].initializeZombie();
-				this.size = temp_zombie.size;
-				this.health_points = temp_zombie.health_points;
-				this.attack_points = temp_zombie.attack_points;
-				this.position = temp_zombie.position;
-				--numberOfHumans;
-				++numberOfZombies;
-			}
-			else if (this.humanoid_type == 'super human') {
-				var position_holder = population.indexOf(this);
-				var temp_zombie = population[position_holder];
-				// population.splice(population.indexOf(this), 1, initializeZombie());
-				population[position_holder].initializeZombie();
-				this.size = temp_zombie.size;
-				this.health_points = temp_zombie.health_points;
-				this.attack_points = temp_zombie.attack_points;
-				this.position = temp_zombie.position;
-				--numberOfSuperHumans;
-				++numberOfSuperZombies;
-			}
+			print("zombie#turnZombie");
+			// if (this.humanoid_type == 'human') {
+			// 	var position_holder = population.indexOf(this);
+			// 	var temp_zombie = population[position_holder];
+			// 	// population.splice(population.indexOf(this), 1, initializeZombie());
+			// 	population[position_holder].initializeZombie();
+			// 	this.size = temp_zombie.size;
+			// 	this.health_points = temp_zombie.health_points;
+			// 	this.attack_points = temp_zombie.attack_points;
+			// 	this.position = temp_zombie.position;
+			// 	--numberOfHumans;
+			// 	++numberOfZombies;
+			// }
+			// else if (this.humanoid_type == 'super human') {
+			// 	var position_holder = population.indexOf(this);
+			// 	var temp_zombie = population[position_holder];
+			// 	// population.splice(population.indexOf(this), 1, initializeZombie());
+			// 	population[position_holder].initializeZombie();
+			// 	this.size = temp_zombie.size;
+			// 	this.health_points = temp_zombie.health_points;
+			// 	this.attack_points = temp_zombie.attack_points;
+			// 	this.position = temp_zombie.position;
+			// 	--numberOfSuperHumans;
+			// 	++numberOfSuperZombies;
+			// }
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
@@ -279,30 +280,31 @@ function initializeSuperZombie() {
 			else if (this.humanoid_type == 'super zombie') --numberOfSuperZombies;
 		},
 		turnZombie: function() {
-			if (this.humanoid_type == 'human') {
-				var position_holder = population.indexOf(this);
-				var temp_zombie = population[position_holder];
-				// population.splice(population.indexOf(this), 1, initializeZombie());
-				population[position_holder].initializeZombie();
-				this.size = temp_zombie.size;
-				this.health_points = temp_zombie.health_points;
-				this.attack_points = temp_zombie.attack_points;
-				this.position = temp_zombie.position;
-				--numberOfHumans;
-				++numberOfZombies;
-			}
-			else if (this.humanoid_type == 'super human') {
-				var position_holder = population.indexOf(this);
-				var temp_zombie = population[position_holder];
-				// population.splice(population.indexOf(this), 1, initializeZombie());
-				population[position_holder].initializeZombie();
-				this.size = temp_zombie.size;
-				this.health_points = temp_zombie.health_points;
-				this.attack_points = temp_zombie.attack_points;
-				this.position = temp_zombie.position;
-				--numberOfSuperHumans;
-				++numberOfSuperZombies;
-			}
+			print("zombie#turnZombie");
+			// if (this.humanoid_type == 'human') {
+			// 	var position_holder = population.indexOf(this);
+			// 	var temp_zombie = population[position_holder];
+			// 	// population.splice(population.indexOf(this), 1, initializeZombie());
+			// 	population[position_holder].initializeZombie();
+			// 	this.size = temp_zombie.size;
+			// 	this.health_points = temp_zombie.health_points;
+			// 	this.attack_points = temp_zombie.attack_points;
+			// 	this.position = temp_zombie.position;
+			// 	--numberOfHumans;
+			// 	++numberOfZombies;
+			// }
+			// else if (this.humanoid_type == 'super human') {
+			// 	var position_holder = population.indexOf(this);
+			// 	var temp_zombie = population[position_holder];
+			// 	// population.splice(population.indexOf(this), 1, initializeZombie());
+			// 	population[position_holder].initializeZombie();
+			// 	this.size = temp_zombie.size;
+			// 	this.health_points = temp_zombie.health_points;
+			// 	this.attack_points = temp_zombie.attack_points;
+			// 	this.position = temp_zombie.position;
+			// 	--numberOfSuperHumans;
+			// 	++numberOfSuperZombies;
+			// }
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
@@ -420,30 +422,31 @@ function initializeHuman() {
 			else if (this.humanoid_type == 'super zombie') --numberOfSuperZombies;
 		},
 		turnZombie: function() {
-			if (this.humanoid_type == 'human') {
-				var position_holder = population.indexOf(this);
-				var temp_zombie = population[position_holder];
-				// population.splice(population.indexOf(this), 1, initializeZombie());
-				population[position_holder].initializeZombie();
-				this.size = temp_zombie.size;
-				this.health_points = temp_zombie.health_points;
-				this.attack_points = temp_zombie.attack_points;
-				this.position = temp_zombie.position;
-				--numberOfHumans;
-				++numberOfZombies;
-			}
-			else if (this.humanoid_type == 'super human') {
-				var position_holder = population.indexOf(this);
-				var temp_zombie = population[position_holder];
-				// population.splice(population.indexOf(this), 1, initializeZombie());
-				population[position_holder].initializeZombie();
-				this.size = temp_zombie.size;
-				this.health_points = temp_zombie.health_points;
-				this.attack_points = temp_zombie.attack_points;
-				this.position = temp_zombie.position;
-				--numberOfSuperHumans;
-				++numberOfSuperZombies;
-			}
+			print("zombie#turnZombie");
+			// if (this.humanoid_type == 'human') {
+			// 	var position_holder = population.indexOf(this);
+			// 	var temp_zombie = population[position_holder];
+			// 	// population.splice(population.indexOf(this), 1, initializeZombie());
+			// 	population[position_holder].initializeZombie();
+			// 	this.size = temp_zombie.size;
+			// 	this.health_points = temp_zombie.health_points;
+			// 	this.attack_points = temp_zombie.attack_points;
+			// 	this.position = temp_zombie.position;
+			// 	--numberOfHumans;
+			// 	++numberOfZombies;
+			// }
+			// else if (this.humanoid_type == 'super human') {
+			// 	var position_holder = population.indexOf(this);
+			// 	var temp_zombie = population[position_holder];
+			// 	// population.splice(population.indexOf(this), 1, initializeZombie());
+			// 	population[position_holder].initializeZombie();
+			// 	this.size = temp_zombie.size;
+			// 	this.health_points = temp_zombie.health_points;
+			// 	this.attack_points = temp_zombie.attack_points;
+			// 	this.position = temp_zombie.position;
+			// 	--numberOfSuperHumans;
+			// 	++numberOfSuperZombies;
+			// }
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
@@ -561,30 +564,31 @@ function initializeSuperHuman() {
 			else if (this.humanoid_type == 'super zombie') --numberOfSuperZombies;
 		},
 		turnZombie: function() {
-			if (this.humanoid_type == 'human') {
-				var position_holder = population.indexOf(this);
-				var temp_zombie = population[position_holder];
-				// population.splice(population.indexOf(this), 1, initializeZombie());
-				population[position_holder].initializeZombie();
-				this.size = temp_zombie.size;
-				this.health_points = temp_zombie.health_points;
-				this.attack_points = temp_zombie.attack_points;
-				this.position = temp_zombie.position;
-				--numberOfHumans;
-				++numberOfZombies;
-			}
-			else if (this.humanoid_type == 'super human') {
-				var position_holder = population.indexOf(this);
-				var temp_zombie = population[position_holder];
-				// population.splice(population.indexOf(this), 1, initializeZombie());
-				population[position_holder].initializeZombie();
-				this.size = temp_zombie.size;
-				this.health_points = temp_zombie.health_points;
-				this.attack_points = temp_zombie.attack_points;
-				this.position = temp_zombie.position;
-				--numberOfSuperHumans;
-				++numberOfSuperZombies;
-			}
+			print("zombie#turnZombie");
+			// if (this.humanoid_type == 'human') {
+			// 	var position_holder = population.indexOf(this);
+			// 	var temp_zombie = population[position_holder];
+			// 	// population.splice(population.indexOf(this), 1, initializeZombie());
+			// 	population[position_holder].initializeZombie();
+			// 	this.size = temp_zombie.size;
+			// 	this.health_points = temp_zombie.health_points;
+			// 	this.attack_points = temp_zombie.attack_points;
+			// 	this.position = temp_zombie.position;
+			// 	--numberOfHumans;
+			// 	++numberOfZombies;
+			// }
+			// else if (this.humanoid_type == 'super human') {
+			// 	var position_holder = population.indexOf(this);
+			// 	var temp_zombie = population[position_holder];
+			// 	// population.splice(population.indexOf(this), 1, initializeZombie());
+			// 	population[position_holder].initializeZombie();
+			// 	this.size = temp_zombie.size;
+			// 	this.health_points = temp_zombie.health_points;
+			// 	this.attack_points = temp_zombie.attack_points;
+			// 	this.position = temp_zombie.position;
+			// 	--numberOfSuperHumans;
+			// 	++numberOfSuperZombies;
+			// }
 		},
 		fight: function(target) {
 			if (this.health_points > target.health_points) {
