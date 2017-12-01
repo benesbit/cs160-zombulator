@@ -90,11 +90,11 @@ function initializePopulation() {
 
 function initializeZombie() {
 	return {
-		size: random(MIN_SIZE, MAX_SIZE),
+		size: Math.round(random(MIN_SIZE, MAX_SIZE)),
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanoid_type: 'zombie',
-		health_points: this.size * ZOMBIE_HP_MODIFIER,
+		health_points: this.size /** ZOMBIE_HP_MODIFIER*/,
 		attack_points: random(ZOMBIE_MIN_AP, ZOMBIE_MAX_AP),
 		velocity: createVector(random(MIN_ZOMBIE_HORIZONTAL_VELOCITY, MAX_ZOMBIE_HORIZONTAL_VELOCITY), random(ZOMBIE_SPEED_MIN, ZOMBIE_SPEED_MAX)),
 		draw: function() {
@@ -213,11 +213,11 @@ function initializeZombie() {
 
 function initializeSuperZombie() {
 	return {
-		size: random(MAX_SIZE*1.5, MAX_SIZE*2), // BIGGER
+		size: Math.round(random(MAX_SIZE*1.5, MAX_SIZE*2)), // BIGGER
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(MAX_SIZE / 2, ZOMBIE_SPAWN_BOUND))),
 		color: color(random(200, 255), random(50, 100), random(50, 100), random(50, 150)),
 		humanoid_type: 'super zombie',
-		health_points: this.size * SUPER_HUMAN_HP_MODIFIER, // HEALTHIER
+		health_points: this.size /** SUPER_ZOMBIE_HP_MODIFIER*/, // HEALTHIER
 		attack_points: random(SUPER_ZOMBIE_MIN_AP, SUPER_ZOMBIE_MAX_AP), // STRONGER
 		velocity: createVector(random(MIN_ZOMBIE_HORIZONTAL_VELOCITY, MAX_ZOMBIE_HORIZONTAL_VELOCITY), random(ZOMBIE_SPEED_MIN * 5, ZOMBIE_SPEED_MAX * 2)),
 		draw: function() {
@@ -337,11 +337,11 @@ function initializeSuperZombie() {
 
 function initializeHuman() {
 	return {
-		size: random(MIN_SIZE, MAX_SIZE),
+		size: Math.round(random(MIN_SIZE, MAX_SIZE)),
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'human',
-		health_points: this.size * HUMAN_HP_MODIFIER,
+		health_points: this.size /** HUMAN_HP_MODIFIER*/,
 		attack_points: random(HUMAN_MIN_AP, HUMAN_MAX_AP),
 		velocity: createVector(random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY), random(HUMAN_SPEED_MIN, HUMAN_SPEED_MAX),),
 		draw: function() {
@@ -461,11 +461,11 @@ function initializeHuman() {
 
 function initializeSuperHuman() {
 	return {
-		size: random(MAX_SIZE * 1.5, MAX_SIZE * 2), // BIGGER
+		size: Math.round(random(MAX_SIZE * 1.5, MAX_SIZE * 2)), // BIGGER
 		position: createVector((random(MAX_SIZE / 2, windowWidth - (MAX_SIZE / 2))), (random(windowHeight - HUMAN_SPAWN_BOUND, windowHeight - (MAX_SIZE / 2)))),
 		color: color(random(0, 30), random(0, 200), random(250, 255), random(50, 150)),
 		humanoid_type: 'super human',
-		health_points: this.size * SUPER_HUMAN_HP_MODIFIER, // HEALTHIER
+		health_points: this.size /** SUPER_HUMAN_HP_MODIFIER*/, // HEALTHIER
 		attack_points: random(SUPER_HUMAN_MIN_AP, SUPER_HUMAN_MAX_AP), // STRONGER
 		velocity: createVector(random(MIN_HUMAN_HORIZONTAL_VELOCITY, MAX_HUMAN_HORIZONTAL_VELOCITY), random(HUMAN_SPEED_MIN * 5, HUMAN_SPEED_MAX * 2)),
 		draw: function() {
@@ -639,6 +639,7 @@ function totalPopulationText() {
 function handleCollision() {
 	for (var i = 0; i < population.length; ++i) {
 		var attacker = population[i];
+		// print(attacker.health_points);
 		if (attacker.health_points <= 0) {
 			print("Attacker no health");
 			if (attacker.isHuman) {
@@ -670,6 +671,7 @@ function handleCollision() {
 				}
 				if (defender == undefined) continue;
 				else if (attacker.isTouching(defender)) {
+					print(attacker.health_points);
 					// playSound();
 					attacker.fight(defender);
 				}
